@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StorySells: Where Imagination Comes to Life!</title>
+    <link rel="stylesheet" href="/Source-code/css/main.css">
+    <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <div class="container">
+        <section class="sidebar">
+            <div class="sidebar__header">
+                <div class="sidebar__header-logo">
+                    <i class="fa-solid fa-book"></i>
+                    <h2 class="sidebar__header-title">StorySells</h2>
+                </div>
+                <div class="sidebar__header-button">
+                    <a href="" class="sidebar__header-link">
+                        <i class="fa-solid fa-bars"></i>
+                    </a>
+                </div>
+            </div>
+            <ul class="sidebar__menu">
+                <li class="sidebar__menu-item active" id="shop" onclick="toggleSublist('shop')">
+                    <a href="#" class="sidebar__menu-link">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Shop</span>
+                        <div style="position: absolute; right: 12px;">
+                            <i class="fa-solid fa-chevron-down" id="icons-shop"></i>
+                        </div>
+                    </a>
+                    <ul class="sidebar__menu-item__list" style="display: block;">
+                        <li class="sidebar__menu-item__list-item" id="homepage">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-house-user"></i>
+                                <span>Home Page</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="category-page">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-list"></i>
+                                <span>Category Page</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="book-page">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-book-atlas"></i>
+                                <span>Book Page</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="book-pdf">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-file-pdf"></i>
+                                <span>Book PDF</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="checkout">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span>Checkout</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="wishlist">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-heart"></i>
+                                <span>Wishlist</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar__menu-item" id="user" onclick="toggleSublist('user')">
+                    <a href="#" class="sidebar__menu-link">
+                        <i class="fa-solid fa-user"></i>
+                        <span>User</span>
+                        <div style="position: absolute; right: 12px;">
+                            <i class="fa-solid fa-chevron-right" id="icons-user"></i>
+                        </div>
+                    </a>
+                    <ul class="sidebar__menu-item__list" style="display: none;">
+                        <li class="sidebar__menu-item__list-item" id="myprofile">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-regular fa-address-card"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="edit-profile">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-user-pen"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="account-setting">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-gear"></i>
+                                <span>Account Setting</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="privacy-setting">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-lock"></i>
+                                <span>Privacy Setting</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id=" sign-out">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Sign out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar__menu-item" id="help" onclick="toggleSublist('help')">
+                    <a href="#" class="sidebar__menu-link">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Help & Contact Us</span>
+                        <div style="position: absolute; right: 12px;">
+                            <i class="fa-solid fa-chevron-right" id="icons-help"></i>
+                        </div>
+                    </a>
+                    <ul class="sidebar__menu-item__list" style="display: none;">
+                        <li class="sidebar__menu-item__list-item" id="privacy-policy">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-handshake"></i>
+                                <span>Privacy Policy</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="contact-information">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Contact Information</span>
+                            </a>
+                        </li>
+                        <li class="sidebar__menu-item__list-item" id="version-information">
+                            <a href="" class="sidebar__menu-item__list-link">
+                                <i class="fa-solid fa-code-compare"></i>
+                                <span>About or Version Information</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar__menu-item"></li>
+                <li class="sidebar__menu-item"></li>
+            </ul>
+            <div class="sidebar__member">
+                <img src="/Source-code/assets/img/Books-Icon.png" alt="" class="sidebar__member-img">
+                <button class="sidebar__member--button">
+                    Become Membership
+                </button>
+            </div>
+        </section>
+
+        <section class="header">
+            <nav class="header__navbar">
+                <div class="header__navigation">
+                    <h3 class="header__navition-title">Shop</h3>
+                    <div class="header__navigation-subtitle">
+                        <a href="" class="header__navigation-link">Home</a>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <span>Home Page</span>
+                    </div>
+                </div>
+                <div class="header__searchbar">
+                    <form action="" class="header__seachbar-form">
+                        <input class="header__seachbar-input" placeholder="Seach Here..."></input>
+                        <a href="" class="header__seachbar-link">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </form>
+                </div>
+                <div class="header__user">
+                    <ul class="user__item">
+                        <li class="user__item-list">
+                            <a href="" class="user__item-link">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="user__item-dot"></span>
+                            </a>
+                        </li>
+                        <li class="user__item-list">
+                            <a href="" class="user__item-link">
+                                <i class="fa-regular fa-envelope"></i>
+                                <span class="user__item-dot"></span>
+                            </a>
+                        </li>
+                        <li class="user__item-list">
+                            <a href="" class="user__item-link">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="user__item-cart">12</span>
+                            </a>
+                        </li>
+                        <li class="user__item-list">
+                            <a href="" class="user__item-link">
+                                <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="user__item-avatar">
+                                <div class="user__item-info">
+                                    <h6 class="user__item-name">Huy Nguyen</h6>
+                                    <p class="user__item-cash">$24.12</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </section>
+
+        <section class="content">
+            <div class="newrealease">
+                <div class="newrealease__container">
+                    <ul class="newrealease__item">
+                        <li class="newrealease__item-list">
+                            <a href="" class="newrealease__item-link">
+                                <img src="/Source-code/assets/img/Book.png" alt="" class="newrealease__item-img">
+                            </a>
+                        </li>
+                        <li class="newrealease__item-list">
+                            <a href="" class="newrealease__item-link">
+                                <img src="/Source-code/assets/img/Book.png" alt="" class="newrealease__item-img">
+                            </a>
+                        </li>
+                        <li class="newrealease__item-list">
+                            <a href="" class="newrealease__item-link">
+                                <img src="/Source-code/assets/img/Book.png" alt="" class="newrealease__item-img">
+                            </a>
+                        </li>
+                        <li class="newrealease__item-list">
+                            <a href="" class="newrealease__item-link">
+                                <img src="/Source-code/assets/img/Book.png" alt="" class="newrealease__item-img">
+                            </a>
+                        </li>
+                        <li class="newrealease__item-list">
+                            <a href="" class="newrealease__item-link">
+                                <img src="/Source-code/assets/img/Book.png" alt="" class="newrealease__item-img">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="browse__books">
+                <div class="browse__books-content">
+                    <div class="browse__books-header">
+                        <h2 class="browse__books-title">Browse Books</h2>
+                        <button class="browse__books-button">
+                            View More
+                        </button>
+                    </div>
+                    <div class="browse__books-book">
+                        <ul class="browse__books-item">
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="browse__books-list">
+                                <div class="browse__books-img">
+                                    <img src="/Source-code/assets/img/Book.png" alt="">
+                                    <div class="browse__books-viewbook">
+                                        <a href="" class="browse__books-link">
+                                            View Book
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="browse__books-text">
+                                    <h6 class="browse__books-title">Lorem Ipsum</h6>
+                                    <span class="browse__books-author">Paulo Coelko</span>
+                                    <div class="browse__books-rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div class="browse__books-price">
+                                        <div class="browse__books-before">$100</div>
+                                        <div class="browse__books-after">$89</div>
+                                    </div>
+                                    <div class="browse__books-add">
+                                        <a class="browse__books-checkout">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                        <a class="browse__books-favorite">
+                                            <i class="fa-solid fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="featured__books">
+                <div class="featured__books-content">
+                    <div class="featured__books-header">
+                        <h2 class="featured__books-title">Browse Books</h2>
+                        <div class="featured__books-thisweek">
+                            <span>This Week</span>
+                            <i class="fa-solid fa-caret-down"></i>
+                        </div>
+                    </div>
+                    <div class="featured_books-detail">
+                        <div class="featured_books-img">
+                            <img src="/Source-code/assets/img/Book.png" alt="">
+                        </div>
+                        <div class="featured_books-text">
+                            <h4 class="featured_books-title">Lorem Ipsum</h4>
+                            <span class="featured_books-author">Author: Paulo Coelko</span>
+                            <div class="featured_books-rate">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="featured_books-describe">Lorem Ipsum is simply dummy test in find a of the printing and typeset ing industry into end.</p>
+                            <button class="featured_books-button">
+                                Learn More
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured__writer">
+                <div class="featured__writer-content">
+                    <div class="featured__writer-header">
+                        <h2 class="featured__writer-title">Featured Writer</h2>
+                        <div class="featured__writer-thisweek">
+                            <span>This Week</span>
+                            <i class="fa-solid fa-caret-down"></i>
+                        </div>
+                    </div>
+                    <div class="featured__writer-writers">
+                        <ul class="featured__writer-item">
+                            <li class="featured__writer-list">
+                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="featured__writer-list">
+                                                                <div class="featured__writer-img">
+                                    <a href="" class="featured__writer-link">
+                                        <img src="/Source-code/assets/img/Avatar.jpeg" alt="" class="featured__writer-avatar">
+                                    </a>
+                                </div>
+                                <div class="featured__writer-text">
+                                    <h4>Huy Nguyen</h4>
+                                    <p class="featured__writer-publish">
+                                        Publish Books:
+                                        <span class="featured__writer-number">24</span>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="favorite__reads">
+                <div class="favorite__reads-content">
+                    <div class="favorite__reads-header">
+                        <h2 class="favorite__reads-headertitle">Browse Books</h2>
+                        <button class="favorite__reads-button">
+                            View More
+                        </button>
+                    </div>
+                    <div class="favorite__reads-box">
+                        <ul class="favorite__reads-item">
+                            <li class="favorite__reads-book">
+                                <div class="display-flex">
+                                    <div class="favorite__reads-img">
+                                        <a href="" class="favorite__reads-link">
+                                            <img src="/Source-code/assets/img/Book.png" alt="" class="favorite__reads-picture">
+                                        </a>
+                                    </div>
+                                    <div class="favorite__reads-describe">
+                                        <h2 class="favorite__reads-title">Lorem Ipsum</h2>
+                                        <p class="favorite__reads-author">Author: Paulo Coelko</p>
+                                        <div class="favorite__reads-status">
+                                            <span>Reading</span>
+                                            <span>78%</span>
+                                        </div>
+                                        <div class="favorite__reads-bar">
+                                            <div class="favorite__read-linerbar">
+                                                <div class="favorite__read-proccess"></div>
+                                            </div>
+                                        </div>
+                                        <a href="" class="favorite__reads-readnow">
+                                            Read Now
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="favorite__reads-book">
+                                <div class="display-flex">
+                                    <div class="favorite__reads-img">
+                                        <a href="" class="favorite__reads-link">
+                                            <img src="/Source-code/assets/img/Book.png" alt="" class="favorite__reads-picture">
+                                        </a>
+                                    </div>
+                                    <div class="favorite__reads-describe">
+                                        <h2 class="favorite__reads-title">Lorem Ipsum</h2>
+                                        <p class="favorite__reads-author">Author: Paulo Coelko</p>
+                                        <div class="favorite__reads-status">
+                                            <span>Reading</span>
+                                            <span>78%</span>
+                                        </div>
+                                        <div class="favorite__reads-bar">
+                                            <div class="favorite__read-linerbar">
+                                                <div class="favorite__read-proccess"></div>
+                                            </div>
+                                        </div>
+                                        <a href="" class="favorite__reads-readnow">
+                                            Read Now
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="favorite__reads-book">
+                                <div class="display-flex">
+                                    <div class="favorite__reads-img">
+                                        <a href="" class="favorite__reads-link">
+                                            <img src="/Source-code/assets/img/Book.png" alt="" class="favorite__reads-picture">
+                                        </a>
+                                    </div>
+                                    <div class="favorite__reads-describe">
+                                        <h2 class="favorite__reads-title">Lorem Ipsum</h2>
+                                        <p class="favorite__reads-author">Author: Paulo Coelko</p>
+                                        <div class="favorite__reads-status">
+                                            <span>Reading</span>
+                                            <span>78%</span>
+                                        </div>
+                                        <div class="favorite__reads-bar">
+                                            <div class="favorite__read-linerbar">
+                                                <div class="favorite__read-proccess"></div>
+                                            </div>
+                                        </div>
+                                        <a href="" class="favorite__reads-readnow">
+                                            Read Now
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    </div>
+
+    <script>
+        function toggleSublist(menuId) {
+            var sublist = document.getElementById(menuId).querySelector('.sidebar__menu-item__list');
+            var icon = document.getElementById('icons-' + menuId);
+            var menuItem = document.getElementById(menuId);
+            var activeMenuItem = document.querySelector('.sidebar__menu-item.active');
+            var activeSublist = document.querySelector('.sidebar__menu-item.active .sidebar__menu-item__list');
+
+            if (sublist.style.display === 'none') {
+                // Collapse the previously active submenu
+                if (activeMenuItem && activeSublist && activeMenuItem !== menuItem) {
+                    activeSublist.style.display = 'none';
+                    activeMenuItem.classList.remove('active');
+                    document.getElementById('icons-' + activeMenuItem.id).classList.remove('fa-chevron-down');
+                    document.getElementById('icons-' + activeMenuItem.id).classList.add('fa-chevron-right');
+                }
+                // Expand the clicked submenu
+                sublist.style.display = 'block';
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+                menuItem.classList.add('active');
+            } else {
+                // Collapse the clicked submenu
+                sublist.style.display = 'none';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+                menuItem.classList.remove('active');
+            }
+        }
+
+        
+        function spreadOut() {
+            const userItemDots = document.querySelectorAll('.user__item-dot');
+            let scale = 0;
+            userItemDots.forEach((itemDot, index) => {
+                itemDot.style.transform = `scale(${index === 0 ? 1 : scale})`;
+                scale += 1;
+            });
+            setTimeout(() => {
+                userItemDots.forEach(itemDot => {
+                    itemDot.style.transform = 'scale(0)';
+                });
+            }, 500);
+        }
+        spreadOut();
+        setInterval(spreadOut, 3000);
+
+
+
+
+    </script>
+
+</body>
+
+</html>
