@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Create a Free Account - RollPoll.com</title>
-    <link rel="stylesheet" href="/Source-code/css/register.css">
+    <link rel="stylesheet" href="/Source-code/public/css/register.css">
     <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
 </head>
 
@@ -14,9 +14,8 @@
     <div class="container">
         <div class="header">
             <div class="header__login">
-                <span>Already have an account?</span>
-                <a href="/Source-code/html/login.html" class="header__button">Log
-                    in</a>
+                <span>Still not have an account?</span>
+                <a href="/Source-code/views/register.html" class="header__button">Create now</a>
             </div>
         </div>
         <div class="title">
@@ -27,11 +26,13 @@
                         StorySells
                     </a>
                 </div>
-                <h2 class="title__create">Create a free account</h2>
+                <h2 class="title__create">
+                    Log in to your account
+                </h2>
                 <p class="title__login">
                     Or
-                    <a href="/Source-code/html/login.html"
-                        class="title__login-link">log in to your account</a>
+                    <a href="/Source-code/views/register.html"
+                        class="title__login-link">create a free account</a>
                 </p>
             </div>
         </div>
@@ -39,11 +40,6 @@
             <div class="signup__panel">
                 <div class="signup__panel-content">
                     <form action="" class="signup__panel-form">
-                        <div class="signup__input">
-                            <label for="email" class="signup__panel-label">Name</label>
-                            <input id="name" name="name" type="text" autocomplete="name" class="signup__panel-input"
-                                required>
-                        </div>
                         <div class="signup__input">
                             <label for="email" class="signup__panel-label">Email</label>
                             <input name="email" type="email" id="email" autocomplete="email" class="signup__panel-input"
@@ -55,21 +51,8 @@
                                 class="signup__panel-input" required>
                         </div>
                         <div class="signup__input">
-                            <div class="display-flex">
-                                <div class="signup__input-agree">
-                                    <input id="agree-me" name="agree-me" type="checkbox" x-model="agreeMe" class="signup__input-checkbox">
-                                </div>
-                                <label for="agree-me" class="signup__input-policy">
-                                    I agree to the
-                                    <a href="" id="privacy" class="signup__input-link">privacy policy </a>
-                                    and
-                                    <a href="" id="term" class="signup__input-link">terms of service.</a>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="signup__input">
                             <button type="submit" class="signup__input-button">
-                                Sign up
+                                Log in
                             </button>
                         </div>
                     </form>
