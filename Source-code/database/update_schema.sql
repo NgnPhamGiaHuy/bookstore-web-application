@@ -1,0 +1,1 @@
+# SQL script for making updates to the database structure
