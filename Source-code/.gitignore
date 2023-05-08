@@ -1,5 +1,5 @@
 .vscode
 .DS_Store
 
-Source-code/node_modules
-Source-code/public/css
+node_modules
+public/css
