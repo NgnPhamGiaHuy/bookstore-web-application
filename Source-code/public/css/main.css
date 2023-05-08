@@ -1503,7 +1503,7 @@ button {
     transition-duration: 300ms;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(/Source-code/public/img/Book-Cover/Book-Cover-Img.jpg);
+    background-image: url(/img/Book-Cover/Book-Cover-Img.jpg);
 }
 
 .books__sale-widget-wrapper-overlay {
@@ -2596,7 +2596,7 @@ button {
     background-size: cover;
     background-position: right center;
     border-radius: 15px 15px 15px 15px;
-    background-image: url(/Source-code/public/img/Background-Img/Background-4.jpg);
+    background-image: url(/img/Background-Img/Background-4.jpg);
     transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
 }
 
@@ -2678,7 +2678,7 @@ button {
     background-size: cover;
     padding: 120px 30px 150px;
     background-position: center center;
-    background-image: url(/Source-code/public/img/Background-Img/Background-5.jpg);
+    background-image: url(/img/Background-Img/Background-5.jpg);
 }
 
 .quote__content {

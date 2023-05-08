@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StorySells: Where Imagination Comes to Life!</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
+    <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <%- include('partials/header-02.ejs', {text: 'Cart'}) -%>
+
+    <div class="container">
+        <div class="container__full" style="display: block;">
+            <div id="primary" class="cart__area">
+                <main id="main" class="main__cart" role="main">
+                    <article class="main__cart-status">
+                        <div class="main__cart-content">
+                            <form action="" method="post" class="main__cart-content-form">
+                                <table class="main__cart-content-table">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-remove">
+                                                <span class="screen-reader-text">Remove item</span>
+                                            </th>
+                                            <th
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
+                                                <span class="screen-reader-text">Thumbnail image</span>
+                                            </th>
+                                            <th
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-name">
+                                                Product</th>
+                                            <th
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-price">
+                                                Price</th>
+                                            <th
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
+                                                Quantity</th>
+                                            <th
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
+                                                Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="main__cart-content-table-product">
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-remove">
+                                                <a href="" class="main__cart-content-table-product-remove-link">
+                                                    x
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
+                                                <a href="">
+                                                    <img src="/img/Book-Cover/Book.png" alt=""
+                                                        class="main__cart-content-table-product-thumbnail-img">
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-name">
+                                                <a href="">Lorem Ipsum</a>
+                                                <dl class="main__cart-content-table-product-name-author">
+                                                    <dt class="main__cart-content-table-product-name-author-variation">
+                                                        <strong>
+                                                            Author:
+                                                        </strong>
+                                                    </dt>
+                                                    <dd class="main__cart-content-table-product-name-author-variation">
+                                                        <p>Paulo Coelko</p>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-price">
+                                                <span class="main__cart-content-table-product-price-amount">
+                                                    <span>$</span>
+                                                    316.15
+                                                </span>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
+                                                <div class="main__book-product-form-quantity">
+                                                    <div class="main__book-product-form-quantity-added">
+                                                        <button
+                                                            class="main__book-product-form-quantity-added-button minus">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </button>
+                                                        <label for="quantity" style="display: none;">Quantity:</label>
+                                                        <input type="number" id="quantity" step="1" min="1" max="999"
+                                                            name="quantity" value="1" inputmode="numeric"
+                                                            class="main__book-product-form-quantity-added-input"
+                                                            placeholder="">
+                                                        <button
+                                                            class="main__book-product-form-quantity-added-button plus">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
+                                                <span class="main__cart-content-table-product-price-amount">
+                                                    <span>$</span>
+                                                    316.15
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="main__cart-content-table-product">
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-remove">
+                                                <a href="" class="main__cart-content-table-product-remove-link">
+                                                    x
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
+                                                <a href="">
+                                                    <img src="/img/Book-Cover/Book.png" alt=""
+                                                        class="main__cart-content-table-product-thumbnail-img">
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-name">
+                                                <a href="">Lorem Ipsum</a>
+                                                <dl class="main__cart-content-table-product-name-author">
+                                                    <dt class="main__cart-content-table-product-name-author-variation">
+                                                        <strong>
+                                                            Author:
+                                                        </strong>
+                                                    </dt>
+                                                    <dd class="main__cart-content-table-product-name-author-variation">
+                                                        <p>Paulo Coelko</p>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-price">
+                                                <span class="main__cart-content-table-product-price-amount">
+                                                    <span>$</span>
+                                                    316.15
+                                                </span>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
+                                                <div class="main__book-product-form-quantity">
+                                                    <div class="main__book-product-form-quantity-added">
+                                                        <button
+                                                            class="main__book-product-form-quantity-added-button minus">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </button>
+                                                        <label for="quantity" style="display: none;">Quantity:</label>
+                                                        <input type="number" id="quantity" step="1" min="1" max="999"
+                                                            name="quantity" value="1" inputmode="numeric"
+                                                            class="main__book-product-form-quantity-added-input"
+                                                            placeholder="">
+                                                        <button
+                                                            class="main__book-product-form-quantity-added-button plus">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
+                                                <span class="main__cart-content-table-product-price-amount">
+                                                    <span>$</span>
+                                                    316.15
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="main__cart-content-table-product">
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-remove">
+                                                <a href="" class="main__cart-content-table-product-remove-link">
+                                                    x
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
+                                                <a href="">
+                                                    <img src="/img/Book-Cover/Book.png" alt=""
+                                                        class="main__cart-content-table-product-thumbnail-img">
+                                                </a>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-name">
+                                                <a href="">Lorem Ipsum</a>
+                                                <dl class="main__cart-content-table-product-name-author">
+                                                    <dt class="main__cart-content-table-product-name-author-variation">
+                                                        <strong>
+                                                            Author:
+                                                        </strong>
+                                                    </dt>
+                                                    <dd class="main__cart-content-table-product-name-author-variation">
+                                                        <p>Paulo Coelko</p>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-price">
+                                                <span class="main__cart-content-table-product-price-amount">
+                                                    <span>$</span>
+                                                    316.15
+                                                </span>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
+                                                <div class="main__book-product-form-quantity">
+                                                    <div class="main__book-product-form-quantity-added">
+                                                        <button
+                                                            class="main__book-product-form-quantity-added-button minus">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </button>
+                                                        <label for="quantity" style="display: none;">Quantity:</label>
+                                                        <input type="number" id="quantity" step="1" min="1" max="999"
+                                                            name="quantity" value="1" inputmode="numeric"
+                                                            class="main__book-product-form-quantity-added-input"
+                                                            placeholder="">
+                                                        <button
+                                                            class="main__book-product-form-quantity-added-button plus">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td
+                                                class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
+                                                <span class="main__cart-content-table-product-price-amount">
+                                                    <span>$</span>
+                                                    316.15
+                                                </span>
+                                            </td>
+                                        </tr>
+
+                                        <script>
+                                            const input = document.getElementById("quantity");
+                                            const minusButton = document.querySelector(".minus");
+                                            const plusButton = document.querySelector(".plus");
+
+                                            // Add click event listeners to the buttons
+                                            minusButton.addEventListener("click", (event) => {
+                                                event.preventDefault();
+                                                if (input.value > 1) {
+                                                    input.value = parseInt(input.value) - 1;
+                                                }
+                                            });
+
+                                            plusButton.addEventListener("click", (event) => {
+                                                event.preventDefault();
+                                                if (input.value < 999) {
+                                                    input.value = parseInt(input.value) + 1;
+                                                }
+                                            });
+
+                                        </script>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="main__cart-content-collaterals">
+                                <div class="main__cart-content-total">
+                                    <h2>Cart totals</h2>
+                                    <table class="main__cart-content-table">
+                                        <tbody>
+                                            <tr class="main__cart-content-table-subtotal">
+                                                <th>Subtotal</th>
+                                                <td class="main__cart-content-table-data">
+                                                    <span class="main__cart-content-table-subtotal-data-amount">
+                                                        <span>$</span>
+                                                        316.15
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr class="main__cart-content-table-total">
+                                                <th>Total</th>
+                                                <td class="main__cart-content-table-data">
+                                                    <span class="main__cart-content-table-total-data-amount">
+                                                        <span>$</span>
+                                                        316.15
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="main__cart-content-checkout">
+                                        <a href="" class="main__cart-content-checkout-link">
+                                            Proceed to checkout
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') -%>
+</body>
+
+</html>
