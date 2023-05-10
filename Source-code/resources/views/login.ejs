@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Create a Free Account - RollPoll.com</title>
+    <title>Sign Up - Create a Free Account - StorySells.com</title>
     <link rel="stylesheet" href="/css/register.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
     <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
         <div class="header__container">
             <div class="header__container-text">
                 <span>Still not have an account?</span>
-                <a href="/register" class="header__container-button">
+                <a href="/user/register" class="header__container-button">
                     <h3>
                         Create now
                     </h3>
@@ -33,7 +33,7 @@
                 </h1>
                 <p class="caption__container-subtitle">
                     Or
-                    <a href="/register" class="caption__container-subtitle-link">create a free
+                    <a href="/user/register" class="caption__container-subtitle-link">create a free
                         account</a>
                 </p>
             </div>
@@ -41,14 +41,14 @@
         <div class="import__container">
             <div class="import__container-box">
                 <div class="import__container-box-text">
-                    <form action="" class="import__container-form">
+                    <form id="login-form" action="/user/login" method="POST" class="import__container-form">
                         <div class="import__container-form-input">
-                            <label for="email" class="import__container-form-input-label">
+                            <label for="username" class="import__container-form-input-label">
                                 <h4>
                                     Email
                                 </h4>
                             </label>
-                            <input name="email" type="email" id="email" autocomplete="email"
+                            <input name="username" type="text" id="username" autocomplete="username"
                                 class="import__container-form-input-data" required>
                         </div>
                         <div class="import__container-form-input">
@@ -57,7 +57,7 @@
                                     Password
                                 </h4>
                             </label>
-                            <input id="password" name="password" type="password" autocomplete="current-password"
+                            <input id="password" name="password" type="password" autocomplete="password"
                                 class="import__container-form-input-data" required>
                         </div>
                         <div class="import__container-form-input">

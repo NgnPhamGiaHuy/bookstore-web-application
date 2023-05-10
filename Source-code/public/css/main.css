@@ -1235,6 +1235,7 @@ button {
 
 .books__topweek-text {
     flex: 1;
+    max-width: 100px;
 }
 
 .books__topweek-text-title {
@@ -1242,6 +1243,7 @@ button {
     overflow: hidden;
     margin-bottom: 10px;
     display: -webkit-box;
+    letter-spacing: 1px;
     -webkit-line-clamp: 2;
     line-height: 1.4285714286;
     -webkit-box-orient: vertical;
@@ -1256,10 +1258,15 @@ button {
 }
 
 .books__topweek-text-author {
-    line-height: 1;
+    line-height: 1.2;
     font-size: 12px;
     font-weight: 400;
     margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--color-lighter);
 }
 

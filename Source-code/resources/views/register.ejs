@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Create a Free Account - RollPoll.com</title>
+    <title>Sign Up - Create a Free Account - StorySells.com</title>
     <link rel="stylesheet" href="/css/register.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
     <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
@@ -16,7 +16,7 @@
         <div class="header__container">
             <div class="header__container-text">
                 <span>Already have an account?</span>
-                <a href="/login" class="header__container-button">
+                <a href="/user/login" class="header__container-button">
                     <h3>
                         Log in
                     </h3>
@@ -26,13 +26,12 @@
         <div class="caption__container">
             <div class="caption__container-logo">
                 <div class="caption__container-logo-content">
-                    <img src="/img/Icon/Website-logo.svg" alt=""
-                        class="caption__container-logo-content-img">
+                    <img src="/img/Icon/Website-logo.svg" alt="" class="caption__container-logo-content-img">
                 </div>
                 <h1 class="caption__container-create">Create a free account</h1>
                 <p class="caption__container-subtitle">
                     Or
-                    <a href="/login" class="caption__container-subtitle-link">
+                    <a href="/user/login" class="caption__container-subtitle-link">
                         log in to your account
                     </a>
                 </p>
@@ -41,7 +40,7 @@
         <div class="import__container">
             <div class="import__container-box">
                 <div class="import__container-box-text">
-                    <form action="" class="import__container-form">
+                    <form action="/user/register" method="post" class="import__container-form">
                         <div class="import__container-form-input">
                             <label for="email" class="import__container-form-input-label">
                                 <h4>
@@ -70,10 +69,21 @@
                                 class="import__container-form-input-data" required>
                         </div>
                         <div class="import__container-form-input">
+                            <label for="password" class="import__container-form-input-label">
+                                <h4>
+                                    What is your using purpose?
+                                </h4>
+                            </label>
+                            <select name="role" id="role" class="import__container-form-input-data">
+                                <option value="user">To buy books</option>
+                                <option value="supplier">To sell books</option>
+                            </select>
+                        </div>
+                        <div class="import__container-form-input">
                             <div class="import__container-form-input-agree">
-                                <input id="agree-me" name="agree-me" type="checkbox" x-model="agreeMe"
-                                    class="import__container-form-input-checkbox">
-                                <label for="agree-me" class="import__container-form-input-policy">
+                                <input id="agree" name="agree" type="checkbox"
+                                    class="import__container-form-input-checkbox" required>
+                                <label for="agree" class="import__container-form-input-policy">
                                     <span>
                                         I agree to the
                                     </span>
@@ -87,7 +97,6 @@
                                         service.</a>
                                 </label>
                             </div>
-
                         </div>
                         <div class="import__container-form-input">
                             <button type="submit" class="import__container-form-input-button">

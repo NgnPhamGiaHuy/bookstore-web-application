@@ -4,3 +4,8 @@
 # ignore nodemon.json only in Online-Bookstore-Project/Source-code
 Source-code/nodemon.json
 
+# ignore resources/html in Online-Bookstore-Project/Source-code
+Source-code/resources/html
+
+# ignore config/database in Online-Bookstore-Project/Source-code
+Source-code/config/database
