@@ -2,6 +2,7 @@ const homePageRouter = require('./homepage');
 const shopPageRouter = require('./shoppage');
 const cartPageRouter = require('./cartpage');
 const wishPageRouter = require('./wishpage');
+const bookPageRouter = require('./bookpage');
 const accessPageRouter = require('./accesspage');
 
 function requireLogin(req, res, next) {
@@ -16,10 +17,12 @@ function requireLogin(req, res, next) {
 
 function route(app) {
     // Apply the requireLogin middleware to the home page route
-    app.use('/story-sells', requireLogin, homePageRouter);
     app.use('/story-sells/shop', requireLogin, shopPageRouter);
+    app.use('/story-sells/book', requireLogin, bookPageRouter);
+    app.use('/story-sells', requireLogin, homePageRouter);
     app.use('/wishlist', requireLogin, wishPageRouter);
     app.use('/cart', requireLogin, cartPageRouter);
+    
     app.use('/', accessPageRouter);
 
     // Redirect the root URL to the login page

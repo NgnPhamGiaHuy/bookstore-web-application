@@ -9,7 +9,7 @@ const OrderSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Customer',
-                require: true,
+                required: true,
             }
         ],
         total_amount: {

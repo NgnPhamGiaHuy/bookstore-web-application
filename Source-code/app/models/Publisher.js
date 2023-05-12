@@ -5,12 +5,12 @@ const PublisherSchema = new Schema(
     {
         publisher_name: {
             type: String,
-            require: true,
+            required: true,
         },
         publisher_location: {
             type: String,
         },
-        contact_infomation: {
+        contact_information: {
             type: String,
         }
     }

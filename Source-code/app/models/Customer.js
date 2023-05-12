@@ -5,22 +5,22 @@ const CustomerSchema = new Schema(
     {
         customer_username: {
             type: String,
-            require: true
+            required: true
         },
         customer_password: {
             type: String,
-            require: true
+            required: true
         },
         customer_fname: {
             type: String
         },
         customer_lname: {
             type: String,
-            require: true
+            required: true
         },
         customer_email: {
             type: String,
-            require: true
+            required: true
         },
         customer_address: {
             type: String

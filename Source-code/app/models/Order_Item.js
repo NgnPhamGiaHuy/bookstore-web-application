@@ -1,7 +1,5 @@
-const mongoose = require('mongoose')
-const Decimal128 = require('mongoose-decimal128').mongoose;
-
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const OrderItemSchema = new Schema(
     {
@@ -9,22 +7,22 @@ const OrderItemSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Order',
-                require: true,
-            }
+                required: true,
+            },
         ],
         book: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Book',
-                require: true,
-            }
+                required: true,
+            },
         ],
         quantity: {
             type: Number,
-            require: true,
+            required: true,
         },
         price: {
-            type: Decimal128,
+            type: Number,
             required: true,
             default: 0,
         },
@@ -32,6 +30,6 @@ const OrderItemSchema = new Schema(
     {
         timestamps: true,
     }
-)
+);
 
-module.exports = mongoose.model('Order_Item', OrderItemSchema)
+module.exports = mongoose.model('Order_Item', OrderItemSchema);

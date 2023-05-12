@@ -24,10 +24,10 @@
                             <div class="books__content-left-paddind">
                                 <div class="books__categories"></div>
                                 <div class="books__topweek">
-                                    <h5 class="books__topweek-title">Top 6 This Week</h5>
+                                    <h5 class="books__topweek-title">Top <%= topBooksOfWeek.length %> This Week</h5>
                                     <div class="books__topweek-content">
                                         <ul class="books__topweek-list">
-                                            <% for (let i = 0; i < bookData.length; i++) { %>
+                                            <% for (let i = 0; i < topBooksOfWeek.length; i++) { %>
                                                 <li class="books__topweek-list-item">
                                                     <% let color; %>
                                                     <% switch (i) {
@@ -44,6 +44,8 @@
                                                         color = "--color-pale-cyan-blue";
                                                         break;
                                                         case 4:
+                                                        color = " --color-cyan-bluish-gray";
+                                                        break;
                                                         case 5:
                                                         color = "--color-lavender-blue";
                                                         break;
@@ -55,14 +57,14 @@
                                                         <span class="books__topweek-logo-number" <% /* eslint-disable css-propertyvalueexpected */ %> style="background-color: var(<%= color %>)">
                                                             <%= i + 1 %>
                                                         </span>
-                                                        <a href="/books/<%= bookData[i].book_id %>" class="books__topweek-logo-link">
-                                                            <img src="/img/Book-Cover/For-sale/<%= bookData[i].cover_image %>.png" alt="" class="books__topweek-logo-image">
+                                                        <a href="/story-sells/book/<%= topBooksOfWeek[i].cover_image %>" class="books__topweek-logo-link">
+                                                            <img src="/img/Book-Cover/For-sale/<%= topBooksOfWeek[i].cover_image %>.png" alt="" class="books__topweek-logo-image">
                                                         </a>
                                                     </div>
                                                     <div class="books__topweek-text">
-                                                        <h3 class="books__topweek-text-title"><%= bookData[i].book_title %></h3>
+                                                        <h3 class="books__topweek-text-title"><%= topBooksOfWeek[i].book_title %></h3>
                                                         <a href="" class="books__topweek-text-author">
-                                                            <%= bookData[i].author_name %>
+                                                            <%= topBooksOfWeek[i].author_name %>
                                                         </a>
                                                     </div>
                                                 </li>
@@ -73,217 +75,69 @@
                                 <div class="books__bestseller">
                                     <h5 class="books__bestseller-title">Best seller</h5>
                                     <div class="books__bestseller-content">
-                                        <ul class="books__bestseller-list">
-                                            <li class="books__bestseller-list-item">
-                                                <div class="books__bestseller-list-item-product">
-                                                    <div class="books__bestseller-logo">
-                                                        <a href="" class="books__bestseller-logo-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                                                class="books__bestseller-logo-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__bestseller-text">
-                                                        <h3 class="books__bestseller-text-title">
-                                                            <a href="">
-                                                                Lorem Ipsum
+                                        <% if (bestSellerBooks && bestSellerBooks.length > 0) { %>
+                                            <ul class="books__bestseller-list">
+                                                <% for (let i = 0; i < bestSellerBooks.length; i++) { %>
+                                                <li class="books__bestseller-list-item">
+                                                    <div class="books__bestseller-list-item-product">
+                                                        <div class="books__bestseller-logo">
+                                                            <a href="/books/<%= bestSellerBooks[i]._id %>" class="books__bestseller-logo-link">
+                                                                <img src="/img/Book-Cover/For-sale/<%= bestSellerBooks[i].cover_image %>.png" alt="" class="books__bestseller-logo-image">
                                                             </a>
-                                                        </h3>
-                                                        <div class="books__bestseller-text-rate">
-                                                            <div class="books__bestseller-text-rate-star" role="img"
-                                                                aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
-                                                                </span>
+                                                        </div>
+                                                        <div class="books__bestseller-text">
+                                                            <h3 class="books__bestseller-text-title">
+                                                                <a href="/books/<%= bestSellerBooks[i]._id %>">
+                                                                    <%= bestSellerBooks[i].book_title %>
+                                                                </a>
+                                                            </h3>
+                                                            <div class="books__bestseller-text-rate">
+                                                                <div class="books__bestseller-text-rate-star" role="img" aria-label="Rated <%= bestSellerBooks[i].rating %> out of 5">
+                                                                    <span <% /* eslint-disable css-propertyvalueexpected */ %> style="width: <%= bestSellerBooks[i].ratingWidth %>%;"></span>
+                                                                </div>
+                                                                <span><%= bestSellerBooks[i].rating %></span>
                                                             </div>
-                                                            <span>5</span>
-                                                        </div>
-                                                        <div class="books__bestseller-text-author">
-                                                            <a href="">
-                                                                Paulo Coelko
-                                                            </a>
-                                                        </div>
-                                                        <span class="books__bestseller-text-price">
-                                                            <del aria-hidden="true">
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="books__bestseller-list-item">
-                                                <div class="books__bestseller-list-item-product">
-                                                    <div class="books__bestseller-logo">
-                                                        <a href="" class="books__bestseller-logo-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                                                class="books__bestseller-logo-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__bestseller-text">
-                                                        <h3 class="books__bestseller-text-title">
-                                                            <a href="">
-                                                                Lorem Ipsum
-                                                            </a>
-                                                        </h3>
-                                                        <div class="books__bestseller-text-rate">
-                                                            <div class="books__bestseller-text-rate-star" role="img"
-                                                                aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
-                                                                </span>
+                                                            <div class="books__bestseller-text-author">
+                                                                <a href="">
+                                                                    <%= bestSellerBooks[i].author_name %>
+                                                                </a>
                                                             </div>
-                                                            <span>5</span>
+                                                            <span class="books__bestseller-text-price">
+                                                                <% if (bestSellerBooks[i].sale_price) { %>
+                                                                    <del aria-hidden="true">
+                                                                        <span class="books__bestseller-text-price-amount amount">
+                                                                            <bdi>
+                                                                                <span class="books__bestseller-text-price-amount-symbol">$</span>
+                                                                                <%= bestSellerBooks[i].price %>
+                                                                            </bdi>
+                                                                        </span>
+                                                                    </del>
+                                                                    <ins>
+                                                                        <span class="books__bestseller-text-price-amount amount">
+                                                                            <bdi>
+                                                                                <span class="books__bestseller-text-price-amount-symbol">$</span>
+                                                                                <%= bestSellerBooks[i].sale_price %>
+                                                                            </bdi>
+                                                                        </span>
+                                                                    </ins>
+                                                                <% } else { %>
+                                                                    <ins>
+                                                                        <span class="books__bestseller-text-price-amount amount">
+                                                                            <bdi>
+                                                                                <span class="books__bestseller-text-price-amount-symbol">$</span>
+                                                                                <%= bestSellerBooks[i].price %>
+                                                                            </bdi>
+                                                                        </span>
+                                                                    </ins>
+                                                                <% } %>
+                                                            </span>
                                                         </div>
-                                                        <div class="books__bestseller-text-author">
-                                                            <a href="">
-                                                                Paulo Coelko
-                                                            </a>
-                                                        </div>
-                                                        <span class="books__bestseller-text-price">
-                                                            <del aria-hidden="true">
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li class="books__bestseller-list-item">
-                                                <div class="books__bestseller-list-item-product">
-                                                    <div class="books__bestseller-logo">
-                                                        <a href="" class="books__bestseller-logo-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                                                class="books__bestseller-logo-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__bestseller-text">
-                                                        <h3 class="books__bestseller-text-title">
-                                                            <a href="">
-                                                                Lorem Ipsum
-                                                            </a>
-                                                        </h3>
-                                                        <div class="books__bestseller-text-rate">
-                                                            <div class="books__bestseller-text-rate-star" role="img"
-                                                                aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
-                                                                </span>
-                                                            </div>
-                                                            <span>5</span>
-                                                        </div>
-                                                        <div class="books__bestseller-text-author">
-                                                            <a href="">
-                                                                Paulo Coelko
-                                                            </a>
-                                                        </div>
-                                                        <span class="books__bestseller-text-price">
-                                                            <del aria-hidden="true">
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="books__bestseller-list-item">
-                                                <div class="books__bestseller-list-item-product">
-                                                    <div class="books__bestseller-logo">
-                                                        <a href="" class="books__bestseller-logo-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                                                class="books__bestseller-logo-image">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__bestseller-text">
-                                                        <h3 class="books__bestseller-text-title">
-                                                            <a href="">
-                                                                Lorem Ipsum
-                                                            </a>
-                                                        </h3>
-                                                        <div class="books__bestseller-text-rate">
-                                                            <div class="books__bestseller-text-rate-star" role="img"
-                                                                aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
-                                                                </span>
-                                                            </div>
-                                                            <span>5</span>
-                                                        </div>
-                                                        <div class="books__bestseller-text-author">
-                                                            <a href="">
-                                                                Paulo Coelko
-                                                            </a>
-                                                        </div>
-                                                        <span class="books__bestseller-text-price">
-                                                            <del aria-hidden="true">
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span
-                                                                    class="books__bestseller-text-price-amount amount">
-                                                                    <bdi>
-                                                                        <span
-                                                                            class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            <% } %>
                                         </ul>
-                                    </div>
+                                    <% } %>
+                                </div>                                      
                                 </div>
                                 <div class="books__sale">
                                     <div class="books__sale-widget">
@@ -321,7 +175,7 @@
                                             </div>
                                             <div class="books__total-content-text">
                                                 <h3 class="books__total-content-text-title">
-                                                    <span>1,124</span>
+                                                    <span><%= totalBooks %></span>
                                                 </h3>
                                                 <p class="books__total-content-text-description">Total Books</p>
                                             </div>
@@ -340,7 +194,7 @@
                                             <div class="books__total-content-text books__author-content-text">
                                                 <h3
                                                     class="books__total-content-text-title books__author-content-text-title">
-                                                    <span>124</span>
+                                                    <span><%= totalAuthor %></span>
                                                 </h3>
                                                 <p
                                                     class="books__total-content-text-description books__author-content-text-description">
@@ -1720,7 +1574,7 @@
             </div>
         </div>
 
-        <%- include('partials/footer.ejs') -%>
+    <%- include('partials/footer.ejs') -%>
 </body>
 
 </html>

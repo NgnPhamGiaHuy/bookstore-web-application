@@ -629,7 +629,13 @@ button {
 .main__book-product-wrapper-summary-description {
     margin: 20px 0;
     font-size: 14px;
+    letter-spacing: 1px;
     color: var(--color-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .main__book-product-wrapper-summary-form {
@@ -876,12 +882,6 @@ button {
     object-fit: cover;
 }
 
-.main__book-product-wrapper-summary-subtitle-review {
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-}
-
 .main__book-product-about-content-reviews-meta {
     margin-bottom: 20px;
 }
@@ -952,7 +952,7 @@ button {
     margin-right: 3.2258064516%;
 }
 
-.main__cart-content-table-product-item{
+.main__cart-content-table-product-item {
     font-size: 12px;
     font-weight: 400;
     word-break: break-all;
@@ -961,18 +961,18 @@ button {
     padding: 1.618em 1.618em 1.618em 0;
 }
 
-.screen-reader-text{
+.screen-reader-text {
     border: 0;
     top: -10000em;
-    clip: rect(1px,1px,1px,1px);
+    clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
     height: 1px;
     margin: -1px;
     overflow: hidden;
     padding: 0;
-    position: absolute!important;
+    position: absolute !important;
     width: 1px;
-    word-wrap: normal!important;
+    word-wrap: normal !important;
 }
 
 
@@ -998,7 +998,7 @@ button {
     border-collapse: collapse;
 }
 
-.main__cart-content-table>thead{
+.main__cart-content-table>thead {
     border-bottom: 1px solid;
     border-bottom-color: var(--color-border);
 }
@@ -1051,17 +1051,17 @@ button {
     background-color: var(--color-primary);
 }
 
-.main__cart-content-checkout-link:hover{
+.main__cart-content-checkout-link:hover {
     background-color: var(--color-primary-hover);
 }
 
-.main__cart-content-table-product{
+.main__cart-content-table-product {
     margin-bottom: 1em;
     border-bottom: 1px solid;
     border-bottom-color: var(--color-border);
 }
 
-.main__cart-content-table-product-remove-link{
+.main__cart-content-table-product-remove-link {
     position: relative;
     top: auto;
     left: -6px;
@@ -1073,29 +1073,29 @@ button {
     font-weight: 400;
 }
 
-.main__cart-content-table-product-thumbnail-img{
+.main__cart-content-table-product-thumbnail-img {
     margin: auto;
     display: block;
     max-width: 90px;
 }
 
-.main__cart-content-table-product-name>a{
+.main__cart-content-table-product-name>a {
     font-weight: 600;
     font-size: 16px;
     color: var(--color-accent);
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
 
-.main__cart-content-table-product-name>a:hover{
+.main__cart-content-table-product-name>a:hover {
     color: var(--color-primary-hover);
 }
 
-.main__cart-content-table-product-name-author-variation{
+.main__cart-content-table-product-name-author-variation {
     text-transform: none;
     display: inline-block;
 }
 
-.main__cart-content-table-product-price-amount{
+.main__cart-content-table-product-price-amount {
     font-size: 14px;
     letter-spacing: 0;
 }
