@@ -81,67 +81,31 @@
                 </div>
                 <div class="header__search-subnav-menu">
                     <ul class="header__search-subnav-menu-list">
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-mountain-sun"></i>
-                                <span class="header__search-subnav-menu-link-text">Actions&Adventure</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-palette"></i>
-                                <span class="header__search-subnav-menu-link-text">Arts & Photography</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-dna"></i>
-                                <span class="header__search-subnav-menu-link-text">Biographies</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-pen-nib"></i>
-                                <span class="header__search-subnav-menu-link-text">Classics</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-regular fa-flag"></i>
-                                <span class="header__search-subnav-menu-link-text">Contemporary</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-masks-theater"></i>
-                                <span class="header__search-subnav-menu-link-text">Comedy & Humor</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-book-bookmark"></i>
-                                <span class="header__search-subnav-menu-link-text">Education & Reference</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-regular fa-circle-user"></i>
-                                <span class="header__search-subnav-menu-link-text">Genre Fiction</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-hourglass-start"></i>
-                                <span class="header__search-subnav-menu-link-text">Historical</span>
-                            </a>
-                        </li>
-                        <li class="header__search-subnav-menu-list-item">
-                            <a href="" class="header__search-subnav-menu-link">
-                                <i class="fa-solid fa-flask"></i>
-                                <span class="header__search-subnav-menu-link-text">Science fiction & Fantasy</span>
-                            </a>
-                        </li>
-                    </ul>
+                        <% const genreIcons = {
+                            'Genre 1': 'fa-solid fa-palette',
+                            'Genre 2': 'fa-solid fa-dna',
+                            'Genre 3': 'fa-solid fa-pen-nib',
+                            'Genre 4': 'fa-solid fa-pen-nib',
+                            'Genre 5': 'fa-regular fa-flag',
+                            'Genre 6': 'fa-solid fa-masks-theater',
+                            'Genre 7': 'fa-solid fa-book-bookmark',
+                            'Genre 8': 'fa-regular fa-circle-user',
+                            'Genre 9': 'fa-solid fa-hourglass-start',
+                            'Genre 10': 'fa-solid fa-flask',
+                        }; %>
+                    
+                        <% for(let i = 0; i < totalGenres.length && i < 10; i++) {
+                            const genre = totalGenres[i].genre_name;
+                            const iconClass = genreIcons[`Genre ${i + 1}`] || 'fa-solid fa-mountain-sun';
+                        %>
+                            <li class="header__search-subnav-menu-list-item">
+                                <a href="/story-sells/genre/<%= totalGenres[i] %>" class="header__search-subnav-menu-link">
+                                    <i class="<%= iconClass %>"></i>
+                                    <span class="header__search-subnav-menu-link-text"><%= totalGenres[i] %></span>
+                                </a>
+                            </li>
+                        <% } %>
+                    </ul>                                     
                 </div>
             </nav>
             <div class="header__search-bar">

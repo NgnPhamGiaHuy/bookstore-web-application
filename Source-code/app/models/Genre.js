@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const GenreSchema = new Schema(
     {
@@ -9,8 +9,8 @@ const GenreSchema = new Schema(
         },
         description: {
             type: String,
-        }
-    },
-)
+        },
+    }
+);
 
-module.exports = mongoose.model('Genre', GenreSchema)
+module.exports = mongoose.model('Genre', GenreSchema);

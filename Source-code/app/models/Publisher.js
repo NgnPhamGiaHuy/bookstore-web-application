@@ -12,8 +12,8 @@ const PublisherSchema = new Schema(
         },
         contact_information: {
             type: String,
-        }
+        },
     }
-)
+);
 
 module.exports = mongoose.model('Publisher', PublisherSchema)
