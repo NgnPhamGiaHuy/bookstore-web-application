@@ -1,21 +1,21 @@
-const geoip = require('geoip-lite')
-const Book = require('../models/Book')
-const Genre = require('../models/Genre')
-const Author = require('../models/Author')
-const Review = require('../models/Review')
-const Publisher = require('../models/Publisher')
-const BookGenre = require('../models/BookGenre')
-const BookAuthor = require('../models/BookAuthor')
-const BookPublisher = require('../models/BookPublisher')
+const geoip = require('geoip-lite');
+const Book = require('../models/Book');
+const Genre = require('../models/Genre');
+const Author = require('../models/Author');
+const Review = require('../models/Review');
+const Publisher = require('../models/Publisher');
+const BookGenre = require('../models/BookGenre');
+const BookAuthor = require('../models/BookAuthor');
+const BookPublisher = require('../models/BookPublisher');
 const generateDummyData = require('../../config/database/dataGenerator');
 
 class HomePageController {
     async index(req, res, next) {
         try {
-            const totalBooks = await Book.countDocuments();
-            const totalAuthors = await Author.countDocuments();
-            const { city, zipCode } = getCityAndZipCode(req);
             const customerData = req.session.customer;
+            const totalBooks = await Book.countDocuments();
+            const {city, zipCode} = getCityAndZipCode(req);
+            const totalAuthors = await Author.countDocuments();
 
             // Generate dummy data
 
@@ -25,15 +25,15 @@ class HomePageController {
             // Retrieve genres for each book
             const bookIds = books.map((book) => book._id);
             const totalGenres = await Genre.find().distinct('genre_name');
-            const bookGenres = await BookGenre.find({ book: { $in: bookIds } })
+            const bookGenres = await BookGenre.find({book: {$in: bookIds}})
                 .populate({
                     path: 'genre',
                     model: 'Genre',
-                    select: 'genre_name', //Only select the 'genre_name' field
+                    select: 'genre_name', // Only select the 'genre_name' field
                 });
 
             // Retrieve authors for each book
-            const bookAuthors = await BookAuthor.find({ book: { $in: bookIds } })
+            const bookAuthors = await BookAuthor.find({book: {$in: bookIds}})
                 .populate({
                     path: 'author',
                     model: 'Author',
@@ -41,28 +41,28 @@ class HomePageController {
                 });
 
             // Retrieve publishers for each book
-            const bookPublishers = await BookPublisher.find({ book: { $in: bookIds } })
+            const bookPublishers = await BookPublisher.find({book: {$in: bookIds}})
                 .populate({
                     path: 'publisher',
                     model: 'Publisher',
                     select: 'publisher_name', // Only select the 'publisher_name' field
                 });
 
-            const bookReviews = await Review.find({ book: { $in: bookIds } });
+            const bookReviews = await Review.find({book: {$in: bookIds}});
 
             // Retrieve ratings for each book
             const bookRatings = await Review.aggregate([
-                { $match: { book: { $in: bookIds } } },
+                {$match: {book: {$in: bookIds}}},
                 {
                     $group: {
                         _id: '$book',
-                        averageRating: { $avg: '$rating' },
+                        averageRating: {$avg: '$rating'},
                     },
                 },
             ]);
 
             // Prepare book data
-            const bookData = books.map((book)  => {
+            const bookData = books.map((book) => {
                 const genres = bookGenres
                     .filter((bg) => bg.book.equals(book._id))
                     .map((bg) => bg.genre.genre_name);
@@ -80,26 +80,26 @@ class HomePageController {
 
                 const bookRating = bookRatings.find((rating) => rating._id.equals(book._id));
 
-                const rating = bookRating ? bookRating.averageRating : 0;
+                let rating = bookRating ? bookRating.averageRating : 0;
+                rating = parseFloat(rating.toFixed(2));
                 const ratingWidth = rating * 20;
 
-
                 return {
-                    _id: book._id,
-                    book_title: book.book_title,
-                    publication_date: book.publication_date,
-                    cover_image: book.cover_image,
-                    price: book.price,
-                    sale_price: book.sale_price,
-                    inventory_count: book.inventory_count,
-                    sale_count: book.sale_count,
-                    description: book.description,
                     genres,
                     authors,
                     reviews,
                     publishers,
                     rating,
                     ratingWidth,
+                    _id: book._id,
+                    price: book.price,
+                    sale_price: book.sale_price,
+                    book_title: book.book_title,
+                    cover_image: book.cover_image,
+                    description: book.description,
+                    sale_count: book.sale_count,
+                    publication_date: book.publication_date,
+                    inventory_count: book.inventory_count,
                 };
             });
 
@@ -143,13 +143,10 @@ class HomePageController {
                 }
             });
 
-
             // Find recent books by createdAt
-            const recentBooks = [...bookData].sort((createdAt) => createdAt);
-
+            const recentBooks = [...bookData].sort((a, b) => a.createdAt - b.createdAt);
             // Get the 5 books with the highest sale_count
             const bestSaleBooks = sortedBooks.slice(0, 5);
-
             // Get the book with the best sale_count change within a week
             const currentWeekBestSaleBooks = sortedBooks.slice(0, 6);
 
@@ -160,18 +157,18 @@ class HomePageController {
                 city,
                 zipCode,
                 customerData,
-                sortedBooks: sortedBooks,
                 trendBooks: trendBooks,
+                sortedBooks: sortedBooks,
                 onSaleBooks: onSaleBooks,
-                topRatedBooks: topRatedBooks,
                 recentBooks: recentBooks,
                 booksOfAll: bestSaleBooks,
+                topRatedBooks: topRatedBooks,
                 currentWeekBestSaleBooks,
             });
         } catch (error) {
             // Handle the error
             console.error(error);
-            return res.status(500).json({ error: 'Internal server error' });
+            return res.status(500).json({error: 'Internal server error'});
         }
     }
 }
@@ -197,7 +194,7 @@ const getCityAndZipCode = (req) => {
         zipCode = geo?.zip || '';
     }
 
-    return { city, zipCode };
+    return {city, zipCode};
 };
 
 module.exports = new HomePageController();

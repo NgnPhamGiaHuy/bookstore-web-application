@@ -18,6 +18,10 @@ const CustomerSchema = new Schema(
             type: String,
             required: true
         },
+        customer_avatar: {
+            type: String,
+            default: '/img/User/Avatar.png',
+        },
         customer_email: {
             type: String,
             required: true

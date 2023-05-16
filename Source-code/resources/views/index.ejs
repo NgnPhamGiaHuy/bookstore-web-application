@@ -58,7 +58,7 @@
                                             <div class="books__topweek-logo">
                                                 <span class="books__topweek-logo-number"
                                                         <% /*eslint-disable css-propertyvalueexpected */ %>
-                                                      style="background-color: var(--color-pale-pink)">
+                                                      style="background-color: var(<%= color %>)">
                                                     <%= i + 1 %>
                                                 </span>
                                                 <a href="/story-sells/book/<%= currentWeekBestSaleBooks[i]._id %>"
@@ -73,13 +73,16 @@
                                                         <%= currentWeekBestSaleBooks[i].book_title %>
                                                     </a>
                                                 </h3>
-                                                <a href="/story-sells/book/<%= currentWeekBestSaleBooks[i]._id %>"
-                                                   class="books__topweek-text-author">
-                                                    <% if (currentWeekBestSaleBooks[i].authors.length >
-                                                            0) { %>
-                                                        <%= currentWeekBestSaleBooks[i].authors[0] %>
+                                                <div class="books__topweek-text-author">
+                                                    <% for (let j = 0; j < currentWeekBestSaleBooks[i].authors.length && j < 3; j++) { %>
+                                                        <a href="/story-sells/author/<%= currentWeekBestSaleBooks[i].authors[j] %>">
+                                                            <%= currentWeekBestSaleBooks[i].authors[j] %>
+                                                            <% if (j < currentWeekBestSaleBooks[i].authors.length - 1) { %>
+                                                                , <%= " " %>
+                                                            <% } %>
+                                                        </a>
                                                     <% } %>
-                                                </a>
+                                                </div>
                                             </div>
                                         </li>
                                     <% } %>
@@ -121,20 +124,22 @@
                                                             </span>
                                                         </div>
                                                         <div class="books__bestseller-text-author">
-                                                            <a href="">
-                                                                <% if (booksOfAll[i].authors.length > 0) { %>
-                                                                    <%= booksOfAll[i].authors[0] %>
-                                                                <% } %>
-                                                            </a>
+                                                            <% for (let j = 0; j < booksOfAll[i].authors.length && j < 3; j++) { %>
+                                                                <a href="/story-sells/author/<%= booksOfAll[i].authors[j] %>">
+                                                                    <%= booksOfAll[i].authors[j] %>
+                                                                    <% if (j < booksOfAll[i].authors.length - 1) { %>
+                                                                        , <%= " " %>
+                                                                    <% } %>
+                                                                </a>
+                                                            <% } %>
                                                         </div>
-
                                                         <span class="books__bestseller-text-price">
                                                             <% if (booksOfAll[i].sale_price) { %>
                                                                 <del aria-hidden="true">
                                                                     <span class="books__bestseller-text-price-amount amount">
                                                                         <bdi>
                                                                             <span class="books__bestseller-text-price-amount-symbol">$</span>
-                                                                                    <%= booksOfAll[i].price %>
+                                                                            <%= booksOfAll[i].price %>
                                                                         </bdi>
                                                                     </span>
                                                                 </del>
@@ -303,22 +308,19 @@
                                 <div class="books__list-content-header">
                                     <ul class="books__list-content-header-list">
                                         <li class="books__list-content-header-list-item books__list-content-header-list-item-active">
-                                            <a href="" class="books__list-content-header-list-item-link" id="popularBooksLink"
-                                               onclick="toggleActiveClass(this, 'popularBook')">
+                                            <button type="button" class="books__list-content-header-list-item-link" id="popularBooksLink" onclick="toggleActiveClass(this, 'popularBook')">
                                                 Popular Books
-                                            </a>
+                                            </button>
                                         </li>
                                         <li class="books__list-content-header-list-item">
-                                            <a href="" class="books__list-content-header-list-item-link" id="onSaleLink"
-                                               onclick="toggleActiveClass(this, 'onSale')">
+                                            <button type="button" class="books__list-content-header-list-item-link" id="onSaleLink" onclick="toggleActiveClass(this, 'onSale')">
                                                 On Sale
-                                            </a>
+                                            </button>
                                         </li>
                                         <li class="books__list-content-header-list-item">
-                                            <a href="" class="books__list-content-header-list-item-link" id="topRatedLink"
-                                               onclick="toggleActiveClass(this, 'topRated')">
+                                            <button type="button" class="books__list-content-header-list-item-link" id="topRatedLink" onclick="toggleActiveClass(this, 'topRated')">
                                                 Top Rated
-                                            </a>
+                                            </button>
                                         </li>
                                     </ul>
                                     <span class="books__list-content-header-underline"></span>
@@ -334,8 +336,10 @@
                                                 <div class="books__list-detail">
                                                     <div class="books__list-detail-transition">
                                                         <div class="books__list-image">
-                                                            <img src="<%= sortedBooks[i].cover_image %>" alt=""
-                                                                 class="books__list-image-bookcover">
+                                                            <a href="/story-sells/book/<%= sortedBooks[i]._id %>">
+                                                                <img src="<%= sortedBooks[i].cover_image %>" alt=""
+                                                                     class="books__list-image-bookcover">
+                                                            </a>
                                                         </div>
                                                         <div class="books__list-action">
                                                             <div class="books__list-action-vertical">
@@ -366,16 +370,22 @@
                                                                 <span
                                                                         <% /*eslint-disable-css-propertyvalueexpected*/ %>
                                                                         style="width: <%=
-                                                                            sortedBooks[i].ratingWidth %>%;"></span>
+                                                                            sortedBooks[i].ratingWidth %>%;">
+                                                                </span>
                                                             </div>
                                                             <span>
                                                                 <%= sortedBooks[i].rating %>
                                                             </span>
                                                         </div>
                                                         <div class="books__list-detail-caption-author">
-                                                            <a href="/story-sells/author/<%= sortedBooks[i].authors %>">
-                                                                <%= sortedBooks[i].authors %>
-                                                            </a>
+                                                            <% for (let j = 0; j < sortedBooks[i].authors.length && j < 3; j++) { %>
+                                                                <a href="/story-sells/author/<%= sortedBooks[i].authors[j] %>">
+                                                                    <%= sortedBooks[i].authors[j] %>
+                                                                    <% if (j < sortedBooks[i].authors.length - 1) { %>
+                                                                        , <%= " " %>
+                                                                    <% } %>
+                                                                </a>
+                                                            <% } %>
                                                         </div>
                                                         <span class="books__list-detail-caption-price">
                                                             <% if (sortedBooks[i].sale_price) { %>
@@ -419,8 +429,10 @@
                                                 <div class="books__list-detail">
                                                     <div class="books__list-detail-transition">
                                                         <div class="books__list-image">
-                                                            <img src="<%= onSaleBooks[i].cover_image %>" alt=""
-                                                                 class="books__list-image-bookcover">
+                                                            <a href="/story-sells/book/<%= onSaleBooks[i]._id %>">
+                                                                <img src="<%= onSaleBooks[i].cover_image %>" alt=""
+                                                                     class="books__list-image-bookcover">
+                                                            </a>
                                                         </div>
                                                         <div class="books__list-action">
                                                             <div class="books__list-action-vertical">
@@ -451,16 +463,22 @@
                                                                 <span
                                                                         <% /*eslint-disable-css-propertyvalueexpected*/ %>
                                                                         style="width: <%=
-                                                                            onSaleBooks[i].ratingWidth %>%;"></span>
+                                                                            onSaleBooks[i].ratingWidth %>%;">
+                                                                </span>
                                                             </div>
                                                             <span>
                                                                 <%= onSaleBooks[i].rating %>
                                                             </span>
                                                         </div>
                                                         <div class="books__list-detail-caption-author">
-                                                            <a href="/story-sells/author/<%= onSaleBooks[i].authors %>">
-                                                                <%= onSaleBooks[i].authors %>
-                                                            </a>
+                                                            <% for (let j = 0; j < onSaleBooks[i].authors.length && j < 3; j++) { %>
+                                                                <a href="/story-sells/author/<%= onSaleBooks[i].authors[j] %>">
+                                                                    <%= onSaleBooks[i].authors[j] %>
+                                                                    <% if (j < onSaleBooks[i].authors.length - 1) { %>
+                                                                        , <%= " " %>
+                                                                    <% } %>
+                                                                </a>
+                                                            <% } %>
                                                         </div>
                                                         <span class="books__list-detail-caption-price">
                                                             <% if (onSaleBooks[i].sale_price) { %>
@@ -504,8 +522,10 @@
                                                 <div class="books__list-detail">
                                                     <div class="books__list-detail-transition">
                                                         <div class="books__list-image">
-                                                            <img src="<%= topRatedBooks[i].cover_image %>" alt=""
-                                                                 class="books__list-image-bookcover">
+                                                            <a href="/story-sells/book/<%= topRatedBooks[i]._id %>">
+                                                                <img src="<%= topRatedBooks[i].cover_image %>" alt=""
+                                                                     class="books__list-image-bookcover">
+                                                            </a>
                                                         </div>
                                                         <div class="books__list-action">
                                                             <div class="books__list-action-vertical">
@@ -536,16 +556,22 @@
                                                                 <span
                                                                         <% /*eslint-disable-css-propertyvalueexpected*/ %>
                                                                         style="width: <%=
-                                                                            topRatedBooks[i].ratingWidth %>%;"></span>
+                                                                            topRatedBooks[i].ratingWidth %>%;">
+                                                                </span>
                                                             </div>
                                                             <span>
                                                                 <%= topRatedBooks[i].rating %>
                                                             </span>
                                                         </div>
                                                         <div class="books__list-detail-caption-author">
-                                                            <a href="/story-sells/author/<%= topRatedBooks[i].authors %>">
-                                                                <%= topRatedBooks[i].authors %>
-                                                            </a>
+                                                            <% for (let j = 0; j < topRatedBooks[i].authors.length && j < 3; j++) { %>
+                                                                <a href="/story-sells/author/<%= topRatedBooks[i].authors[j] %>">
+                                                                    <%= topRatedBooks[i].authors[j] %>
+                                                                    <% if (j < topRatedBooks[i].authors.length - 1) { %>
+                                                                        , <%= " " %>
+                                                                    <% } %>
+                                                                </a>
+                                                            <% } %>
                                                         </div>
                                                         <span class="books__list-detail-caption-price">
                                                             <% if (topRatedBooks[i].sale_price) { %>
@@ -886,9 +912,14 @@
                                                                 </span>
                                                             </div>
                                                             <div class="books__list-detail-caption-author">
-                                                                <a href="/story-sells/author/<%= trendBooks[i].authors %>">
-                                                                    <%= trendBooks[i].authors %>
-                                                                </a>
+                                                                <% for (let j = 0; j < trendBooks[i].authors.length && j < 3; j++) { %>
+                                                                    <a href="/story-sells/author/<%= trendBooks[i].authors[j] %>">
+                                                                        <%= trendBooks[i].authors[j] %>
+                                                                        <% if (j < trendBooks[i].authors.length - 1) { %>
+                                                                            , <%= " " %>
+                                                                        <% } %>
+                                                                    </a>
+                                                                <% } %>
                                                             </div>
                                                             <span class="books__list-detail-caption-price">
                                                                 <% if (trendBooks[i].sale_price) { %>
@@ -964,9 +995,14 @@
                                                                 </span>
                                                             </div>
                                                             <div class="books__list-detail-caption-author">
-                                                                <a href="/story-sells/author/<%= recentBooks[i].authors %>">
-                                                                    <%= recentBooks[i].authors %>
-                                                                </a>
+                                                                <% for (let j = 0; j < recentBooks[i].authors.length && j < 3; j++) { %>
+                                                                    <a href="/story-sells/author/<%= recentBooks[i].authors[j] %>">
+                                                                        <%= recentBooks[i].authors[j] %>
+                                                                        <% if (j < recentBooks[i].authors.length - 1) { %>
+                                                                            , <%= " " %>
+                                                                        <% } %>
+                                                                    </a>
+                                                                <% } %>
                                                             </div>
                                                             <span class="books__list-detail-caption-price">
                                                                 <% if (recentBooks[i].sale_price) { %>

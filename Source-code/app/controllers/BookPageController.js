@@ -1,6 +1,5 @@
 const Book = require('../models/Book');
 const Review = require('../models/Review');
-const Publisher = require('../models/BookPublisher');
 const BookGenre = require('../models/BookGenre');
 const BookAuthor = require('../models/BookAuthor');
 const BookPublisher = require('../models/BookPublisher');
@@ -8,33 +7,28 @@ const BookPublisher = require('../models/BookPublisher');
 class BookPageController {
     async index(req, res, next) {
         try {
-            const books = await Book.find();
+            const bookId = req.params.slug;
+            const book = await Book.findById(bookId);
 
-            if (books.length === 0) {
-                return res.status(404).json({ error: 'No books found' });
+            if (!book) {
+                return res.status(404).json({ error: 'Book not found' });
             }
 
-            const book = books[0]; // Select the first book object
+            const formatDate = (date) => {
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                };
+                return date.toLocaleDateString('en-US', options);
+            };
 
-            const bookGenres = await BookGenre.find({ book: book._id }).populate({
-                path: 'genre',
-                model: 'Genre',
-                select: 'genre_name',
-            });
-
-            const bookAuthors = await BookAuthor.find({ book: book._id }).populate({
-                path: 'author',
-                model: 'Author',
-                select: 'author_name',
-            });
-
-            const bookPublishers = await BookPublisher.find({ book: book._id }).populate({
-                path: 'publisher',
-                model: 'Publisher',
-                select: 'publisher_name',
-            });
-
-            const bookReviews = await Review.find({ book: book._id });
+            const bookGenres = await BookGenre.find({ book: book._id }).populate('genre');
+            const bookReviews = await Review.find({ book: book._id }).populate('customer');
+            const bookAuthors = await BookAuthor.find({ book: book._id }).populate('author');
+            const bookPublishers = await BookPublisher.find({ book: book._id }).populate('publisher');
 
             const bookRatings = await Review.aggregate([
                 { $match: { book: book._id } },
@@ -46,27 +40,48 @@ class BookPageController {
                 },
             ]);
 
-            const genres = bookGenres.map((bg) => bg.genre.genre_name);
-            const authors = bookAuthors.map((bg) => bg.author.author_name);
-            const publishers = bookPublishers.map((bp) => bp.publisher.publisher_name);
-            const reviews = bookReviews;
+            const customerReview = bookReviews.map((review) => {
+                const ratingWidth = review.rating * 20;
+                const updatedAt = formatDate(review.updatedAt);
+                return {
+                    updatedAt,
+                    ratingWidth,
+                    rating: review.rating,
+                    comment: review.comment,
+                    customer: review.customer,
+                };
+            });
 
+            const genres = bookGenres.map((bg) => bg.genre.genre_name);
+            const publishers = bookPublishers.map((bp) => bp.publisher);
+            const authors = bookAuthors.map((bg) => bg.author.author_name);
+
+            const reviews = bookReviews;
             const bookRating = bookRatings.find((rating) => rating._id.equals(book._id));
-            const averageRating = bookRating ? bookRating.averageRating : 0;
-            const ratingWidth = (averageRating / 5) * 100;
+            const rating = bookRating ? parseFloat(bookRating.averageRating.toFixed(2)) : 0;
+            const ratingWidth = rating * 20;
+
+            const formattedReviews = reviews.map((review) => {
+                return {
+                    ...review.toObject(),
+                    updatedAt: formatDate(review.updatedAt),
+                };
+            });
 
             const bookData = {
                 genres,
+                rating,
                 authors,
                 publishers,
-                _id: book._id,
+                ratingWidth,
+                customerReview,
                 price: book.price,
                 book_title: book.book_title,
                 sale_price: book.sale_price,
                 cover_image: book.cover_image,
+                book_reviews: formattedReviews,
                 book_description: book.description,
-                rating: averageRating,
-                ratingWidth,
+                inventory_count: book.inventory_count,
             };
 
             res.render('book', {
