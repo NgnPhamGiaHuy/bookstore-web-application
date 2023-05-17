@@ -10,1061 +10,275 @@
     <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
     <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 </head>
 
 <body>
-    <%- include('partials/header-02.ejs', {text: 'Shop', display: 'block'}) -%>
+<%- include('partials/header-02.ejs', {text: 'Shop', display: 'block'}) -%>
 
-    <div class="container">
-        <div class="container__full container__shop">
-            <aside id="secondary" class="aside__area">
-                <div class="aside__area-widget" id="aside__genre">
+<div class="container">
+    <div class="container__full container__shop">
+        <aside id="secondary" class="aside__area">
+            <div class="aside__area-widget" id="aside__genre">
                     <span class="aside__area-widget-title">
                         Genre
                     </span>
-                    <ul class="aside__area-widget-list">
+                <ul class="aside__area-widget-list">
+                    <% for (let i = 0; i < totalGenres.length && i < 20; i++) { %>
                         <li class="aside__area-widget-list-item">
                             <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_actions">
-                            <label for="genre_actions" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Actions&Adventure</span>
+                                   id="<%= totalGenres[i] %>">
+                            <label for="<%= totalGenres[i] %>" class="aside__area-widget-label">
+                                <span class="aside__area-widget-text">
+                                    <%= totalGenres[i] %>
+                                </span>
                             </label>
                         </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_arts">
-                            <label for="genre_arts" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Arts & Photography</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_biographies">
-                            <label for="genre_biographies" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Biographies</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_classics">
-                            <label for="genre_classics" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Classics</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_contemporary">
-                            <label for="genre_contemporary" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Contemporary</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_comedy">
-                            <label for="genre_comedy" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Comedy & Humor</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_education">
-                            <label for="genre_education" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Education & Reference</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_fiction">
-                            <label for="genre_fiction" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Genre Fiction</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_historical">
-                            <label for="genre_historical" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Historical</span>
-                            </label>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="genre_science">
-                            <label for="genre_science" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Science fiction & Fantasy</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="aside__area-widget" id="aside__author">
-                    <span class="aside__area-widget-title">
-                        Authors
-                    </span>
-                    <ul class="aside__area-widget-list">
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="author_a">
-                            <label for="author_a" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Authors</span>
-                            </label>
-                            <span class="aside__area-widget-number">(1)</span>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="author_b">
-                            <label for="author_b" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Authors</span>
-                            </label>
-                            <span class="aside__area-widget-number">(1)</span>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="author_c">
-                            <label for="author_c" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Authors</span>
-                            </label>
-                            <span class="aside__area-widget-number">(1)</span>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="author_d">
-                            <label for="author_d" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Authors</span>
-                            </label>
-                            <span class="aside__area-widget-number">(1)</span>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="author_e">
-                            <label for="author_e" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Authors</span>
-                            </label>
-                            <span class="aside__area-widget-number">(1)</span>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
-                                id="author_f">
-                            <label for="genre_comedy" class="aside__area-widget-label">
-                                <span href="" class="aside__area-widget-text">Authors</span>
-                            </label>
-                            <span class="aside__area-widget-number">(1)</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="aside__area-widget" id="aside__featured">
-                    <span class="aside__area-widget-title">
-                        Featured Books
-                    </span>
-                    <ul class="aside__area-widget-list">
-                        <li class="aside__area-widget-list-item">
-                            <a href="" class="aside__area-widget-link">
-                                <img src="/img/Book-Cover/Book.png" alt=""
-                                    class="aside__area-widget-link-img">
-                            </a>
-                            <div class="aside__area-widget-caption">
-                                <a href="" class="aside__area-widget-caption-title">
-                                    <span>Lorem Ipsum</span>
-                                </a>
-                                <div class="aside__area-widget-caption-genre">
-                                    <a class="aside__area-widget-caption-genre-link" rel="tag">Genre</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <a href="" class="aside__area-widget-link">
-                                <img src="/img/Book-Cover/Book.png" alt=""
-                                    class="aside__area-widget-link-img">
-                            </a>
-                            <div class="aside__area-widget-caption">
-                                <a href="" class="aside__area-widget-caption-title">
-                                    <span>Lorem Ipsum</span>
-                                </a>
-                                <div class="aside__area-widget-caption-genre">
-                                    <a class="aside__area-widget-caption-genre-link" rel="tag">Genre</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <a href="" class="aside__area-widget-link">
-                                <img src="/img/Book-Cover/Book.png" alt=""
-                                    class="aside__area-widget-link-img">
-                            </a>
-                            <div class="aside__area-widget-caption">
-                                <a href="" class="aside__area-widget-caption-title">
-                                    <span>Lorem Ipsum</span>
-                                </a>
-                                <div class="aside__area-widget-caption-genre">
-                                    <a class="aside__area-widget-caption-genre-link" rel="tag">Genre</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <a href="" class="aside__area-widget-link">
-                                <img src="/img/Book-Cover/Book.png" alt=""
-                                    class="aside__area-widget-link-img">
-                            </a>
-                            <div class="aside__area-widget-caption">
-                                <a href="" class="aside__area-widget-caption-title">
-                                    <span>Lorem Ipsum</span>
-                                </a>
-                                <div class="aside__area-widget-caption-genre">
-                                    <a class="aside__area-widget-caption-genre-link" rel="tag">Genre</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <a href="" class="aside__area-widget-link">
-                                <img src="/img/Book-Cover/Book.png" alt=""
-                                    class="aside__area-widget-link-img">
-                            </a>
-                            <div class="aside__area-widget-caption">
-                                <a href="" class="aside__area-widget-caption-title">
-                                    <span>Lorem Ipsum</span>
-                                </a>
-                                <div class="aside__area-widget-caption-genre">
-                                    <a class="aside__area-widget-caption-genre-link" rel="tag">Genre</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="aside__area-widget-list-item">
-                            <a href="" class="aside__area-widget-link">
-                                <img src="/img/Book-Cover/Book.png" alt=""
-                                    class="aside__area-widget-link-img">
-                            </a>
-                            <div class="aside__area-widget-caption">
-                                <a href="" class="aside__area-widget-caption-title">
-                                    <span>Lorem Ipsum</span>
-                                </a>
-                                <div class="aside__area-widget-caption-genre">
-                                    <a class="aside__area-widget-caption-genre-link" rel="tag">Genre</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-            <div id="primary" class="content__area">
-                <main class="main__shop" id="main" role="main">
-                    <div class="main__shop-sorting">
-                        <div class="main__shop-sorting-grid">
-                            <a href="" id="grid"
-                                class="main__shop-sorting-grid-link main__shop-sorting-grid-link-active"
-                                title="Grid View">
-                                <i class="fa-solid fa-table-cells-large"></i>
-                            </a>
-                            <a href="" id="list" class="main__shop-sorting-grid-link" title="List View">
-                                <i class="fa-solid fa-list"></i>
-                            </a>
-                        </div>
-                        <form action="" class="main__shop-sorting-form">
-                            <select name="orderby" id="orderby" class="main__shop-sorting-form-orderby"
-                                aria-label="Shop order">
-                                <option value="" selected="selected">Default sorting</option>
-                                <option value="popularity">Sort by popularity</option>
-                                <option value="rating">Sort by average rating</option>
-                                <option value="date">Sort by latest</option>
-                                <option value="price">Sort by price: low to high</option>
-                                <option value="price-desc">Sort by price: high to low</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div class="main__shop-products">
-                        <ul class="main__shop-products-list">
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="main__shop-products-list-item">
-                                <div class="main__shop-products-transition">
-                                    <div class="main__shop-products-transition-gallary">
-                                        <a href="" class="main__shop-products-transition-gallary-link">
-                                            <img src="/img/Book-Cover/Book.png" alt=""
-                                            class="main__shop-products-transition-gallary-thumbnail">
-                                        </a>
-                                    </div>
-                                    <div class="books__list-action">
-                                        <div class="books__list-action-vertical">
-                                            <button class="books__list-action-button">
-                                                Browse wishlist
-                                                <i class="fa-regular fa-heart"></i>
-                                            </button>
-                                            <button class="books__list-action-button">
-                                                <i class="fa-regular fa-eye"></i>
-                                            </button>
-                                            <div class="">
-                                                <a href="" class="books__list-action-button">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="main__shop-products-caption">
-                                    <h3 class="books__list-detail-caption-title">
-                                        <a href="">Lorem Ipsum</a>
-                                    </h3>
-                                    <div class="books__list-detail-caption-review">
-                                        <div class="books__list-detail-caption-review-star"
-                                            role="img" aria-label="Rated 5.0 out of 5">
-                                            <span style="width: 70%;">
-                                            </span>
-                                        </div>
-                                        <span>5</span>
-                                    </div>
-                                    <div class="books__list-detail-caption-author">
-                                        <a href="">Paulo Coelko</a>
-                                    </div>
-                                    <span class="books__list-detail-caption-price">
-                                        <del aria-hidden="true">
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    86.99
-                                                </bdi>
-                                            </span>
-                                        </del>
-                                        <ins>
-                                            <span
-                                                class="books__list-detail-caption-price-amount amount">
-                                                <bdi>
-                                                    <span
-                                                        class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                    72.99
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </main>
-                <nav id="pagination" class="pagination__area">
-                    <ul class="pagination__area-list">
-                        <li class="pagination__area-list-item">
-                            <a href="" class="pagination__area-numbers pagination__area-numbers-current">1</a>
-                        </li>
-                        <li class="pagination__area-list-item">
-                            <a href="" class="pagination__area-numbers">2</a>
-                        </li>
-                        <li class="pagination__area-list-item">
-                            <a href="" class="pagination__area-numbers">3</a>
-                        </li>
-                        <li class="pagination__area-list-item">
-                            <a href="" class="pagination__area-numbers-next">
-                                <span>Next</span>
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                    <% } %>
+                </ul>
             </div>
+            <div class="aside__area-widget" id="aside__author">
+                <span class="aside__area-widget-title">
+                    Authors
+                </span>
+                <ul class="aside__area-widget-list">
+                    <% for (let i = 0; i < authorData.length && i < 10; i++) { %>
+                        <li class="aside__area-widget-list-item">
+                            <input type="checkbox" name="genre__checkbox" class="aside__area-widget-checkbox"
+                                   id="<%= authorData[i].author_name %>">
+                            <label for="<%= authorData[i].author_name %>" class="aside__area-widget-label">
+                                    <span class="aside__area-widget-text">
+                                        <%= authorData[i].author_name %>
+                                    </span>
+                            </label>
+                            <span class="aside__area-widget-number"><%= authorData[i].numberOfBooks %></span>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="aside__area-widget" id="aside__featured">
+                <span class="aside__area-widget-title">
+                    Featured Books
+                </span>
+                <ul class="aside__area-widget-list">
+                    <% for (let i = 0; i < randomBooks.length && i < 6; i++) { %>
+                        <li class="aside__area-widget-list-item">
+                            <a href="/story-sells/book/<%= randomBooks[i]._id %>" class="aside__area-widget-link">
+                                <img src="<%= randomBooks[i].cover_image %>" alt="" class="aside__area-widget-link-img">
+                            </a>
+                            <div class="aside__area-widget-caption">
+                                <a href="/story-sells/book/<%= randomBooks[i]._id %>"
+                                   class="aside__area-widget-caption-title">
+                                    <span>
+                                        <%= randomBooks[i].book_title %>
+                                    </span>
+                                </a>
+                                <div class="aside__area-widget-caption-genre">
+                                    <% for (let j = 0; j < randomBooks[i].genres.length && j < 3; j++) { %>
+                                        <a href="/story-sells/genre/<%= randomBooks[i].genres[j] %>"
+                                           class="aside__area-widget-caption-genre-link" rel="tag">
+                                            <%= randomBooks[i].genres[j] %>
+                                        </a>
+                                        <% if (j < randomBooks[i].genres.length - 1) { %>
+                                            <span>,</span>
+                                        <% } %>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </aside>
+        <div id="primary" class="content__area">
+            <main class="main__shop" id="main" role="main">
+                <div class="main__shop-sorting">
+                    <div class="main__shop-sorting-grid">
+                        <a href="" id="grid"
+                           class="main__shop-sorting-grid-link main__shop-sorting-grid-link-active"
+                           title="Grid View">
+                            <i class="fa-solid fa-table-cells-large"></i>
+                        </a>
+                        <a href="" id="list" class="main__shop-sorting-grid-link" title="List View">
+                            <i class="fa-solid fa-list"></i>
+                        </a>
+                    </div>
+                    <form action="/story-sells/shop" method="get" class="main__shop-sorting-form">
+                        <select name="orderby" id="orderby" class="main__shop-sorting-form-orderby"
+                                aria-label="Shop order" onchange="this.form.submit()">
+                            <option value="" <% if (orderBy === '') { %>selected
+                                    <% } %>
+                            >Default sorting
+                            </option>
+                            <option value="popularity" <% if (orderBy === 'popularity') { %>selected
+                                    <% } %>
+                            >Sort by popularity
+                            </option>
+                            <option value="rating" <% if (orderBy === 'rating') { %>selected
+                                    <% } %>
+                            >Sort by average rating
+                            </option>
+                            <option value="date" <% if (orderBy === 'date') { %>selected
+                                    <% } %>
+                            >Sort by latest
+                            </option>
+                            <option value="price" <% if (orderBy === 'price') { %>selected
+                                    <% } %>
+                            >Sort by price: low to high
+                            </option>
+                            <option value="price-desc" <% if (orderBy === 'price-desc') { %>selected
+                                    <% } %>
+                            >Sort by price: high to low
+                            </option>
+                        </select>
+                    </form>
+                </div>
+                <div class="main__shop-products">
+                    <ul class="main__shop-products-list">
+                        <% for (let i = 0; i < bookData.length && i < 12; i++) { %>
+                            <li class="main__shop-products-list-item">
+                                <div class="main__shop-products-transition">
+                                    <div class="main__shop-products-transition-gallary">
+                                        <a href="/story-sells/book/<%= bookData[i]._id %>"
+                                           class="main__shop-products-transition-gallary-link">
+                                            <img src="<%= bookData[i].cover_image %>" alt=""
+                                                 class="main__shop-products-transition-gallary-thumbnail">
+                                        </a>
+                                    </div>
+                                    <div class="books__list-action">
+                                        <div class="books__list-action-vertical">
+                                            <button class="books__list-action-button">
+                                                Browse wishlist
+                                                <i class="fa-regular fa-heart"></i>
+                                            </button>
+                                            <button class="books__list-action-button">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
+                                            <div class="">
+                                                <a href="" class="books__list-action-button">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main__shop-products-caption">
+                                    <h3 class="books__list-detail-caption-title">
+                                        <a href="/story-sells/book/<%= bookData[i]._id %>">
+                                            <%= bookData[i].book_title %>
+                                        </a>
+                                    </h3>
+                                    <div class="books__list-detail-caption-review">
+                                        <div class="books__list-detail-caption-review-star"
+                                             role="img" aria-label="Rated 5.0 out of 5">
+                                            <span style="width: <%= bookData[i].ratingWidth %>%;">
+                                            </span>
+                                        </div>
+                                        <span><%= bookData[i].rating %></span>
+                                    </div>
+                                    <div class="books__list-detail-caption-author">
+                                        <% for (let j = 0; j < bookData[i].authors.length && j < 3; j++) { %>
+                                            <a href="/story-sells/author/<%= bookData[i].authors[j] %>">
+                                                <%= bookData[i].authors[j] %>
+                                            </a>
+                                            <% if (j < bookData[i].authors.length - 1 ) { %>
+                                                <span>,</span>
+                                            <% } %>
+                                        <% } %>
+                                    </div>
+                                    <span class="books__list-detail-caption-price">
+                                        <% if (bookData[i].sale_price) { %>
+                                            <del aria-hidden="true">
+                                                <span class="books__list-detail-caption-price-amount amount">
+                                                    <bdi>
+                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
+                                                        <%= bookData[i].price %>
+                                                    </bdi>
+                                                </span>
+                                            </del>
+                                            <ins>
+                                                <span class="books__list-detail-caption-price-amount amount">
+                                                    <bdi>
+                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
+                                                        <%= bookData[i].sale_price %>
+                                                    </bdi>
+                                                </span>
+                                            </ins>
+                                        <% } else { %>
+                                            <ins>
+                                                <span class="books__list-detail-caption-price-amount amount">
+                                                    <bdi>
+                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
+                                                        <%= bookData[i].price %>
+                                                    </bdi>
+                                                </span>
+                                            </ins>
+                                        <% } %>
+                                    </span>
+                                </div>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </main>
+            <nav id="pagination" class="pagination__area">
+                <ul class="pagination__area-list">
+                    <% if (currentPage > 1) { %>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/shop?page=<%= currentPage - 1 %>&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers-next">
+                                <span><i class="fa-solid fa-chevron-left"></i></span>
+                            </a>
+                        </li>
+                    <% } %>
+
+                    <% let startPage = 1; %>
+                    <% let endPage = Math.min(totalPages, 3); %>
+                    <% if (currentPage > 2) { %>
+                        <% startPage = currentPage - 1; %>
+                        <% endPage = currentPage + 1; %>
+                    <% } %>
+                    <% if (endPage > totalPages) { %>
+                        <% startPage = Math.max(totalPages - 2, 1); %>
+                        <% endPage = totalPages; %>
+                    <% } %>
+
+                    <% for (let i = startPage; i <= endPage; i++) { %>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/shop?page=<%= i %>&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers <%= i === currentPage ? 'pagination__area-numbers-current' : '' %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                    <% } %>
+
+                    <% if (endPage < totalPages - 1) { %>
+                        <li class="pagination__area-list-item">
+                            <span class="pagination__area-ellipsis">...</span>
+                        </li>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/shop?page=<%= totalPages %>&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers">
+                                <%= totalPages %>
+                            </a>
+                        </li>
+                    <% } %>
+
+                    <% if (currentPage < totalPages) { %>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/shop?page=<%= currentPage + 1 %>&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers-next">
+                                <span><i class="fa-solid fa-chevron-right"></i></span>
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </nav>
         </div>
     </div>
-    
-    <%- include('partials/footer.ejs') -%>
+</div>
+
+<%- include('partials/footer.ejs') -%>
 </body>
 
 </html>

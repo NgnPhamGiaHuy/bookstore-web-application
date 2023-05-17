@@ -739,139 +739,76 @@
                                     </div>
                                     <div class="books__sublist-content-column">
                                         <ul class="books__sublist-content-column-list">
-                                            <li class="books__sublist-content-column-list-item">
-                                                <div class="books__sublist-content-column-product">
-                                                    <div class="books__sublist-content-column-product-img">
-                                                        <a href=""
-                                                           class="books__sublist-content-column-product-img-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__sublist-content-column-product-caption">
-                                                        <h3 class="books__list-detail-caption-title">
-                                                            <a href="">Lorem Ipsum</a>
-                                                        </h3>
-                                                        <div class="books__list-detail-caption-review">
-                                                            <div class="books__list-detail-caption-review-star"
-                                                                 role="img" aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
+                                            <% for(let i = 0; i < randomSaleBooks.length && i < 3; i++){ %>
+                                                <li class="books__sublist-content-column-list-item">
+                                                    <div class="books__sublist-content-column-product">
+                                                        <div class="books__sublist-content-column-product-img">
+                                                            <a href="/story-sells/book/<%= randomSaleBooks[i]._id %>"
+                                                               class="books__sublist-content-column-product-img-link">
+                                                                <img src="<%= randomSaleBooks[i].cover_image %>" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="books__sublist-content-column-product-caption">
+                                                            <h3 class="books__list-detail-caption-title">
+                                                                <a href="/story-sells/book/<%= randomSaleBooks[i]._id %>">
+                                                                    <%= randomSaleBooks[i].book_title %>
+                                                                </a>
+                                                            </h3>
+                                                            <div class="books__list-detail-caption-review">
+                                                                <div class="books__list-detail-caption-review-star"
+                                                                     role="img" aria-label="Rated 5.0 out of 5">
+                                                                    <span
+                                                                            <% /* eslint-disable-css-propertyvalueexpected */ %>
+                                                                            style="width: <%= randomSaleBooks[i].ratingWidth %>%;">
+                                                                    </span>
+                                                                </div>
+                                                                <span>
+                                                                    <%= randomSaleBooks[i].rating %>
                                                                 </span>
                                                             </div>
-                                                            <span>5</span>
-                                                        </div>
-                                                        <div class="books__list-detail-caption-author">
-                                                            <a href="">Paulo Coelko</a>
-                                                        </div>
-                                                        <span class="books__list-detail-caption-price">
-                                                            <del aria-hidden="true">
-                                                                <span class="books__list-detail-caption-price-amount amount">
-                                                                    <bdi>
-                                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span class="books__list-detail-caption-price-amount amount">
-                                                                    <bdi>
-                                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="books__sublist-content-column-list-item">
-                                                <div class="books__sublist-content-column-product">
-                                                    <div class="books__sublist-content-column-product-img">
-                                                        <a href=""
-                                                           class="books__sublist-content-column-product-img-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__sublist-content-column-product-caption">
-                                                        <h3 class="books__list-detail-caption-title">
-                                                            <a href="">Lorem Ipsum</a>
-                                                        </h3>
-                                                        <div class="books__list-detail-caption-review">
-                                                            <div class="books__list-detail-caption-review-star"
-                                                                 role="img" aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
-                                                                </span>
+                                                            <div class="books__list-detail-caption-author">
+                                                                <% for (let j = 0; j < randomSaleBooks[i].authors.length && j < 3; j++) { %>
+                                                                    <a href="/story-sells/author/<%= randomSaleBooks[i].authors[j] %>">
+                                                                        <%= randomSaleBooks[i].authors[j] %>
+                                                                        <% if (j < randomSaleBooks[i].authors.length - 1) { %>
+                                                                            , <%= " " %>
+                                                                        <% } %>
+                                                                    </a>
+                                                                <% } %>
                                                             </div>
-                                                            <span>5</span>
+                                                            <span class="books__list-detail-caption-price">
+                                                                <% if (randomSaleBooks[i].sale_price) { %>
+                                                                    <del aria-hidden="true">
+                                                                        <span class="books__list-detail-caption-price-amount amount">
+                                                                            <bdi>
+                                                                                <span class="books__list-detail-caption-price-amount-symbol">$</span>
+                                                                                <%= randomSaleBooks[i].price %>
+                                                                            </bdi>
+                                                                        </span>
+                                                                    </del>
+                                                                    <ins>
+                                                                        <span class="books__list-detail-caption-price-amount amount">
+                                                                            <bdi>
+                                                                                <span class="books__list-detail-caption-price-amount-symbol">$</span>
+                                                                                <%= randomSaleBooks[i].sale_price %>
+                                                                            </bdi>
+                                                                        </span>
+                                                                    </ins>
+                                                                <% } else { %>
+                                                                    <ins>
+                                                                        <span class="books__list-detail-caption-price-amount amount">
+                                                                            <bdi>
+                                                                                <span class="books__list-detail-caption-price-amount-symbol">$</span>
+                                                                                <%= randomSaleBooks[i].price %>
+                                                                            </bdi>
+                                                                        </span>
+                                                                    </ins>
+                                                                <% } %>
+                                                            </span>
                                                         </div>
-                                                        <div class="books__list-detail-caption-author">
-                                                            <a href="">Paulo Coelko</a>
-                                                        </div>
-                                                        <span class="books__list-detail-caption-price">
-                                                            <del aria-hidden="true">
-                                                                <span class="books__list-detail-caption-price-amount amount">
-                                                                    <bdi>
-                                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span class="books__list-detail-caption-price-amount amount">
-                                                                    <bdi>
-                                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li class="books__sublist-content-column-list-item">
-                                                <div class="books__sublist-content-column-product">
-                                                    <div class="books__sublist-content-column-product-img">
-                                                        <a href=""
-                                                           class="books__sublist-content-column-product-img-link">
-                                                            <img src="/img/Book-Cover/Book.png" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="books__sublist-content-column-product-caption">
-                                                        <h3 class="books__list-detail-caption-title">
-                                                            <a href="">Lorem Ipsum</a>
-                                                        </h3>
-                                                        <div class="books__list-detail-caption-review">
-                                                            <div class="books__list-detail-caption-review-star"
-                                                                 role="img" aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: 70%;">
-                                                                </span>
-                                                            </div>
-                                                            <span>5</span>
-                                                        </div>
-                                                        <div class="books__list-detail-caption-author">
-                                                            <a href="">Paulo Coelko</a>
-                                                        </div>
-                                                        <span class="books__list-detail-caption-price">
-                                                            <del aria-hidden="true">
-                                                                <span class="books__list-detail-caption-price-amount amount">
-                                                                    <bdi>
-                                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                                        86.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </del>
-                                                            <ins>
-                                                                <span class="books__list-detail-caption-price-amount amount">
-                                                                    <bdi>
-                                                                        <span class="books__list-detail-caption-price-amount-symbol">$</span>
-                                                                        72.99
-                                                                    </bdi>
-                                                                </span>
-                                                            </ins>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            </books__sublist-content-column-list>
+                                                </li>
+                                            <% } %>
                                         </ul>
                                     </div>
                                 </div>
