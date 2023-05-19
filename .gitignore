@@ -1,6 +1,9 @@
 # ignore .DS_Store from all folders
 .DS_Store
 
+# ignore .idea from all folders
+.idea
+
 # ignore nodemon.json only in Online-Bookstore-Project/Source-code
 Source-code/nodemon.json
 
