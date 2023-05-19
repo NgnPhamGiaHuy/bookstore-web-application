@@ -1,97 +1,158 @@
 const Book = require('../models/Book');
+const Cart = require('../models/Cart');
+const CartItem = require('../models/CartItem');
 const Review = require('../models/Review');
 const BookGenre = require('../models/BookGenre');
 const BookAuthor = require('../models/BookAuthor');
 const BookPublisher = require('../models/BookPublisher');
 
 class BookPageController {
+    static calculateTotalQuantity(cartItems) {
+        let totalQuantity = 0;
+        for (const cartItem of cartItems) {
+            totalQuantity += cartItem.quantity;
+        }
+        return totalQuantity;
+    }
+
     async index(req, res, next) {
         try {
             const bookId = req.params.slug;
-            const book = await Book.findById(bookId);
+            const bookPromise = Book.findById(bookId).select('book_title price sale_price cover_image description inventory_count');
+            const customerId = req.session.customer;
+
+            const [book, cart] = await Promise.all([bookPromise, customerId ? Cart.findOne({customer: customerId}).populate('customer') : null]);
 
             if (!book) {
-                return res.status(404).json({ error: 'Book not found' });
+                return res.status(404).json({error: 'Book not found'});
             }
 
-            const formatDate = (date) => {
-                const options = {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                };
-                return date.toLocaleDateString('en-US', options);
-            };
+            let cartItems = [];
+            let totalQuantity = 0;
 
-            const bookGenres = await BookGenre.find({ book: book._id }).populate('genre');
-            const bookReviews = await Review.find({ book: book._id }).populate('customer');
-            const bookAuthors = await BookAuthor.find({ book: book._id }).populate('author');
-            const bookPublishers = await BookPublisher.find({ book: book._id }).populate('publisher');
+            if (cart) {
+                cartItems = await CartItem.find({cart: cart._id}).populate('book');
+                totalQuantity = BookPageController.calculateTotalQuantity(cartItems);
+            }
 
-            const bookRatings = await Review.aggregate([
-                { $match: { book: book._id } },
-                {
-                    $group: {
-                        _id: '$book',
-                        averageRating: { $avg: '$rating' },
-                    },
+            const [bookGenres, bookAuthors, bookPublishers, bookRatings, bookReviews,] = await Promise.all([BookGenre.find({book: book._id}).populate('genre'), BookAuthor.find({book: book._id}).populate('author'), BookPublisher.find({book: book._id}).populate('publisher'), Review.aggregate([{$match: {book: book._id}}, {
+                $group: {
+                    _id: null, avgRating: {$avg: '$rating'},
                 },
-            ]);
-
-            const customerReview = bookReviews.map((review) => {
-                const ratingWidth = review.rating * 20;
-                const updatedAt = formatDate(review.updatedAt);
-                return {
-                    updatedAt,
-                    ratingWidth,
-                    rating: review.rating,
-                    comment: review.comment,
-                    customer: review.customer,
-                };
-            });
-
-            const genres = bookGenres.map((bg) => bg.genre.genre_name);
-            const publishers = bookPublishers.map((bp) => bp.publisher);
-            const authors = bookAuthors.map((bg) => bg.author.author_name);
-
-            const reviews = bookReviews;
-            const bookRating = bookRatings.find((rating) => rating._id.equals(book._id));
-            const rating = bookRating ? parseFloat(bookRating.averageRating.toFixed(2)) : 0;
-            const ratingWidth = rating * 20;
-
-            const formattedReviews = reviews.map((review) => {
-                return {
-                    ...review.toObject(),
-                    updatedAt: formatDate(review.updatedAt),
-                };
-            });
+            },]), Review.find({book: book._id}).populate('customer'),]);
 
             const bookData = {
-                genres,
-                rating,
-                authors,
-                publishers,
-                ratingWidth,
-                customerReview,
-                price: book.price,
+                id: book._id,
                 book_title: book.book_title,
+                price: book.price,
                 sale_price: book.sale_price,
                 cover_image: book.cover_image,
-                book_reviews: formattedReviews,
-                book_description: book.description,
+                description: book.description,
                 inventory_count: book.inventory_count,
+                genres: bookGenres.map((genre) => genre.genre),
+                authors: bookAuthors.map((author) => author.author),
+                publishers: bookPublishers.map((publisher) => publisher.publisher),
+                averageRating: bookRatings.length > 0 ? bookRatings[0].avgRating : 0,
+                averageRatingWidth: (bookRatings.length > 0 ? bookRatings[0].avgRating : 0) * 20,
+                reviews: bookReviews.map((review) => ({
+                    id: review._id,
+                    customer: review.customer,
+                    rating: review.rating,
+                    ratingWidth: review.rating * 20,
+                    comment: review.comment,
+                    createdAt: formatDate(review.createdAt),
+                })),
             };
 
             res.render('book', {
                 bookData,
+                cartItems,
+                totalQuantity,
+                addedToCart: req.query.addedToCart === 'true',
+                successMessage: 'Book added to cart successfully',
             });
         } catch (error) {
             next(error);
-            return res.status(500).json({ error: 'Internal server error' });
         }
     }
+
+    async addToCart(req, res, next) {
+        try {
+            const customerId = req.session.customer;
+            const bookId = req.params.slug;
+            const quantity = parseInt(req.body.quantity);
+
+            const cart = customerId ? await Cart.findOne({customer: customerId}) : null;
+            const book = await Book.findById(bookId);
+
+            if (!book) {
+                return res.status(404).json({error: 'Book not found'});
+            }
+
+            if (quantity < 1 || quantity > book.inventory_count) {
+                return res.status(400).json({error: 'Invalid quantity'});
+            }
+
+            let cartItem;
+
+            if (cart) {
+                cartItem = await CartItem.findOne({cart: cart._id, book: book._id});
+
+                if (cartItem) {
+                    cartItem.quantity += quantity;
+                } else {
+                    cartItem = new CartItem({
+                        cart: cart._id, book: book._id, quantity,
+                    });
+                }
+
+                await cartItem.save();
+            } else {
+                const newCart = new Cart({customer: customerId});
+                await newCart.save();
+
+                cartItem = new CartItem({
+                    cart: newCart._id, book: book._id, quantity,
+                });
+                await cartItem.save();
+            }
+
+            return res.redirect(`/story-sells/book/${bookId}?addedToCart=true`);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async postReview(req, res, next) {
+        try {
+            const customerId = req.session.customer;
+            const bookId = req.params.slug;
+            const rating = parseFloat(req.body.rating);
+            const comment = req.body.comment;
+
+            const book = await Book.findById(bookId);
+
+            if (!book) {
+                return res.status(404).json({error: 'Book not found'});
+            }
+
+            const review = new Review({
+                book: book._id, customer: customerId, rating, comment,
+            });
+            await review.save();
+
+            res.status(201).json({message: 'Review posted successfully'});
+        } catch (error) {
+            next(error);
+        }
+    }
+}
+
+function formatDate(date) {
+    const options = {
+        year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
+    };
+    return date.toLocaleDateString('en-US', options);
 }
 
 module.exports = new BookPageController();

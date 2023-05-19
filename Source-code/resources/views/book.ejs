@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<%- include('partials/header-02.ejs', {text: 'none' , display: 'none' }) -%>
+<%- include('partials/header-02.ejs', { text: 'Book', display: 'none', totalQuantity: 0 ? totalQuantity : totalQuantity }) -%>
 
 <div class="book__subnav">
     <section class="book__subnav-content">
@@ -62,9 +62,9 @@
                                 <div class="main__book-product-wrapper-summary-subtitle-author">
                                     Author:
                                     <% for (let i = 0; i < bookData.authors.length && i < 3; i++) { %>
-                                        <a href="/story-sells/author/<%= bookData.authors[i] %>"
+                                        <a href="/story-sells/author/<%= bookData.authors[i].author_name %>"
                                            class="main__book-product-wrapper-summary-subtitle-author-link">
-                                            <%= bookData.authors[i] %>
+                                            <%= bookData.authors[i].author_name %>
                                         </a>
                                         <% if (i !== Math.min(bookData.authors.length, 5) - 1) { %>
                                             ,
@@ -76,10 +76,10 @@
                                          aria-label="Rated 5.0 out of 5">
                                         <span
                                                 <% /* eslint-disable css-propertyvalueexpected */ %>
-                                                style="width: <%= bookData.ratingWidth %>%;">>
+                                                style="width: <%= bookData.averageRatingWidth %>%;">>
                                         </span>
                                     </div>
-                                    <span><%= bookData.rating %></span>
+                                    <span><%= bookData.averageRating %></span>
                                 </div>
                                 <span class="main__book-product-wrapper-summary-subtitle-sku">
                                     SKU:
@@ -116,12 +116,12 @@
                                 <% } %>
                             </span>
                             <div class="main__book-product-wrapper-summary-description">
-                                <%= bookData.book_description %>
+                                <%= bookData.description %>
                             </div>
-                            <form action="" class="main__book-product-wrapper-summary-form">
+                            <form action="/story-sells/book/<%= bookData.id %>" method="POST" class="main__book-product-wrapper-summary-form">
+                                <input type="hidden" name="action" value="cart">
                                 <div class="main__book-product-form-quantity">
-                                    <label for=""
-                                           class="main__book-product-form-quantity-label">Quantity</label>
+                                    <label for="" class="main__book-product-form-quantity-label">Quantity</label>
                                     <div class="main__book-product-form-quantity-added">
                                         <button class="main__book-product-form-quantity-added-button minus">
                                             <i class="fa-solid fa-minus"></i>
@@ -157,15 +157,27 @@
 
                                     </script>
                                 </div>
-                                <button class="main__book-product-form-buy">
+                                <button type="submit" class="main__book-product-form-buy">
                                     <i class="fa-solid fa-cart-arrow-down"></i>
                                     Add to cart
                                 </button>
-                                <button class="main__book-product-form-wish">
+                                <button type="submit" class="main__book-product-form-wish">
                                     <i class="fa-regular fa-heart"></i>
                                     Add to wishlist
                                 </button>
                             </form>
+                            <% if (addedToCart) { %>
+                                <div class="success-message">
+                                    <%= successMessage %>
+                                </div>
+                                <script>
+                                    const successMessage = document.querySelector('.success-message');
+
+                                    setTimeout(() => {
+                                        successMessage.style.display = 'none';
+                                    }, 10000);
+                                </script>
+                            <% } %>
                             <div class="main__book-product-wrapper-summary-meta">
                                 <span class="main__book-product-wrapper-summary-meta-tagged">
                                     Tags:
@@ -174,8 +186,8 @@
                                 <span class="main__book-product-wrapper-summary-meta-posted">
                                     Categories:
                                     <% for (let i = 0; i < Math.min(bookData.genres.length, 5); i++) { %>
-                                        <a href="/story-sells/gerne/<%= bookData.genres[i] %>" rel="tag">
-                                            <%= bookData.genres[i] %>
+                                        <a href="/story-sells/gerne/<%= bookData.genres[i].genre_name %>" rel="tag">
+                                            <%= bookData.genres[i].genre_name %>
                                         </a>
                                         <% if (i !== Math.min(bookData.genres.length, 5) - 1) { %>
                                             ,
@@ -196,7 +208,7 @@
                             <li class="main__book-product-about-list-item">
                                 <a href="#" data-target="reviews" class="main__book-product-about-list-link">
                                     Reviews
-                                    <span class="number__reviews">(<%= bookData.customerReview.length %>)</span>
+                                    <span class="number__reviews">(<%= bookData.reviews.length %>)</span>
                                 </a>
                             </li>
                             <li class="main__book-product-about-list-item">
@@ -209,17 +221,17 @@
                             <div id="description"
                                  class="main__book-product-about-content-margin main__book-product-about-content-description active">
                                 <p>
-                                    <%= bookData.book_description %>
+                                    <%= bookData.description %>
                                 </p>
                             </div>
                             <div id="reviews"
                                  class="main__book-product-about-content-margin main__book-product-about-content-reviews">
                                 <ol class="main__book-product-about-content-reviews-list">
-                                    <% for (let i = 0; i < bookData.customerReview.length; i++) { %>
+                                    <% for (let i = 0; i < bookData.reviews.length; i++) { %>
                                         <li class="main__book-product-about-content-reviews-list-item">
                                             <div class="main__book-product-about-content-reviews-comment">
                                                 <div class="main__book-product-wrapper-summary-subtitle-review">
-                                                    <img src="<%= bookData.customerReview[i].customer.customer_avatar %>"
+                                                    <img src="<%= bookData.reviews[i].customer.customer_avatar %>"
                                                          alt=""
                                                          class="main__book-product-about-content-reviews-avatar">
                                                     <div style="display: flex; flex-direction: column; line-height: 10px">
@@ -227,24 +239,24 @@
                                                             <div class="books__list-detail-caption-review-star"
                                                                  role="img"
                                                                  aria-label="Rated 5.0 out of 5">
-                                                                <span style="width: <%= bookData.customerReview[i].ratingWidth %>%;"></span>
+                                                                <span style="width: <%= bookData.reviews[i].ratingWidth %>%;"></span>
                                                             </div>
-                                                            <span><%= bookData.customerReview[i].rating %></span>
+                                                            <span><%= bookData.reviews[i].rating %></span>
                                                         </div>
                                                         <div>
                                                             <div class="main__book-product-about-content-reviews-meta">
                                                                 <Strong class="main__book-product-about-content-reviews-meta-author">
-                                                                    <%= bookData.customerReview[i].customer.customer_fname + " " + bookData.customerReview[i].customer.customer_lname %>
+                                                                    <%= bookData.reviews[i].customer.customer_fname + " " + bookData.reviews[i].customer.customer_lname %>
                                                                 </Strong>
                                                                 <time class="main__book-product-about-content-reviews-date">
-                                                                    <%= bookData.customerReview[i].updatedAt %>
+                                                                    <%= bookData.reviews[i].updatedAt %>
                                                                 </time>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <p>
-                                                    <%= bookData.book_reviews[i].comment %>
+                                                    <%= bookData.reviews[i].comment %>
                                                 </p>
                                             </div>
                                         </li>

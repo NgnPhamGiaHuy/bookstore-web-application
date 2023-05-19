@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<%- include('partials/header-01.ejs', {genres: totalGenres}) -%>
+<%- include('partials/header-01.ejs', {genres: totalGenres, totalQuantity: 0 ? totalQuantity : totalQuantity}) -%>
 
 <div class="content">
     <main id="content__main">
@@ -308,17 +308,21 @@
                                 <div class="books__list-content-header">
                                     <ul class="books__list-content-header-list">
                                         <li class="books__list-content-header-list-item books__list-content-header-list-item-active">
-                                            <button type="button" class="books__list-content-header-list-item-link" id="popularBooksLink" onclick="toggleActiveClass(this, 'popularBook')">
+                                            <button type="button" class="books__list-content-header-list-item-link"
+                                                    id="popularBooksLink"
+                                                    onclick="toggleActiveClass(this, 'popularBook')">
                                                 Popular Books
                                             </button>
                                         </li>
                                         <li class="books__list-content-header-list-item">
-                                            <button type="button" class="books__list-content-header-list-item-link" id="onSaleLink" onclick="toggleActiveClass(this, 'onSale')">
+                                            <button type="button" class="books__list-content-header-list-item-link"
+                                                    id="onSaleLink" onclick="toggleActiveClass(this, 'onSale')">
                                                 On Sale
                                             </button>
                                         </li>
                                         <li class="books__list-content-header-list-item">
-                                            <button type="button" class="books__list-content-header-list-item-link" id="topRatedLink" onclick="toggleActiveClass(this, 'topRated')">
+                                            <button type="button" class="books__list-content-header-list-item-link"
+                                                    id="topRatedLink" onclick="toggleActiveClass(this, 'topRated')">
                                                 Top Rated
                                             </button>
                                         </li>
@@ -341,22 +345,28 @@
                                                                      class="books__list-image-bookcover">
                                                             </a>
                                                         </div>
-                                                        <div class="books__list-action">
-                                                            <div class="books__list-action-vertical">
-                                                                <button class="books__list-action-button">
-                                                                    Browse wishlist
-                                                                    <i class="fa-regular fa-heart"></i>
-                                                                </button>
-                                                                <button class="books__list-action-button">
-                                                                    <i class="fa-regular fa-eye"></i>
-                                                                </button>
-                                                                <div class="/story-sells/cart">
-                                                                    <a href="" class="books__list-action-button">
-                                                                        <i class="fa-solid fa-cart-shopping"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+<!--                                                        <div class="books__list-action">-->
+<!--                                                            <div class="books__list-action-vertical">-->
+<!--                                                                <form action="" method="POST"-->
+<!--                                                                      class="addToFavoritesForm">-->
+<!--                                                                    <input type="hidden" name="bookId"-->
+<!--                                                                           value="<%= sortedBooks[i]._id %>">-->
+<!--                                                                    <button class="books__list-action-button"-->
+<!--                                                                            type="submit">-->
+<!--                                                                        Browse wishlist-->
+<!--                                                                        <i class="fa-regular fa-heart"></i>-->
+<!--                                                                    </button>-->
+<!--                                                                </form>-->
+<!--                                                                <button class="books__list-action-button">-->
+<!--                                                                    <i class="fa-regular fa-eye"></i>-->
+<!--                                                                </button>-->
+<!--                                                                <div class="/story-sells/cart">-->
+<!--                                                                    <a href="" class="books__list-action-button">-->
+<!--                                                                        <i class="fa-solid fa-cart-shopping"></i>-->
+<!--                                                                    </a>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
                                                     </div>
                                                     <div class="books__list-detail-caption">
                                                         <h3 class="books__list-detail-caption-title">

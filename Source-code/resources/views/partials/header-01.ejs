@@ -62,11 +62,17 @@
                     </a>
                 </li>
                 <li class="header__nav-user-list-item">
-                    <a href="/cart" class="header__nav-user-link">
+                    <a href="/story-sells/cart" class="header__nav-user-link">
                         <i class="fa-solid fa-basket-shopping"></i>
+                        <% if (totalQuantity > 99) { %>
+                            <span class="header__nav-user-list-cart-total header__nav-user-list-cart-total--exceeded">99+</span>
+                        <% } else { %>
+                            <span class="header__nav-user-list-cart-total"><%= totalQuantity %></span>
+                        <% } %>
                     </a>
                 </li>
             </ul>
+        </div>
         </div>
     </nav>
     <div class="header__search">
@@ -93,18 +99,18 @@
                             'Genre 9': 'fa-solid fa-hourglass-start',
                             'Genre 10': 'fa-solid fa-flask',
                         }; %>
-                    
+
                         <% for(let i = 0; i < totalGenres.length && i < 10; i++) {
                             const iconClass = genreIcons[`Genre ${i + 1}`] || 'fa-solid fa-mountain-sun';
                         %>
-                            <li class="header__search-subnav-menu-list-item">
-                                <a href="/story-sells/genre/<%= totalGenres[i] %>" class="header__search-subnav-menu-link">
-                                    <i class="<%= iconClass %>"></i>
-                                    <span class="header__search-subnav-menu-link-text"><%= totalGenres[i] %></span>
-                                </a>
-                            </li>
+                        <li class="header__search-subnav-menu-list-item">
+                            <a href="/story-sells/genre/<%= totalGenres[i] %>" class="header__search-subnav-menu-link">
+                                <i class="<%= iconClass %>"></i>
+                                <span class="header__search-subnav-menu-link-text"><%= totalGenres[i] %></span>
+                            </a>
+                        </li>
                         <% } %>
-                    </ul>                                     
+                    </ul>
                 </div>
             </nav>
             <div class="header__search-bar">
@@ -127,7 +133,7 @@
                             Deliver to <%= customerData.customer_lname %>
                         </p>
                         <h3 href="" class="header__search-location-text-place" rel="noopener noreferrer">
-                            <%= city + " " +zipCode%>
+                            <%= city + " " + zipCode %>
                         </h3>
                     </div>
                 </a>

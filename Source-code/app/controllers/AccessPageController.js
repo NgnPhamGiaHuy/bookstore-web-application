@@ -21,6 +21,7 @@ class AccessPageController {
             // Customer is valid, perform further actions (e.g., session management, redirect to dashboard, etc.)
             req.session.isLoggedIn = true;
             req.session.customer = customer;
+            req.session.customerId = customer._id;
 
             // Set cookie if remember me option is checked
             if (remember) {

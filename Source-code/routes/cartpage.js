@@ -1,10 +1,7 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const cartPageController = require('../app/controllers/CartPageController');
 
-const cartPageController = require('../app/controllers/CartPageController')
+router.get('/', cartPageController.index);
 
-router.use('/',  cartPageController.index)
-
-module.exports = router
-
-
+module.exports = router;

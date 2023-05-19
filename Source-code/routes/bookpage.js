@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const bookPageController = require('../app/controllers/BookPageController');
 
-const bookPageController = require('../app/controllers/BookPageController')
+router.get('/:slug', bookPageController.index);
+router.post('/:slug', bookPageController.addToCart);
 
-router.get('/:slug', bookPageController.index)
-
-module.exports = router
+module.exports = router;

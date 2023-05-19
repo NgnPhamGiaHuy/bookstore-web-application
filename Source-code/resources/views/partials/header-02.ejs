@@ -28,8 +28,13 @@
                     </a>
                 </li>
                 <li class="header__nav-user-list-item">
-                    <a href="/cart" class="header__nav-user-link">
+                    <a href="/story-sells/cart" class="header__nav-user-link">
                         <i class="fa-solid fa-basket-shopping"></i>
+                        <% if (totalQuantity > 99) { %>
+                            <span class="header__nav-user-list-cart-total header__nav-user-list-cart-total--exceeded">99+</span>
+                        <% } else { %>
+                            <span class="header__nav-user-list-cart-total"><%= totalQuantity %></span>
+                        <% } %>
                     </a>
                 </li>
             </ul>

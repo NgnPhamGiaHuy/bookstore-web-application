@@ -1,13 +1,28 @@
 const Book = require('../models/Book');
+const Cart = require('../models/Cart');
+const CartItem = require('../models/CartItem');
 const Genre = require('../models/Genre');
 const Review = require('../models/Review');
 const Author = require('../models/Author');
 const BookGenre = require('../models/BookGenre');
 const BookAuthor = require('../models/BookAuthor');
 
+
 class ShopPageController {
+    static async calculateTotalQuantity(cartItems) {
+        let totalQuantity = 0;
+
+        for (const cartItem of cartItems) {
+            totalQuantity += cartItem.quantity;
+        }
+
+        return totalQuantity;
+    }
+
     async index(req, res, next) {
         try {
+            const customerId = req.session.customer;
+
             const booksPerPage = 12;
             const page = parseInt(req.query.page) || 1;
             const skip = (page - 1) * booksPerPage;
@@ -48,8 +63,7 @@ class ShopPageController {
 
             const [bookGenres, bookAuthors, bookRatings] = await Promise.all([BookGenre.find({book: {$in: bookIds}}).populate('genre'), BookAuthor.find({book: {$in: bookIds}}).populate('author'), Review.aggregate([{
                 $match: {
-                    book: {$in: bookIds},
-                    rating: {$gt: 0, $ne: null}
+                    book: {$in: bookIds}, rating: {$gt: 0, $ne: null}
                 }
             }, {
                 $group: {
@@ -83,7 +97,7 @@ class ShopPageController {
                     book_title: book.book_title,
                     sale_price: book.sale_price,
                     cover_image: book.cover_image,
-                    price: book.sale_price > 0 ? book.sale_price : book.price,
+                    price: book.price,
                 };
             });
 
@@ -102,8 +116,35 @@ class ShopPageController {
                 },
             },]);
 
+            let cart = null;
+            let cartItems = [];
+            let totalQuantity = 0;
+
+            if (customerId) {
+                cart = await Cart.findOne({customer: customerId})
+                    .populate('customer')
+                    .lean()
+                    .exec();
+
+                if (cart) {
+                    cartItems = await CartItem.find({cart: cart._id})
+                        .populate('book')
+                        .lean()
+                        .exec();
+                    totalQuantity = await ShopPageController.calculateTotalQuantity(cartItems);
+                }
+            }
+
             res.render('shop', {
-                title: 'Shop', orderBy, currentPage: page, bookData, totalPages, authorData, randomBooks, totalGenres,
+                title: 'Shop',
+                orderBy,
+                bookData,
+                totalPages,
+                authorData,
+                randomBooks,
+                totalGenres,
+                totalQuantity,
+                currentPage: page,
             });
         } catch (error) {
             next(error);
@@ -112,4 +153,3 @@ class ShopPageController {
 }
 
 module.exports = new ShopPageController();
-
