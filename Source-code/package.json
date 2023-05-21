@@ -20,20 +20,15 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
-    "connect-flash": "^0.1.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "faker": "^5.5.3",
     "geoip-lite": "^1.4.7",
-    "method-override": "^3.0.0",
     "mongoose": "^7.1.0",
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
-    "lint-staged": "^13.2.2",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.22"
   }
 }

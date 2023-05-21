@@ -37,6 +37,64 @@ class HomePageController {
         return totalQuantity;
     }
 
+    async updateHome(req, res, next) {
+        try {
+            res.redirect('/story-sells');
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async addToCart(req, res, next) {
+        try {
+            const bookId = req.params.bookCartId;
+            const customerId = req.session.customerId;
+            let cart = customerId ? await Cart.findOne({ customer: customerId }) : null;
+
+            const book = await Book.findById(bookId);
+
+            if (!book) {
+                return res.status(404).json({ error: "Book not found" });
+            }
+
+            let cartItem;
+
+            if (cart) {
+                cartItem = await CartItem.findOne({ cart: cart._id, book: book._id });
+
+                if (cartItem) {
+                    cartItem.quantity += 1;
+                } else {
+                    cartItem = new CartItem({
+                        cart: cart._id, book: book._id, quantity: 1,
+                    });
+                }
+
+                await cartItem.save();
+                cart.items.push(cartItem._id);
+                await cart.save();
+            } else {
+                cartItem = new CartItem({
+                    book: book._id, quantity: 1,
+                });
+
+                await cartItem.save();
+
+                cart = new Cart({
+                    customer: customerId,
+                    items: [cartItem._id],
+                });
+
+                await cart.save();
+            }
+
+            return res.status(200).json({ success: true });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
     async index(req, res, next) {
         try {
             const books = await Book.find({}, 'book_title cover_image price sale_price inventory_count sale_count')

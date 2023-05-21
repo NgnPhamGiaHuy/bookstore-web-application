@@ -52,7 +52,7 @@ class BookPageController {
                 genres: bookGenres.map((genre) => genre.genre),
                 authors: bookAuthors.map((author) => author.author),
                 publishers: bookPublishers.map((publisher) => publisher.publisher),
-                averageRating: bookRatings.length > 0 ? bookRatings[0].avgRating : 0,
+                averageRating: bookRatings.length > 0 ? bookRatings[0].avgRating.toFixed(2) : 0,
                 averageRatingWidth: (bookRatings.length > 0 ? bookRatings[0].avgRating : 0) * 20,
                 reviews: bookReviews.map((review) => ({
                     id: review._id,

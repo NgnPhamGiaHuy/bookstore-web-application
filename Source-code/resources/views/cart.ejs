@@ -14,198 +14,336 @@
 </head>
 
 <body>
-<%- include('partials/header-02.ejs', { text: 'Cart', display: 'block', totalQuantity: 0 }) -%>
-
+<%- include('partials/header-02.ejs', { text: 'Cart', display: 'block', totalQuantity: totalQuantity ? totalQuantity : 0 }) -%>
 
 <div class="container">
     <div class="container__full" style="display: block; max-width: 1500px">
         <div id="primary" class="cart__area">
             <main id="main" class="main__cart" role="main">
                 <article class="main__cart-status">
-                    <div class="main__cart-content">
-                        <form action="/story-sells/cart" method="post" class="main__cart-content-form">
-                            <table class="main__cart-content-table">
-                                <thead>
-                                <tr>
-                                    <th class="main__cart-content-table-product-item main__cart-content-table-product-remove">
-                                        <span class="screen-reader-text">Remove item</span>
-                                    </th>
-                                    <th class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
-                                        <span class="screen-reader-text">Thumbnail image</span>
-                                    </th>
-                                    <th class="main__cart-content-table-product-item main__cart-content-table-product-name">
-                                        Product
-                                    </th>
-                                    <th class="main__cart-content-table-product-item main__cart-content-table-product-price">
-                                        Price
-                                    </th>
-                                    <th class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
-                                        Quantity
-                                    </th>
-                                    <th class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
-                                        Subtotal
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <% cartItems.forEach((cartItem) => { %>
-                                    <tr class="main__cart-content-table-product">
-                                        <td class="main__cart-content-table-product-item main__cart-content-table-product-remove">
-                                            <a href="" class="main__cart-content-table-product-remove-link">
-                                                x
-                                            </a>
-                                        </td>
-                                        <td class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
-                                            <a href="">
-                                                <img src="<%= cartItem.book.cover_image %>" alt=""
-                                                     class="main__cart-content-table-product-thumbnail-img">
-                                            </a>
-                                        </td>
-                                        <td class="main__cart-content-table-product-item main__cart-content-table-product-name">
-                                            <a href=""><%= cartItem.book.book_title %></a>
-                                            <dl class="main__cart-content-table-product-name-author">
-                                                <dt class="main__cart-content-table-product-name-author-variation">
-                                                    <strong>Author:</strong>
-                                                </dt>
-                                                <dd class="main__cart-content-table-product-name-author-variation">
-                                                    <p><%= cartItem.book.author %></p>
-                                                </dd>
-                                            </dl>
-                                        </td>
-                                        <td class="main__cart-content-table-product-item main__cart-content-table-product-price">
-                                            <span class="main__cart-content-table-product-price-amount">
-                                                <span>$</span>
-                                                <%= cartItem.book.price %>
-                                            </span>
-                                        </td>
-                                        <td class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
-                                            <div class="main__book-product-form-quantity">
-                                                <div class="main__book-product-form-quantity-added">
-                                                    <button type="button" class="main__book-product-form-quantity-added-button minus">
-                                                        <i class="fa-solid fa-minus"></i>
-                                                    </button>
-                                                    <label for="quantity_<%= cartItem._id %>">Quantity:</label>
-                                                    <input
-                                                            type="number"
-                                                            id="quantity_<%= cartItem._id %>"
-                                                            step="1"
-                                                            min="1"
-                                                            max="999"
-                                                            name="quantity"
-                                                            value="<%= cartItem.quantity %>"
-                                                            inputmode="numeric"
-                                                            class="main__book-product-form-quantity-added-input"
-                                                            data-cart-item-id="<%= cartItem._id %>"
-                                                    />
-                                                    <button type="button" class="main__book-product-form-quantity-added-button plus">
-                                                        <i class="fa-solid fa-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
-                                            <span class="main__cart-content-table-product-price-amount">
-                                                <span>$</span>
-                                                <%= cartItem.book.price * cartItem.quantity %>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                <% }); %>
-                                </tbody>
-                            </table>
-                        </form>
-                        <script>
-                            async function updateCartItemQuantity(cartItemId, quantity) {
-                                try {
-                                    const response = await fetch('/story-sells/cart/update-quantity', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify({ cartItemId, quantity }),
-                                    });
-
-                                    if (!response.ok) {
-                                        throw new Error('Failed to update cart item quantity');
-                                    }
-
-                                    return response.json();
-                                } catch (error) {
-                                    console.error(error);
-                                }
-                            }
-
-                            document.addEventListener('DOMContentLoaded', () => {
-                                const minusButtons = document.querySelectorAll('.minus');
-                                const plusButtons = document.querySelectorAll('.plus');
-
-                                minusButtons.forEach((minusButton) => {
-                                    minusButton.addEventListener('click', async (event) => {
-                                        event.preventDefault();
-                                        const input = event.target.parentElement.querySelector('input');
-                                        const cartItemId = input.dataset.cartItemId;
-                                        let quantity = parseInt(input.value);
-
-                                        if (quantity > 1) {
-                                            quantity--;
-                                            input.value = quantity;
-                                            await updateCartItemQuantity(cartItemId, quantity);
-                                        }
-                                    });
-                                });
-
-                                plusButtons.forEach((plusButton) => {
-                                    plusButton.addEventListener('click', async (event) => {
-                                        event.preventDefault();
-                                        const input = event.target.parentElement.querySelector('input');
-                                        const cartItemId = input.dataset.cartItemId;
-                                        let quantity = parseInt(input.value);
-
-                                        if (quantity < 999) {
-                                            quantity++;
-                                            input.value = quantity;
-                                            await updateCartItemQuantity(cartItemId, quantity);
-                                        }
-                                    });
-                                });
-                            });
-                        </script>
-                        </table>
-                        </form>
-
-                        <div class="main__cart-content-collaterals">
-                            <div class="main__cart-content-total">
-                                <h2>Cart totals</h2>
+                    <% if (cartItems.length) { %>
+                        <div class="main__cart-content">
+                            <form id="removeCartItemForm" method="post" class="main__cart-content-form">
                                 <table class="main__cart-content-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="main__cart-content-table-product-item main__cart-content-table-product-remove">
+                                            <span class="screen-reader-text">Remove item</span>
+                                        </th>
+                                        <th class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
+                                            <span class="screen-reader-text">Thumbnail image</span>
+                                        </th>
+                                        <th class="main__cart-content-table-product-item main__cart-content-table-product-name">
+                                            Product
+                                        </th>
+                                        <th class="main__cart-content-table-product-item main__cart-content-table-product-price">
+                                            Price
+                                        </th>
+                                        <th class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
+                                            Quantity
+                                        </th>
+                                        <th class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
+                                            Subtotal
+                                        </th>
+                                    </tr>
+                                    </thead>
                                     <tbody>
-                                    <tr class="main__cart-content-table-subtotal">
-                                        <th>Subtotal</th>
-                                        <td class="main__cart-content-table-data">
+                                    <% cartItems.forEach((cartItem) => { %>
+                                        <tr class="main__cart-content-table-product">
+                                            <td class="main__cart-content-table-product-item main__cart-content-table-product-remove">
+                                                <button class="main__cart-content-table-product-remove-link"
+                                                        onclick="confirmRemoveCartItem('<%= cart._id %>', '<%= cartItem._id %>')">
+                                                    x
+                                                </button>
+                                            </td>
+                                            <td class="main__cart-content-table-product-item main__cart-content-table-product-thumbnail">
+                                                <a href="/story-sells/book/<%= cartItem.book._id %>">
+                                                    <img src="<%= cartItem.book.cover_image %>" alt=""
+                                                         class="main__cart-content-table-product-thumbnail-img">
+                                                </a>
+                                            </td>
+                                            <td class="main__cart-content-table-product-item main__cart-content-table-product-name">
+                                                <a href="/story-sells/book/<%= cartItem.book._id %>">
+                                                    <%= cartItem.book.book_title %>
+                                                </a>
+                                                <dl class="main__cart-content-table-product-name-author">
+                                                    <dt class="main__cart-content-table-product-name-author-variation">
+                                                        <strong>Author:</strong>
+                                                    </dt>
+                                                    <dd class="main__cart-content-table-product-name-author-variation">
+                                                        <% for (let i = 0; i < cartItem.book.authors.length && i < 3; i++) { %>
+                                                            <a href="/story-sells/author/<%= cartItem.book.authors[i].author_name %>">
+                                                            <span>
+                                                                <%= cartItem.book.authors[i].author_name %>
+                                                            </span>
+                                                            </a>
+                                                            <% if (i < cartItem.book.authors.length - 1) { %>
+                                                                <span>,</span>
+                                                            <% } %>
+                                                        <% } %>
+                                                    </dd>
+                                                </dl>
+                                            </td>
+                                            <td class="main__cart-content-table-product-item main__cart-content-table-product-price">
+                                                <% if (cartItem.book.sale_price > 0) { %>
+                                                    <span class="main__cart-content-table-product-price-amount">
+                                                        <span>$</span>
+                                                        <%= cartItem.book.sale_price.toFixed(2) %>
+                                                    </span>
+                                                <% } else { %>
+                                                    <span class="main__cart-content-table-product-price-amount">
+                                                        <span>$</span>
+                                                        <%= cartItem.book.price.toFixed(2) %>
+                                                    </span>
+                                                <% } %>
+                                            </td>
+                                            <td class="main__cart-content-table-product-item main__cart-content-table-product-quantity">
+                                                <div class="main__book-product-form-quantity">
+                                                    <div class="main__book-product-form-quantity-added">
+                                                        <button type="button"
+                                                                class="main__book-product-form-quantity-added-button minus"
+                                                                onclick="decreaseQuantityCartItem('<%= cart._id %>', '<%= cartItem._id %>')">
+                                                            <i class="fa-solid fa-minus"></i>
+                                                        </button>
+                                                        <label for="quantity_<%= cartItem._id %>" style="display: none">Quantity:</label>
+                                                        <input type="number" id="quantity_<%= cartItem._id %>" step="1"
+                                                               min="1" max="999" name="quantity"
+                                                               value="<%= cartItem.quantity %>" inputmode="numeric"
+                                                               class="main__book-product-form-quantity-added-input"
+                                                               data-cart-item-id="<%= cartItem._id %>" disabled>
+                                                        <button type="button"
+                                                                class="main__book-product-form-quantity-added-button plus"
+                                                                onclick="increaseQuantityCartItem('<%= cart._id %>', '<%= cartItem._id %>')">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
+                                                <% if (cartItem.book.sale_price > 0 ) { %>
+                                                    <span class="main__cart-content-table-product-price-amount">
+                                                        <span>$</span>
+                                                        <%= (cartItem.book.sale_price.toFixed(2) * cartItem.quantity).toFixed(2) %>
+                                                    </span>
+                                                <% } else { %>
+                                                        <span class="main__cart-content-table-product-price-amount">
+                                                        <span>$</span>
+                                                        <%= (cartItem.book.price * cartItem.quantity).toFixed(2) %>
+                                                    </span>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="main__cart-content-collaterals">
+                                <div class="main__cart-content-total">
+                                    <h2>Cart totals</h2>
+                                    <table class="main__cart-content-table">
+                                        <tbody>
+                                        <tr class="main__cart-content-table-subtotal">
+                                            <th>Subtotal</th>
+                                            <td class="main__cart-content-table-data">
                                             <span class="main__cart-content-table-subtotal-data-amount">
                                                 <span>$</span>
-                                                 <span id="subtotal"><%= subtotal %></span>
+                                                <span id="subtotal"><%= subtotal %></span>
                                             </span>
-                                        </td>
-                                    </tr>
-                                    <tr class="main__cart-content-table-total">
-                                        <th>Total</th>
-                                        <td class="main__cart-content-table-data">
+                                            </td>
+                                        </tr>
+                                        <tr class="main__cart-content-table-total">
+                                            <th>Total</th>
+                                            <td class="main__cart-content-table-data">
                                             <span class="main__cart-content-table-total-data-amount">
                                                 <span>$</span>
                                                 <span id="total"><%= total %></span>
                                             </span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="main__cart-content-checkout">
-                                    <a href="" class="main__cart-content-checkout-link">
-                                        Proceed to checkout
-                                    </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="main__cart-content-checkout">
+                                        <a href="" class="main__cart-content-checkout-link">Proceed to checkout</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <% } else { %>
+                        <div class="main__cart-content">
+                            <div class="main__cart-content-empty">
+                                <div class="main__cart-content-empty-logo">
+                                    <i class="fa-solid fa-cart-arrow-down fa-10x"></i>
+                                </div>
+                                <h3 class="main__cart-content-empty-text">Your cart is currently empty.</h3>
+                                <a href="/story-sells/shop" class="main__cart-content-empty-button">
+                                    Return to shop
+                                </a>
+                            </div>
+                        </div>
+                    <% } %>
+                    <script>
+                        async function confirmRemoveCartItem(cartId, cartItemId) {
+                            const confirmed = confirm('Are you sure you want to remove this item from the cart?');
+
+                            if (confirmed) {
+                                try {
+                                    const response = await fetch(`/story-sells/cart/remove/${cartItemId}`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                    });
+
+                                    if (response.ok) {
+                                        const data = await response.json();
+
+                                        if (data.success) {
+                                            // Item removed successfully, you can reload the cart page or update the cart dynamically
+                                            location.reload();
+                                        } else {
+                                            throw new Error('Failed to remove cart item');
+                                        }
+                                    } else {
+                                        throw new Error('Failed to remove cart item');
+                                    }
+                                } catch (error) {
+                                    console.error(error);
+                                }
+                            }
+                        }
+
+                        async function updateCartItemQuantity(cartItemId, quantity) {
+                            try {
+                                const response = await fetch(`/story-sells/cart/update/${cartItemId}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({quantity}),
+                                });
+
+                                if (response.ok) {
+                                    const data = await response.json();
+
+                                    if (data.success) {
+                                        const subtotalElement = document.getElementById('subtotal');
+                                        const totalElement = document.getElementById('total');
+                                        subtotalElement.textContent = data.subtotal;
+                                        totalElement.textContent = data.total;
+
+                                        const quantityElement = document.getElementById(`quantity_${cartItemId}`);
+                                        quantityElement.value = quantity;
+                                        await updateSubtotalAndTotal();
+                                    } else {
+                                        throw new Error('Failed to update cart item quantity.');
+                                    }
+                                } else {
+                                    throw new Error('Request failed.');
+                                }
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+
+
+                        async function decreaseQuantityCartItem(cartId, cartItemId) {
+                            try {
+                                const response = await fetch(`/story-sells/cart/decrease/${cartItemId}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                });
+
+                                if (response.ok) {
+                                    const data = await response.json();
+
+                                    if (data.success) {
+                                        const quantityElement = document.getElementById(`quantity_${cartItemId}`);
+                                        let quantity = parseInt(quantityElement.value);
+
+                                        if (quantity > 1) {
+                                            quantity--;
+                                            quantityElement.value = quantity;
+                                            await updateCartItemQuantity(cartItemId, quantity);
+                                        }
+                                        await updateSubtotalAndTotal();
+                                    } else {
+                                        throw new Error('Failed to decrease cart item quantity.');
+                                    }
+                                } else {
+                                    throw new Error('Request failed.');
+                                }
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+
+                        async function increaseQuantityCartItem(cartId, cartItemId) {
+                            try {
+                                const response = await fetch(`/story-sells/cart/increase/${cartItemId}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                });
+
+                                if (response.ok) {
+                                    const data = await response.json();
+
+                                    if (data.success) {
+                                        const quantityElement = document.getElementById(`quantity_${cartItemId}`);
+                                        let quantity = parseInt(quantityElement.value);
+
+                                        if (quantity < 999) {
+                                            quantity++;
+                                            quantityElement.value = quantity;
+                                            await updateCartItemQuantity(cartItemId, quantity);
+                                        } else {
+                                            throw new Error("Too much book quantity");
+                                        }
+                                        await updateSubtotalAndTotal();
+                                    } else {
+                                        throw new Error('Failed to increase cart item quantity.');
+                                    }
+                                } else {
+                                    throw new Error('Request failed.');
+                                }
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+
+                        async function updateSubtotalAndTotal() {
+                            try {
+                                const cartItems = document.querySelectorAll('.main__cart-content-table-product');
+                                let subtotal = 0;
+                                let totalQuantity = 0;
+
+                                for (const cartItem of cartItems) {
+                                    const quantityElement = cartItem.querySelector('.main__book-product-form-quantity-added-input');
+                                    const quantity = parseInt(quantityElement.value);
+                                    const priceElement = cartItem.querySelector('.main__cart-content-table-product-price-amount');
+                                    const price = parseFloat(priceElement.textContent.replace(/\$/g, ''));
+                                    const subtotalElement = cartItem.querySelector('.main__cart-content-table-product-subtotal .main__cart-content-table-product-price-amount');
+
+                                    const newSubtotal = price * quantity;
+                                    subtotalElement.textContent = `$${newSubtotal.toFixed(2)}`;
+
+                                    subtotal += newSubtotal;
+                                    totalQuantity += quantity;
+                                }
+
+                                const subtotalElement = document.getElementById('subtotal');
+                                const totalElement = document.getElementById('total');
+                                subtotalElement.textContent = `${subtotal.toFixed(2)}`;
+                                totalElement.textContent = `${subtotal.toFixed(2)}`;
+
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+                    </script>
                 </article>
             </main>
         </div>

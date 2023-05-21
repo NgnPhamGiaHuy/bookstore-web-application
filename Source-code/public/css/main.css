@@ -746,6 +746,7 @@ button {
     text-align: center;
     border-radius: 50px;
     color: var(--color-black);
+    background-color: transparent;
     transition: all ease-in-out .3s;
 }
 
@@ -1014,7 +1015,6 @@ button {
     font-size: 12px;
     font-weight: 400;
     text-align: center;
-    word-break: break-all;
     color: var(--color-accent);
     text-transform: uppercase;
     padding: 1.618em 1.618em 1.618em 1.618em;
@@ -1122,6 +1122,34 @@ button {
     background-color: var(--color-primary-hover);
 }
 
+.main__cart-content-empty{
+    display: flex;
+    margin-top: 160px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--color-lighter);
+}
+
+.main__cart-content-empty-text{
+    margin-top: 20px;
+}
+
+.main__cart-content-empty-button{
+    font-size: 16px;
+    margin-top: 20px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: var(--color-white);
+    transition: opacity 0.5s ease-in-out;
+    background-color: var(--color-primary);
+}
+
+.main__cart-content-empty-button:hover {
+    background-color: var(--color-primary-hover);
+}
+
 .main__cart-content-table-product {
     margin-bottom: 1em;
     border-bottom: 1px solid;
@@ -1129,7 +1157,6 @@ button {
 }
 
 .main__cart-content-table-product-remove-link {
-    position: relative;
     top: auto;
     left: -6px;
     text-align: left;
@@ -1138,6 +1165,8 @@ button {
     height: 1.618em;
     font-size: 1em;
     font-weight: 400;
+    position: relative;
+    background-color: transparent;
 }
 
 .main__cart-content-table-product-thumbnail-img {
@@ -1162,9 +1191,19 @@ button {
     display: inline-block;
 }
 
+.main__cart-content-table-product-name-author-variation > a:hover{
+    color: var(--color-primary-hover);
+}
+
 .main__cart-content-table-product-price-amount {
+    display: flex;
     font-size: 14px;
+    font-weight: 600;
+    min-width: 50px;
     letter-spacing: 0;
+    align-items: start;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .books {
@@ -2917,6 +2956,7 @@ button {
 
 .container__full {
     display: flex;
+    min-height: 100vh;
     max-width: 1320px;
     margin-left: auto;
     margin-right: auto;

@@ -135,12 +135,10 @@
                                         </button>
                                     </div>
                                     <script>
-                                        // Get the input and buttons
                                         const input = document.getElementById("quantity");
                                         const minusButton = document.querySelector(".minus");
                                         const plusButton = document.querySelector(".plus");
 
-                                        // Add click event listeners to the buttons
                                         minusButton.addEventListener("click", (event) => {
                                             event.preventDefault();
                                             if (input.value > 1) {
