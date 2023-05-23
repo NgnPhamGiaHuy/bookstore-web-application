@@ -69,7 +69,9 @@ class BookPageController {
                 cartItems,
                 totalQuantity,
                 addedToCart: req.query.addedToCart === 'true',
-                successMessage: 'Book added to cart successfully',
+                successMessage: 'Book added to cart successfully!',
+                outOfInventory: req.query.outOfInventory === 'true',
+                outOfInventoryMessage: 'You have over-ordered inventory, please try again!',
             });
         } catch (error) {
             next(error);
@@ -90,7 +92,7 @@ class BookPageController {
             }
 
             if (quantity < 1 || quantity > book.inventory_count) {
-                return res.status(400).json({error: 'Invalid quantity'});
+                return res.redirect(`/story-sells/book/${bookId}?outOfInventory=true`);
             }
 
             let cartItem;

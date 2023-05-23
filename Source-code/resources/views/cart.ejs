@@ -87,13 +87,11 @@
                                             <td class="main__cart-content-table-product-item main__cart-content-table-product-price">
                                                 <% if (cartItem.book.sale_price > 0) { %>
                                                     <span class="main__cart-content-table-product-price-amount">
-                                                        <span>$</span>
-                                                        <%= cartItem.book.sale_price.toFixed(2) %>
+                                                        $ <%= cartItem.book.sale_price.toFixed(2) %>
                                                     </span>
                                                 <% } else { %>
                                                     <span class="main__cart-content-table-product-price-amount">
-                                                        <span>$</span>
-                                                        <%= cartItem.book.price.toFixed(2) %>
+                                                        $ <%= cartItem.book.price.toFixed(2) %>
                                                     </span>
                                                 <% } %>
                                             </td>
@@ -122,13 +120,11 @@
                                             <td class="main__cart-content-table-product-item main__cart-content-table-product-subtotal">
                                                 <% if (cartItem.book.sale_price > 0 ) { %>
                                                     <span class="main__cart-content-table-product-price-amount">
-                                                        <span>$</span>
-                                                        <%= (cartItem.book.sale_price.toFixed(2) * cartItem.quantity).toFixed(2) %>
+                                                        $ <%= (cartItem.book.sale_price.toFixed(2) * cartItem.quantity).toFixed(2) %>
                                                     </span>
                                                 <% } else { %>
-                                                        <span class="main__cart-content-table-product-price-amount">
-                                                        <span>$</span>
-                                                        <%= (cartItem.book.price * cartItem.quantity).toFixed(2) %>
+                                                    <span class="main__cart-content-table-product-price-amount">
+                                                        $ <%= (cartItem.book.price * cartItem.quantity).toFixed(2) %>
                                                     </span>
                                                 <% } %>
                                             </td>
@@ -146,8 +142,15 @@
                                             <th>Subtotal</th>
                                             <td class="main__cart-content-table-data">
                                             <span class="main__cart-content-table-subtotal-data-amount">
-                                                <span>$</span>
-                                                <span id="subtotal"><%= subtotal %></span>
+                                                $ <span id="subtotal"><%= subtotal %></span>
+                                            </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="main__cart-content-table-subtotal">
+                                            <th>Shipping</th>
+                                            <td class="main__cart-content-table-data">
+                                            <span class="main__cart-content-table-subtotal-data-amount">
+                                                $ 0
                                             </span>
                                             </td>
                                         </tr>
@@ -155,15 +158,15 @@
                                             <th>Total</th>
                                             <td class="main__cart-content-table-data">
                                             <span class="main__cart-content-table-total-data-amount">
-                                                <span>$</span>
-                                                <span id="total"><%= total %></span>
+                                                $ <span id="total"><%= total %></span>
                                             </span>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                     <div class="main__cart-content-checkout">
-                                        <a href="/story-sells/checkout" class="main__cart-content-checkout-link">Proceed to checkout</a>
+                                        <a href="/story-sells/checkout" class="main__cart-content-checkout-link">Proceed
+                                            to checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +331,7 @@
                                     const subtotalElement = cartItem.querySelector('.main__cart-content-table-product-subtotal .main__cart-content-table-product-price-amount');
 
                                     const newSubtotal = price * quantity;
-                                    subtotalElement.textContent = `$${newSubtotal.toFixed(2)}`;
+                                    subtotalElement.textContent = `$ ${newSubtotal.toFixed(2)}`;
 
                                     subtotal += newSubtotal;
                                     totalQuantity += quantity;

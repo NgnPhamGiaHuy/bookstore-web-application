@@ -1,12 +1,11 @@
-const Book = require('../models/Book');
-const Cart = require('../models/Cart');
-const CartItem = require('../models/CartItem');
-const Genre = require('../models/Genre');
-const Review = require('../models/Review');
-const Author = require('../models/Author');
-const BookGenre = require('../models/BookGenre');
-const BookAuthor = require('../models/BookAuthor');
-
+const Book = require("../models/Book");
+const Cart = require("../models/Cart")
+const CartItem = require("../models/CartItem");
+const Genre = require("../models/Genre");
+const Review = require("../models/Review");
+const Author = require("../models/Author");
+const BookGenre = require("../models/BookGenre");
+const BookAuthor = require("../models/BookAuthor");
 
 class ShopPageController {
     static async calculateTotalQuantity(cartItems) {
@@ -19,6 +18,58 @@ class ShopPageController {
         return totalQuantity;
     }
 
+    async updateShop(req, res, next) {
+        try {
+            res.redirect("/story-sells/shop");
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async addToCart(req, res, next) {
+        try {
+            const bookId = req.params.bookCartId;
+            const customerId = req.session.customerId;
+            let cart = customerId ? await Cart.findOne({customer: customerId}) : null;
+
+            const book = await Book.findById(bookId);
+
+            if (!book) {
+                return res.status(404).json({error: "Book not found"});
+            }
+
+            let cartItem;
+
+            if (cart) {
+                cartItem = await CartItem.findOne({cart: cart._id, book: book._id});
+
+                if (cartItem) {
+                    cartItem.quantity += 1;
+                } else {
+                    cartItem = new CartItem({
+                        cart: cart._id, book: book._id, quantity: 1,
+                    });
+                }
+
+                await cartItem.save();
+                cart.items.push(cartItem._id);
+                await cart.save();
+            } else {
+                const newCart = new Cart({customer: customerId});
+                await newCart.save();
+
+                cartItem = new CartItem({
+                    cart: newCart._id, book: book._id, quantity: 1,
+                });
+                await cartItem.save();
+            }
+
+            return res.status(200).json({success: true});
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async index(req, res, next) {
         try {
             const customerId = req.session.customer;
@@ -27,49 +78,49 @@ class ShopPageController {
             const page = parseInt(req.query.page) || 1;
             const skip = (page - 1) * booksPerPage;
 
-            const orderBy = req.query.orderby || '';
+            const orderBy = req.query.orderby || "";
 
             const sort = {};
             switch (orderBy) {
-                case 'popularity':
+                case "popularity":
                     sort.sale_count = -1;
                     break;
-                case 'rating':
+                case "rating":
                     sort.rating = -1;
                     break;
-                case 'date':
+                case "date":
                     sort.updatedAt = -1;
                     break;
-                case 'price':
+                case "price":
                     sort.sale_price = {$gt: 0} ? 1 : {$gt: 0, $ne: null} ? -1 : {
-                        $gt: 0, $ne: null, $exists: false
+                        $gt: 0, $ne: null, $exists: false,
                     } ? 1 : {$gt: 0, $ne: null, $exists: false} ? -1 : 0;
                     break;
-                case 'price-desc':
+                case "price-desc":
                     sort.sale_price = {$gt: 0} ? -1 : {$gt: 0, $ne: null} ? 1 : {
-                        $gt: 0, $ne: null, $exists: false
+                        $gt: 0, $ne: null, $exists: false,
                     } ? -1 : {$gt: 0, $ne: null, $exists: false} ? 1 : 0;
                     break;
                 default:
                     break;
             }
 
-            const [books, totalBooks] = await Promise.all([Book.find().sort(sort).skip(skip).limit(booksPerPage), Book.countDocuments()]);
+            const [books, totalBooks] = await Promise.all([Book.find().sort(sort).skip(skip).limit(booksPerPage), Book.countDocuments(),]);
 
             const totalPages = Math.ceil(totalBooks / booksPerPage);
-            const totalGenres = await Genre.find().distinct('genre_name');
+            const totalGenres = await Genre.find().distinct("genre_name");
 
             const bookIds = books.map((book) => book._id);
 
-            const [bookGenres, bookAuthors, bookRatings] = await Promise.all([BookGenre.find({book: {$in: bookIds}}).populate('genre'), BookAuthor.find({book: {$in: bookIds}}).populate('author'), Review.aggregate([{
+            const [bookGenres, bookAuthors, bookRatings] = await Promise.all([BookGenre.find({book: {$in: bookIds}}).populate("genre"), BookAuthor.find({book: {$in: bookIds}}).populate("author"), Review.aggregate([{
                 $match: {
-                    book: {$in: bookIds}, rating: {$gt: 0, $ne: null}
-                }
+                    book: {$in: bookIds}, rating: {$gt: 0, $ne: null},
+                },
             }, {
                 $group: {
-                    _id: '$book', averageRating: {$avg: '$rating'},
+                    _id: "$book", averageRating: {$avg: "$rating"},
                 },
-            },])]);
+            },]),]);
 
             const bookData = books.map((book) => {
                 const genres = bookGenres
@@ -122,21 +173,21 @@ class ShopPageController {
 
             if (customerId) {
                 cart = await Cart.findOne({customer: customerId})
-                    .populate('customer')
+                    .populate("customer")
                     .lean()
                     .exec();
 
                 if (cart) {
                     cartItems = await CartItem.find({cart: cart._id})
-                        .populate('book')
+                        .populate("book")
                         .lean()
                         .exec();
                     totalQuantity = await ShopPageController.calculateTotalQuantity(cartItems);
                 }
             }
 
-            res.render('shop', {
-                title: 'Shop',
+            res.render("shop", {
+                title: "Shop",
                 orderBy,
                 bookData,
                 totalPages,

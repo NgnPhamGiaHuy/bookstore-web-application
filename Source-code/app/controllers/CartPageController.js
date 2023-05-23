@@ -119,7 +119,7 @@ class CartPageController {
             const cart = await Cart.findOne({customer: customerId}).populate('customer');
 
             if (!cart) {
-                return res.render('cart', {cartItems: [], subtotal: 0, total: 0, cart: null});
+                return res.render('cart', {cartItems: [], subtotal: 0, total: 0, totalQuantity: 0, cart: null});
             }
 
             const cartItems = await CartItem.find({cart: cart._id}).populate('book');
@@ -148,8 +148,9 @@ class CartPageController {
                 cartItem.book.authors = authors;
             }
 
-            const {subtotal, total} = CartPageController.calculateSubtotalAndTotal(cartItems);
             const totalQuantity = CartPageController.calculateTotalQuantity(cartItems);
+            const {subtotal, total} = CartPageController.calculateSubtotalAndTotal(cartItems);
+
 
             res.render('cart', {cartItems, subtotal, total, totalQuantity, cart});
         } catch (error) {

@@ -1,27 +1,27 @@
-const geoip = require('geoip-lite');
-const Book = require('../models/Book');
-const Genre = require('../models/Genre');
-const Author = require('../models/Author');
-const Cart = require('../models/Cart');
-const Review = require('../models/Review');
-const CartItem = require('../models/CartItem');
-const BookGenre = require('../models/BookGenre');
-const BookAuthor = require('../models/BookAuthor');
-const generateDummyData = require('../../config/database/dataGenerator');
+const geoip = require("geoip-lite");
+const Cart = require("../models/Cart");
+const Book = require("../models/Book");
+const Genre = require("../models/Genre");
+const Author = require("../models/Author");
+const Review = require("../models/Review");
+const CartItem = require("../models/CartItem");
+const BookGenre = require("../models/BookGenre");
+const BookAuthor = require("../models/BookAuthor");
+const generateDummyData = require("../../config/database/dataGenerator");
 
 class HomePageController {
     static getCityAndZipCode(req) {
-        let city = '';
-        let zipCode = '';
+        let city;
+        let zipCode;
 
-        if (req.hostname === 'localhost' || req.hostname === '127.0.0.1') {
-            city = 'Vung Tau';
-            zipCode = '780000';
+        if (req.hostname === "localhost" || req.hostname === "127.0.0.1") {
+            city = "Vung Tau";
+            zipCode = "780000";
         } else {
             const ipAddress = req.ip;
             const geo = geoip.lookup(ipAddress);
-            city = geo?.city || '';
-            zipCode = geo?.zip || '';
+            city = geo?.city || "";
+            zipCode = geo?.zipCode || "";
         }
 
         return {city, zipCode};
@@ -39,7 +39,7 @@ class HomePageController {
 
     async updateHome(req, res, next) {
         try {
-            res.redirect('/story-sells');
+            res.redirect("/story-sells");
         } catch (error) {
             next(error);
         }
@@ -49,18 +49,18 @@ class HomePageController {
         try {
             const bookId = req.params.bookCartId;
             const customerId = req.session.customerId;
-            let cart = customerId ? await Cart.findOne({ customer: customerId }) : null;
+            let cart = customerId ? await Cart.findOne({customer: customerId}) : null;
 
             const book = await Book.findById(bookId);
 
             if (!book) {
-                return res.status(404).json({ error: "Book not found" });
+                return res.status(404).json({error: "Book not found"});
             }
 
             let cartItem;
 
             if (cart) {
-                cartItem = await CartItem.findOne({ cart: cart._id, book: book._id });
+                cartItem = await CartItem.findOne({cart: cart._id, book: book._id});
 
                 if (cartItem) {
                     cartItem.quantity += 1;
@@ -74,57 +74,50 @@ class HomePageController {
                 cart.items.push(cartItem._id);
                 await cart.save();
             } else {
+                const newCart = new Cart({customer: customerId});
+                await newCart.save();
+
                 cartItem = new CartItem({
-                    book: book._id, quantity: 1,
+                    cart: newCart._id, book: book._id, quantity: 1,
                 });
-
                 await cartItem.save();
-
-                cart = new Cart({
-                    customer: customerId,
-                    items: [cartItem._id],
-                });
-
-                await cart.save();
             }
-
-            return res.status(200).json({ success: true });
+            return res.status(200).json({success: true});
         } catch (error) {
             next(error);
         }
     }
 
-
-    async index(req, res, next) {
+    async index(req, res) {
         try {
-            const books = await Book.find({}, 'book_title cover_image price sale_price inventory_count sale_count')
+            const books = await Book.find({}, "book_title cover_image price sale_price inventory_count sale_count")
                 .lean()
                 .exec();
             const bookIds = books.map((book) => book._id);
             const customerId = req.session.customerId;
             const {city, zipCode} = HomePageController.getCityAndZipCode(req);
 
-            const countPromises = [Book.countDocuments().lean().exec(), Author.countDocuments().lean().exec(), Genre.countDocuments().lean().exec()];
+            const countPromises = [await Book.countDocuments().lean().exec(), await Author.countDocuments().lean().exec(), await Genre.countDocuments().lean().exec(),];
             const [totalBooks, totalAuthors] = await Promise.all(countPromises);
-            const totalGenres = await Genre.find().distinct('genre_name');
+            const totalGenres = await Genre.find().distinct("genre_name");
 
             const bookGenrePromise = BookGenre.find({book: {$in: bookIds}})
-                .populate('genre', 'genre_name')
+                .populate("genre", "genre_name")
                 .lean()
                 .exec();
 
             const bookAuthorPromise = BookAuthor.find({book: {$in: bookIds}})
-                .populate({path: 'author', model: 'Author', select: 'author_name'})
+                .populate({path: "author", model: "Author", select: "author_name"})
                 .lean()
                 .exec();
 
             const reviewPromise = Review.aggregate([{$match: {book: {$in: bookIds}}}, {
                 $group: {
-                    _id: '$book', averageRating: {$avg: '$rating'},
+                    _id: "$book", averageRating: {$avg: "$rating"},
                 },
             },]).exec();
 
-            const [bookGenres, bookAuthors, bookRatings] = await Promise.all([bookGenrePromise, bookAuthorPromise, reviewPromise]);
+            const [bookGenres, bookAuthors, bookRatings] = await Promise.all([bookGenrePromise, bookAuthorPromise, reviewPromise,]);
 
             const bookData = books.map((book) => {
                 const genres = bookGenres
@@ -194,20 +187,20 @@ class HomePageController {
 
             if (customerId) {
                 cart = await Cart.findOne({customer: customerId})
-                    .populate('customer')
+                    .populate("customer")
                     .lean()
                     .exec();
 
                 if (cart) {
                     cartItems = await CartItem.find({cart: cart._id})
-                        .populate('book')
+                        .populate("book")
                         .lean()
                         .exec();
                     totalQuantity = await HomePageController.calculateTotalQuantity(cartItems);
                 }
             }
 
-            return res.render('index', {
+            return res.render("index", {
                 city,
                 zipCode,
                 totalBooks,
@@ -226,7 +219,7 @@ class HomePageController {
             });
         } catch (error) {
             console.error(error);
-            return res.status(500).json({error: 'Internal server error'});
+            return res.status(500).json({error: "Internal server error"});
         }
     }
 }

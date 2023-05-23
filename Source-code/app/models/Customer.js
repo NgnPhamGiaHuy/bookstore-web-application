@@ -37,6 +37,9 @@ const CustomerSchema = new Schema(
             enum: ['admin', 'user', 'guest', 'supplier'],
             default: 'user'
         },
+    },
+    {
+        timestamps: true,
     }
 )
 

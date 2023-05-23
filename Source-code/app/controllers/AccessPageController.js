@@ -3,10 +3,10 @@ const Customer = require('../models/Customer');
 class AccessPageController {
     async login(req, res, next) {
         try {
-            const { username, password, remember } = req.body;
+            const {username, password, remember} = req.body;
 
             // Find the customer based on the provided username
-            const customer = await Customer.findOne({ customer_username: username }).exec();
+            const customer = await Customer.findOne({customer_username: username}).exec();
 
             if (!customer) {
                 // No customer found with the provided username
@@ -25,7 +25,7 @@ class AccessPageController {
 
             // Set cookie if remember me option is checked
             if (remember) {
-                res.cookie('customerId', customer._id, { maxAge: 30 * 24 * 60 * 60 * 1000 }); // Cookie expires in 30 days
+                res.cookie('customerId', customer._id, {maxAge: 30 * 24 * 60 * 60 * 1000}); // Cookie expires in 30 days
             }
 
             // Redirect to the customer's index page
@@ -39,7 +39,7 @@ class AccessPageController {
 
     async register(req, res) {
         try {
-            const { name, email, password, role, agree } = req.body;
+            const {name, email, password, role, agree} = req.body;
 
             if (!name || !email || !password || !role || !agree) {
                 return res.send('<script>alert("Please fill in all the required fields and agree to the terms."); window.location.href = "/user/register";</script>');
@@ -58,7 +58,7 @@ class AccessPageController {
             }
 
             // Check if the email already exists
-            const existingCustomer = await Customer.findOne({ customer_email: email }).exec();
+            const existingCustomer = await Customer.findOne({customer_email: email}).exec();
             if (existingCustomer) {
                 return res.send(`<script>alert("The email '${email}' is already registered. Please use a different email."); window.location.href = "/user/register";</script>`);
             }

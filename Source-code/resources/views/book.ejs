@@ -118,7 +118,8 @@
                             <div class="main__book-product-wrapper-summary-description">
                                 <%= bookData.description %>
                             </div>
-                            <form action="/story-sells/book/<%= bookData.id %>" method="POST" class="main__book-product-wrapper-summary-form">
+                            <form action="/story-sells/book/<%= bookData.id %>" method="POST"
+                                  class="main__book-product-wrapper-summary-form">
                                 <input type="hidden" name="action" value="cart">
                                 <div class="main__book-product-form-quantity">
                                     <label for="" class="main__book-product-form-quantity-label">Quantity</label>
@@ -176,6 +177,19 @@
                                     }, 10000);
                                 </script>
                             <% } %>
+                            <% if (outOfInventory) { %>
+                                <div class="success-message" style="background-color: var(--color-primary)">
+                                    <%= outOfInventoryMessage %>
+                                </div>
+                                <script>
+                                    const successMessage = document.querySelector('.success-message');
+
+                                    setTimeout(() => {
+                                        successMessage.style.display = 'none';
+                                    }, 10000);
+                                </script>
+                            <% } %>
+
                             <div class="main__book-product-wrapper-summary-meta">
                                 <span class="main__book-product-wrapper-summary-meta-tagged">
                                     Tags:
