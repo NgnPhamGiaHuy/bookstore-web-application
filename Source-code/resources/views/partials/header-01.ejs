@@ -114,14 +114,28 @@
                 </div>
             </nav>
             <div class="header__search-bar">
-                <form action="" class="header__search-bar-form">
+                <form action="/story-sells/search" class="header__search-bar-form">
                     <div class="header__search-find">
-                        <input type="text" class="header__search-find-input" placeholder="Search products...">
-                        <button class="header__search-find-button">
+                        <input type="text" class="header__search-find-input" placeholder="Search products..."
+                               onfocus="changeInputBorderStyle(true)" onblur="changeInputBorderStyle(false)">
+                        <button type="submit" class="header__search-find-button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
                 </form>
+                <!--                <ul class="header__search-result-list">-->
+                <!--                    <% for (const result of searchResultList) { %>-->
+                <!--                        <li class="header__search-result-list-item">-->
+                <!--                            <div class="header__search-result-image">-->
+                <!--                                <img src="<%= result.cover_image %>" alt="">-->
+                <!--                            </div>-->
+                <!--                            <div class="header__search-result-info">-->
+                <!--                                <h3 class="header__search-result-title"><%= result.book_title %></h3>-->
+                <!--                                <p class="header__search-result-author"><%= result.author %></p>-->
+                <!--                            </div>-->
+                <!--                        </li>-->
+                <!--                    <% } %>-->
+                <!--                </ul>-->
             </div>
             <div class="header__search-location">
                 <a href="#" class="header__search-location-link">
@@ -140,4 +154,60 @@
             </div>
         </div>
     </div>
+
+    <!--    <script>-->
+    <!--        function changeInputBorderStyle(focus) {-->
+    <!--            const input = document.querySelector('.header__search-find-input');-->
+    <!--            if (focus) {-->
+    <!--                input.classList.add('focus');-->
+    <!--            } else {-->
+    <!--                input.classList.remove('focus');-->
+    <!--            }-->
+    <!--        }-->
+
+    <!--        const searchForm = document.querySelector('.header__search-bar-form');-->
+    <!--        const searchResultList = document.querySelector('.header__search-result-list');-->
+
+    <!--        searchForm.addEventListener('submit', async (event) => {-->
+    <!--            event.preventDefault();-->
+
+    <!--            const searchTerm = event.target.querySelector('.header__search-find-input').value;-->
+
+    <!--            try {-->
+    <!--                const response = await fetch('/story-sells/search', {-->
+    <!--                    method: 'POST',-->
+    <!--                    headers: {-->
+    <!--                        'Content-Type': 'application/json'-->
+    <!--                    },-->
+    <!--                    body: JSON.stringify({searchTerm})-->
+    <!--                });-->
+
+    <!--                const data = await response.json();-->
+
+    <!--                if (data.success) {-->
+    <!--                    const searchResults = data.searchResults;-->
+    <!--                    const searchResultItems = searchResults.map(result => `-->
+    <!--                <li class="header__search-result-list-item">-->
+    <!--                    <div class="header__search-result-image">-->
+    <!--                        <img src="${result.cover_image}" alt="">-->
+    <!--                    </div>-->
+    <!--                    <div class="header__search-result-info">-->
+    <!--                        <h3 class="header__search-result-title">${result.book_title}</h3>-->
+    <!--                        <p class="header__search-result-author">${result.author}</p>-->
+    <!--                    </div>-->
+    <!--                </li>-->
+    <!--            `);-->
+
+    <!--                    searchResultList.innerHTML = searchResultItems.join('');-->
+    <!--                    searchResultList.style.display = 'block';-->
+    <!--                } else {-->
+    <!--                    // Handle error response-->
+    <!--                    console.error(data.error);-->
+    <!--                }-->
+    <!--            } catch (error) {-->
+    <!--                // Handle network or other errors-->
+    <!--                console.error('Error searching for the book:', error);-->
+    <!--            }-->
+    <!--        });-->
+    <!--    </script>-->
 </header>

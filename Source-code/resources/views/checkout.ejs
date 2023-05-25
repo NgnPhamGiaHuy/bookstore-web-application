@@ -15,7 +15,8 @@
 </head>
 
 <body>
-<%- include('partials/header-02.ejs', { text: 'Checkout', display: 'block', totalQuantity: totalQuantity ? totalQuantity : 0 }) -%>
+<%- include('partials/header-02.ejs', { text: 'Checkout' , display: 'block' , totalQuantity: totalQuantity ?
+totalQuantity : 0 }) -%>
 
 <div class="container">
     <div class="container__full" style="display: block; max-width: 1320px">
@@ -49,14 +50,12 @@
                                                value="<%= customerData.customer_lname %>" placeholder="" required>
                                     </div>
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-company">
-                                    <span class="main__checkout-content-form-detail-label">Company name (optional)</span>
+                                    <span class="main__checkout-content-form-detail-label">Company name(optional)</span>
                                     <input type="text"
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-company"
                                            placeholder="" required>
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-region">
                                     <span class="main__checkout-content-form-detail-label">
                                         Country / Region
@@ -66,16 +65,16 @@
                                     <select class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-region"
                                             name="region" id="region-select" autocomplete="region" aria-hidden="true"
                                             required>
-                                        <option value="Vietnam" selected>Vietnam</option>
-                                        <option value="Africa">Africa</option>
-                                        <option value="Asia">Asia</option>
-                                        <option value="Europe">Europe</option>
-                                        <option value="North America">North America</option>
-                                        <option value="Oceania">Oceania</option>
-                                        <option value="South America">South America</option>
+                                        <% for (let i = 0; i < countryOptions.length; i++) { %>
+                                            <% if (countryOptions[i] === "Vietnam") { %>
+                                                <option value="<%= countryOptions[i] %>"
+                                                        selected><%= countryOptions[i] %></option>
+                                            <% } else { %>
+                                                <option value="<%= countryOptions[i] %>"><%= countryOptions[i] %></option>
+                                            <% } %>
+                                        <% } %>
                                     </select>
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-street">
                                     <span class="main__checkout-content-form-detail-label">
                                         Street address
@@ -89,7 +88,6 @@
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-apartment"
                                            placeholder="Apartment, suite, unit, etc. (optional)">
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-city">
                                     <span class="main__checkout-content-form-detail-label">
                                         Town / City
@@ -100,7 +98,6 @@
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-city"
                                            placeholder="" required>
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-state">
                                     <span class="main__checkout-content-form-detail-label">
                                         State
@@ -114,7 +111,6 @@
                                         <option value="Africa">Africa</option>
                                     </select>
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-zipcode">
                                     <span class="main__checkout-content-form-detail-label">
                                         ZIP code
@@ -123,7 +119,6 @@
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-zipcode"
                                            placeholder="">
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-phone">
                                     <span class="main__checkout-content-form-detail-label">
                                         Phone
@@ -134,7 +129,6 @@
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-phone"
                                            value="<%= customerData.customer_phoneNo %>" placeholder="" required>
                                 </div>
-
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-email">
                                     <span class="main__checkout-content-form-detail-label">
                                         Email address
@@ -155,18 +149,21 @@
                                     </div>
                                     <div class="main__checkout-content-order-info-books">
                                         <ul class="main__checkout-content-order-info-list">
-                                            <% cartItems.forEach((cartItem) => { %>
+                                            <% cartItems.forEach((cartItem)=> { %>
                                                 <li class="main__checkout-content-order-info-list-item">
                                                     <div class="main__checkout-content-order-info-books-text">
                                                         <div class="main__checkout-content-order-info-books-title">
-                                                            <%= cartItem.book.book_title %>
+                                                            <a href="/story-sells/book/<%= cartItem.book._id %>" st>
+                                                                <%= cartItem.book.book_title %>
+                                                            </a>
                                                             <span class="main__checkout-content-order-info-books-amount">
                                                                 x<%= cartItem.quantity %>
                                                             </span>
                                                         </div>
                                                         <div class="main__checkout-content-order-info-books-vendor">
                                                             <strong>Vendor: </strong>
-                                                            <% for (let i = 0; i < cartItem.book.publishers.length && i < 3; i++) { %>
+                                                            <% for (let i = 0; i < cartItem.book.publishers.length
+                                                            && i < 3; i++) { %>
                                                                 <a href="/story-sells/publisher/<%= cartItem.book.publishers[i]._id %>">
                                                                     <%= cartItem.book.publishers[i].publisher_name %>
                                                                 </a>
@@ -179,12 +176,12 @@
                                                     <% if (cartItem.book.sale_price > 0) { %>
                                                         <div class="main__checkout-content-order-info-books-price">
                                                             <span>$</span>
-                                                            <%= cartItem.book.sale_price %>
+                                                            <%= cartItem.book.sale_price * cartItem.quantity %>
                                                         </div>
-                                                    <% }  else { %>
+                                                    <% } else { %>
                                                         <div class="main__checkout-content-order-info-books-price">
                                                             <span>$</span>
-                                                            <%= cartItem.book.price %>
+                                                            <%= cartItem.book.price * cartItem.quantity %>
                                                         </div>
                                                     <% } %>
                                                 </li>
@@ -205,14 +202,16 @@
                                     </div>
                                 </div>
                                 <p class="main__checkout-content-order-info-privacy">
-                                    Your personal data will be used to process your order, support your experience
+                                    Your personal data will be used to process your order, support your
+                                    experience
                                     throughout this website, and for other purposes described in our
                                     <a href="" style="color: var(--color-black)">
                                         privacy policy.
                                     </a>
                                 </p>
                                 <div class="main__checkout-content-checkout">
-                                    <button type="submit" class="main__checkout-content-checkout-button">Place order
+                                    <button type="submit" class="main__checkout-content-checkout-button">Place
+                                        order
                                     </button>
                                 </div>
                             </div>
@@ -226,4 +225,5 @@
 
 <%- include('partials/footer.ejs') -%>
 </body>
+
 </html>

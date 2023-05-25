@@ -52,6 +52,11 @@ class ShopPageController {
                 }
 
                 await cartItem.save();
+
+                if (!cart.items) {
+                    cart.items = [];
+                }
+
                 cart.items.push(cartItem._id);
                 await cart.save();
             } else {
@@ -63,7 +68,6 @@ class ShopPageController {
                 });
                 await cartItem.save();
             }
-
             return res.status(200).json({success: true});
         } catch (error) {
             next(error);

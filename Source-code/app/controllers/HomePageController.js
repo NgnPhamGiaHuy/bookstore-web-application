@@ -71,6 +71,11 @@ class HomePageController {
                 }
 
                 await cartItem.save();
+
+                if (!cart.items) {
+                    cart.items = [];
+                }
+
                 cart.items.push(cartItem._id);
                 await cart.save();
             } else {
@@ -87,6 +92,28 @@ class HomePageController {
             next(error);
         }
     }
+
+    // async search(req, res) {
+    //     try {
+    //         const searchTerm = req.body.searchTerm ? req.body.searchTerm.toString() : '';
+    //         const books = await Book.find({book_title: {$regex: searchTerm, $options: 'i'}})
+    //             .select('book_title cover_image author')
+    //             .lean()
+    //             .exec();
+    //
+    //         const searchResults = books.map((book) => ({
+    //             cover_image: book.cover_image,
+    //             book_title: book.book_title,
+    //             author: book.author,
+    //         }));
+    //
+    //         return res.json({success: true, searchResults});
+    //     } catch (error) {
+    //         console.error('Error searching for the book:', error);
+    //         return res.status(500).json({error: 'Internal server error'});
+    //     }
+    // }
+
 
     async index(req, res) {
         try {
@@ -200,6 +227,8 @@ class HomePageController {
                 }
             }
 
+            const searchResultList = res.locals.searchResultList || [];
+
             return res.render("index", {
                 city,
                 zipCode,
@@ -215,6 +244,7 @@ class HomePageController {
                 randomSaleBooks,
                 booksOfAll: bestSaleBooks,
                 currentWeekBestSaleBooks,
+                searchResultList: searchResultList,
                 customerData: req.session.customer,
             });
         } catch (error) {

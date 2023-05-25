@@ -1,4 +1,5 @@
 const Cart = require('../models/Cart');
+const countriesList = require('countries-list').countries;
 const CartItem = require('../models/CartItem');
 const Customer = require('../models/Customer');
 const BookPublisher = require('../models/BookPublisher');
@@ -21,7 +22,8 @@ class CheckoutController {
         }
 
         return {
-            subtotal: subtotal.toFixed(2), total: total.toFixed(2),
+            subtotal: subtotal.toFixed(2),
+            total: total.toFixed(2),
         };
     }
 
@@ -59,7 +61,7 @@ class CheckoutController {
                 if (!bookPublishersMap[bookId]) {
                     bookPublishersMap[bookId] = [publisher];
                 } else {
-                    bookPublishersMap[bookId].push(publisher)
+                    bookPublishersMap[bookId].push(publisher);
                 }
             }
 
@@ -72,9 +74,22 @@ class CheckoutController {
             const {subtotal, total} = CheckoutController.calculateSubtotalAndTotal(cartItems);
             const totalQuantity = CheckoutController.calculateTotalQuantity(cartItems);
 
-            res.render('checkout', { cartItems: cartItems, customerData: customerData , subtotal, total, totalQuantity});
+            const allCountries = Object.values(countriesList);
+            const countryOptions = allCountries
+                .map((country) => country.name)
+
+            console.log(countryOptions)
+
+            res.render('checkout', {
+                cartItems: cartItems,
+                customerData: customerData,
+                subtotal,
+                total,
+                totalQuantity,
+                countryOptions,
+            });
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 }

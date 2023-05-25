@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<%- include('partials/header-01.ejs', {genres: totalGenres, totalQuantity: 0 ? totalQuantity : totalQuantity}) -%>
+<%- include('partials/header-01.ejs', {genres: totalGenres, totalQuantity: totalQuantity, searchResultList: searchResultList || []}) -%>
 
 <div class="content">
     <main id="content__main">
