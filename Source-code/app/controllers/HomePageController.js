@@ -93,28 +93,6 @@ class HomePageController {
         }
     }
 
-    // async search(req, res) {
-    //     try {
-    //         const searchTerm = req.body.searchTerm ? req.body.searchTerm.toString() : '';
-    //         const books = await Book.find({book_title: {$regex: searchTerm, $options: 'i'}})
-    //             .select('book_title cover_image author')
-    //             .lean()
-    //             .exec();
-    //
-    //         const searchResults = books.map((book) => ({
-    //             cover_image: book.cover_image,
-    //             book_title: book.book_title,
-    //             author: book.author,
-    //         }));
-    //
-    //         return res.json({success: true, searchResults});
-    //     } catch (error) {
-    //         console.error('Error searching for the book:', error);
-    //         return res.status(500).json({error: 'Internal server error'});
-    //     }
-    // }
-
-
     async index(req, res) {
         try {
             const books = await Book.find({}, "book_title cover_image price sale_price inventory_count sale_count")
