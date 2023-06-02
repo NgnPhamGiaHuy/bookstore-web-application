@@ -9,12 +9,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
     <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 </head>
 
 <body>
-<%- include('partials/header-02.ejs', { text: 'Cart', display: 'block', totalQuantity: totalQuantity ? totalQuantity : 0 }) -%>
+<%- include('partials/header-02.ejs', { text: 'Cart', display: 'block', customerData: customerData, totalQuantity: 0 ? totalQuantity: totalQuantity }) -%>
 
 <div class="container">
     <div class="container__full" style="display: block; max-width: 1500px">

@@ -3,6 +3,7 @@ const shopPageRouter = require('./shoppage');
 const cartPageRouter = require('./cartpage');
 const wishPageRouter = require('./wishpage');
 const bookPageRouter = require('./bookpage');
+const userPageRouter = require('./customer');
 const accessPageRouter = require('./accesspage');
 const searchPageRouter = require('./searchpage');
 const checkoutPageRouter = require('./checkoutpage');
@@ -21,6 +22,7 @@ function route(app) {
     app.use('/story-sells/shop', requireLogin, shopPageRouter);
     app.use('/story-sells/book', requireLogin, bookPageRouter);
     app.use('/story-sells/cart', requireLogin, cartPageRouter);
+    app.use('/story-sells/user/', requireLogin, userPageRouter);
     app.use('/story-sells/search', requireLogin, searchPageRouter);
     app.use('/story-sells/checkout', requireLogin, checkoutPageRouter);
     app.use('/story-sells', requireLogin, homePageRouter);

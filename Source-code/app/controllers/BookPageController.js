@@ -1,7 +1,8 @@
 const Book = require('../models/Book');
 const Cart = require('../models/Cart');
-const CartItem = require('../models/CartItem');
 const Review = require('../models/Review');
+const CartItem = require('../models/CartItem');
+const Customer = require('../models/Customer');
 const BookGenre = require('../models/BookGenre');
 const BookAuthor = require('../models/BookAuthor');
 const BookPublisher = require('../models/BookPublisher');
@@ -20,6 +21,7 @@ class BookPageController {
             const bookId = req.params.slug;
             const bookPromise = Book.findById(bookId).select('book_title price sale_price cover_image description inventory_count');
             const customerId = req.session.customer;
+            const customerData = await Customer.findById(customerId).populate('customer_lname').populate('customer_avatar');
 
             const [book, cart] = await Promise.all([bookPromise, customerId ? Cart.findOne({customer: customerId}).populate('customer') : null]);
 
@@ -67,6 +69,7 @@ class BookPageController {
             res.render('book', {
                 bookData,
                 cartItems,
+                customerData,
                 totalQuantity,
                 addedToCart: req.query.addedToCart === 'true',
                 successMessage: 'Book added to cart successfully!',

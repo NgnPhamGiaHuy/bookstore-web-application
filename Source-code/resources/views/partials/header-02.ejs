@@ -6,10 +6,12 @@
             </a>
         </div>
         <div class="header__search-bar">
-            <form action="" class="header__search-bar-form">
+            <form action="/story-sells/search" method="post" class="header__search-bar-form">
                 <div class="header__search-find">
-                    <input type="text" class="header__search-find-input" placeholder="Search products...">
-                    <button class="header__search-find-button">
+                    <input type="text" class="header__search-find-input" name="searchTerm"
+                           placeholder="Search products..."
+                           onfocus="changeInputBorderStyle(true)" onblur="changeInputBorderStyle(false)">
+                    <button type="submit" class="header__search-find-button">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
@@ -19,7 +21,21 @@
             <ul class="header__nav-user-list">
                 <li class="header__nav-user-list-item">
                     <a href="" class="header__nav-user-link">
-                        <i class="fa-regular fa-user"></i>
+                        <div>
+                            <button type="button" class="header__nav-user-button">
+                                <span class="sr-only">Open main menu</span>
+                                <img src="<%= customerData.customer_avatar %>" alt="" loading="lazy"
+                                     class="header__nav-user-avatar">
+                                <span class="header__nav-user-name">
+                                    <%= customerData.customer_lname %>
+                                </span>
+                                <% if (customerData.customer_role === "admin" || customerData.customer_role === "supplier") { %>
+                                    <span class="header__nav-user-role">
+                                        <%= customerData.customer_role %>
+                                    </span>
+                                <% } %>
+                            </button>
+                        </div>
                     </a>
                 </li>
                 <li class="header__nav-user-list-item">
@@ -45,7 +61,8 @@
             <div class="header__nav-menu">
                 <ul class="header__nav-menu-list">
                     <li class="header__nav-menu-list-item">
-                        <a href="/story-sells" id="home" class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
+                        <a href="/story-sells" id="home"
+                           class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
                             <span class="header__nav-menu-link-text">
                                 Home
                             </span>
@@ -54,7 +71,7 @@
                     </li>
                     <li class="header__nav-menu-list-item">
                         <a href="/story-sells/shop" id="shop"
-                            class="header__nav-menu-link header__nav-menu-link-padding-horizontal <%= text === 'Shop' ? 'header__nav-menu-link-active' : '' %>">
+                           class="header__nav-menu-link header__nav-menu-link-padding-horizontal <%= text === 'Shop' ? 'header__nav-menu-link-active' : '' %>">
                             <span class="header__nav-menu-link-text">
                                 Shop
                             </span>
@@ -62,7 +79,8 @@
                         </a>
                     </li>
                     <li class="header__nav-menu-list-item">
-                        <a href="/story-sells/publisher" class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
+                        <a href="/story-sells/publisher"
+                           class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
                             <span class="header__nav-menu-link-text">
                                 Publisher
                             </span>
@@ -70,7 +88,8 @@
                         </a>
                     </li>
                     <li class="header__nav-menu-list-item">
-                        <a href="/story-sells/author" class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
+                        <a href="/story-sells/author"
+                           class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
                             <span class="header__nav-menu-link-text">
                                 Author
                             </span>
@@ -78,7 +97,8 @@
                         </a>
                     </li>
                     <li class="header__nav-menu-list-item">
-                        <a href="/story-sells/contact" class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
+                        <a href="/story-sells/contact"
+                           class="header__nav-menu-link header__nav-menu-link-padding-horizontal">
                             <span class="header__nav-menu-link-text">
                                 Contact
                             </span>
@@ -90,7 +110,9 @@
         </div>
 
     </div>
-    <div class="header__shop" <% /* eslint-disable css-propertyvalueexpected */ %> style="display: <%= display%>;">
+    <div class="header__shop"
+            <% /* eslint-disable css-propertyvalueexpected */ %>
+         style="display: <%= display %>">
         <div class="header__shop-content">
             <div class="header__shop-content-title">
                 <h1>
@@ -104,4 +126,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function changeInputBorderStyle(focus) {
+            const input = document.querySelector('.header__search-find-input');
+            if (focus) {
+                input.classList.add('focus');
+            } else {
+                input.classList.remove('focus');
+            }
+        }
+    </script>
 </header>

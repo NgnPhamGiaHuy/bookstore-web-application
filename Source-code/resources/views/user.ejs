@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Account Overview - StorySells.com</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
+    <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+</head>
+
+<body>
+<%- include('partials/header-02.ejs', { text: 'User', display: 'none', customerData: customerData, totalQuantity: 0 ? totalQuantity : totalQuantity }) -%>
+
+<div class="container">
+    <div class="container__full container__shop">
+        <aside id="secondary" class="aside__area">
+            <div class="aside__area-customer">
+                <div class="aside__area-customer-avatar">
+                    <img src="<%= customerData.customer_avatar %>" alt="">
+                </div>
+                <div class="aside__area-customer-info">
+                    <span>
+                        Account of
+                    </span>
+                    <h4 class="aside__area-customer-info-name">
+                        <%= customerData.customer_fname + " " + customerData.customer_lname %>
+                    </h4>
+                </div>
+            </div>
+            <div class="aside__area-options">
+                <ul class="aside__area-options-list">
+                    <li class="aside__area-options-list-item aside__area-options-list-item-active">
+                        <a href="" class="aside__area-options-list-link">
+                            <div class="aside__area-options-icon">
+                                <i class="fa-regular fa-user"></i>
+                            </div>
+                            <div class="aside__area-options-function">
+                                <span>Account Information</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="aside__area-options-list-item">
+                        <a href="" class="aside__area-options-list-link">
+                            <div class="aside__area-options-icon">
+                                <i class="fa-regular fa-bell"></i>
+                            </div>
+                            <div class="aside__area-options-function">
+                                <span>Notification</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="aside__area-options-list-item">
+                        <a href="" class="aside__area-options-list-link">
+                            <div class="aside__area-options-icon">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </div>
+                            <div class="aside__area-options-function">
+                                <span>Order Management</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="aside__area-options-list-item">
+                        <a href="" class="aside__area-options-list-link">
+                            <div class="aside__area-options-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="aside__area-options-function">
+                                <span>Address Number</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="aside__area-options-list-item">
+                        <a href="" class="aside__area-options-list-link">
+                            <div class="aside__area-options-icon">
+                                <i class="fa-regular fa-credit-card"></i>
+                            </div>
+                            <div class="aside__area-options-function">
+                                <span>Billing Information</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="aside__area-options-list-item">
+                        <a href="" class="aside__area-options-list-link">
+                            <div class="aside__area-options-icon">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                            <div class="aside__area-options-function">
+                                <span>Favorite Book</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div id="primary" class="content__area">
+            <main class="main__customer" id="main" role="main">
+                <section class="customer__information">
+                    <h4 class="customer__information-title">Account Information</h4>
+                    <% if (updateSuccess) { %>
+                        <div class="success-message" style="margin-bottom: -4px; z-index: 999">
+                            Information updated successfully!
+                        </div>
+                        <script>
+                            const successMessage = document.querySelector('.success-message');
+
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 10000);
+                        </script>
+                    <% } %>
+                    <div class="customer__information-content">
+                        <div class="customer__information-content-left">
+                            <span>
+                                Account Information
+                            </span>
+                            <form action="/story-sells/user" method="POST" enctype="multipart/form-data" class="customer__information-content-form">
+                                <div class="customer__information-content-avatar-name">
+                                    <div class="customer__information-content-avatar">
+                                        <img id="customerAvatar" src="<%= customerData.customer_avatar %>" alt="">
+                                        <input type="file" id="avatarInput" name="avatar" accept="image/*">
+                                    </div>
+                                    <div class="customer__information-content-username">
+                                        <div class="customer__information-content-name">
+                                            <label for="">First Name: </label>
+                                            <input type="text" class="customer__information-content-name-input"
+                                                   value="<%= customerData.customer_fname %>"
+                                                   placeholder="Your first name">
+                                        </div>
+                                        <div class="customer__information-content-name">
+                                            <label for="">Last Name: </label>
+                                            <input type="text" class="customer__information-content-name-input"
+                                                   value="<%= customerData.customer_lname %>"
+                                                   placeholder="Your last name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="customer__information-content-dateOfBirth">
+                                    <label for="">Birthday: </label>
+                                    <div class="customer__information-content-dateOfBirth-inputs">
+                                        <input name="day" type="number"
+                                               class="customer__information-content-dateOfBirth-input" placeholder="Day"
+                                               min="1" max="31"
+                                               value="<%= customerData.customer_birthday ? customerData.customer_birthday.getDate() : '' %>"
+                                               required>
+                                        <input name="month" type="number"
+                                               class="customer__information-content-dateOfBirth-input"
+                                               placeholder="Month" min="1" max="12"
+                                               value="<%= customerData.customer_birthday ? customerData.customer_birthday.getMonth() + 1 : '' %>"
+                                               required>
+                                        <input name="year" type="number"
+                                               class="customer__information-content-dateOfBirth-input"
+                                               placeholder="Year" min="1900" max="2023"
+                                               value="<%= customerData.customer_birthday ? customerData.customer_birthday.getFullYear() : '' %>"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="customer__information-content-gender">
+                                    <label for="">Gender: </label>
+                                    <div class="customer__information-content-gender-inputs">
+                                        <input type="radio" id="male" name="gender" value="male"
+                                               <% if (customerData.customer_gender === 'male') { %>checked
+                                                <% } %>
+                                        >
+                                        <label for="male">Male</label>
+
+                                        <input type="radio" id="female" name="gender" value="female"
+                                               <% if (customerData.customer_gender === 'female') { %>checked
+                                                <% } %>
+                                        >
+                                        <label for="female">Female</label>
+
+                                        <input type="radio" id="other" name="gender" value="other"
+                                               <% if (customerData.customer_gender === 'other') { %>checked
+                                                <% } %>
+                                        >
+                                        <label for="other">Other</label>
+                                    </div>
+                                </div>
+                                <div class="customer__information-content-national">
+                                    <label for="nationality">National</label>
+                                    <div class="customer__information-content-national-inputs">
+                                        <select name="nationality" id="nationality"
+                                                class="customer__information-content-national-select">
+                                            <% for (let i = 0; i < countryOptions.length; i++) { %>
+                                                <% if (countryOptions[i] === customerData.customer_nationality) { %>
+                                                    <option value="<%= countryOptions[i] %>"
+                                                            selected><%= countryOptions[i] %></option>
+                                                <% } else { %>
+                                                    <option value="<%= countryOptions[i] %>"><%= countryOptions[i] %></option>
+                                                <% } %>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="customer__information-content-submit">
+                                    <button type="submit" class="customer__information-content-button">
+                                        Save changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="customer__information-content-right">
+                            <div class="customer__information-content-contact">
+                                <span>Phone and Email</span>
+                                <form action="" method="" class="customer__information-content-contact-content">
+                                    <div class="customer__information-content-contact-content-left">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <div class="customer__information-content-contact-content-text">
+                                            <span>Phone number</span>
+                                            <span class="customer__information-content-contact-content-text-output"><%= customerData.customer_phoneNo %></span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="customer__information-content-update">
+                                        Update
+                                    </button>
+                                </form>
+                                <form action="" method="" class="customer__information-content-contact-content">
+                                    <div class="customer__information-content-contact-content-left">
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <div class="customer__information-content-contact-content-text">
+                                            <span>Email address</span>
+                                            <span class="customer__information-content-contact-content-text-output"><%= customerData.customer_email %></span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="customer__information-content-update">
+                                        Update
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="customer__information-content-contact">
+                                <span>Security</span>
+                                <form action="" method="" class="customer__information-content-contact-content">
+                                    <div class="customer__information-content-contact-content-left">
+                                        <i class="fa-solid fa-lock"></i>
+                                        <div class="customer__information-content-contact-content-text">
+                                            <span>Change password</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="customer__information-content-update">
+                                        Update
+                                    </button>
+                                </form>
+                                <form action="" method="" class="customer__information-content-contact-content">
+                                    <div class="customer__information-content-contact-content-left">
+                                        <i class="fa-solid fa-shield"></i>
+                                        <div class="customer__information-content-contact-content-text">
+                                            <span>Set up a PIN code</span>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="customer__information-content-update">
+                                        Update
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</div>
+
+<script>
+    const avatarInput = document.querySelector('#avatarInput');
+    const customerAvatar = document.querySelector('#customerAvatar');
+
+    avatarInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            customerAvatar.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
+
+<%- include('partials/footer.ejs') -%>
+</body>
+</html>

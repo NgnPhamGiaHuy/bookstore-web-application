@@ -18,6 +18,16 @@ const CustomerSchema = new Schema(
             type: String,
             required: true
         },
+        customer_birthday: {
+            type: Date
+        },
+        customer_nationality: {
+            type: String
+        },
+        customer_gender: {
+            type: String,
+            enum: ['male', 'female', 'other']
+        },
         customer_avatar: {
             type: String,
             default: '/img/User/Avatar.png',

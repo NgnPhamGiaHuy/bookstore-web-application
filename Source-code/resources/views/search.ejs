@@ -37,7 +37,21 @@
             <ul class="header__nav-user-list">
                 <li class="header__nav-user-list-item">
                     <a href="" class="header__nav-user-link">
-                        <i class="fa-regular fa-user"></i>
+                        <div>
+                            <button type="button" class="header__nav-user-button">
+                                <span class="sr-only">Open main menu</span>
+                                <img src="<%= customerData.customer_avatar %>" alt="" loading="lazy"
+                                     class="header__nav-user-avatar">
+                                <span class="header__nav-user-name">
+                                    <%= customerData.customer_lname %>
+                                </span>
+                                <% if (customerData.customer_role === "admin" || customerData.customer_role === "supplier") { %>
+                                    <span class="header__nav-user-role">
+                                        <%= customerData.customer_role %>
+                                    </span>
+                                <% } %>
+                            </button>
+                        </div>
                     </a>
                 </li>
                 <li class="header__nav-user-list-item">
@@ -145,33 +159,15 @@
                             </a>
                         </div>
                         <form action="/story-sells/search" method="get" class="main__shop-sorting-form">
-                            <select name="orderby" id="orderby" class="main__shop-sorting-form-orderby"
-                                    aria-label="Shop order" onchange="this.form.submit()">
-                                <option value="" <% if (orderBy === '') { %>selected
-                                        <% } %>
-                                >Default sorting
-                                </option>
-                                <option value="popularity" <% if (orderBy === 'popularity') { %>selected
-                                        <% } %>
-                                >Sort by popularity
-                                </option>
-                                <option value="rating" <% if (orderBy === 'rating') { %>selected
-                                        <% } %>
-                                >Sort by average rating
-                                </option>
-                                <option value="date" <% if (orderBy === 'date') { %>selected
-                                        <% } %>
-                                >Sort by latest
-                                </option>
-                                <option value="price" <% if (orderBy === 'price') { %>selected
-                                        <% } %>
-                                >Sort by price: low to high
-                                </option>
-                                <option value="price-desc" <% if (orderBy === 'price-desc') { %>selected
-                                        <% } %>
-                                >Sort by price: high to low
-                                </option>
+                            <select name="orderby" id="orderby" class="main__shop-sorting-form-orderby" aria-label="Shop order" onchange="this.form.submit()">
+                                <option value="" <% if (orderBy === '') { %>selected <% } %>>Default sorting</option>
+                                <option value="popularity" <% if (orderBy === 'popularity') { %>selected <% } %>>Sort by popularity</option>
+                                <option value="rating" <% if (orderBy === 'rating') { %>selected <% } %>>Sort by average rating</option>
+                                <option value="date" <% if (orderBy === 'date') { %>selected <% } %>>Sort by latest</option>
+                                <option value="price" <% if (orderBy === 'price') { %>selected <% } %>>Sort by price: low to high</option>
+                                <option value="price-desc" <% if (orderBy === 'price-desc') { %>selected <% } %>>Sort by price: high to low</option>
                             </select>
+                            <input type="hidden" name="searchTerm" value="<%= searchTerm %>">
                         </form>
                     </div>
                     <div class="main__shop-products">

@@ -1,8 +1,8 @@
 const Cart = require('../models/Cart');
-const countriesList = require('countries-list').countries;
 const CartItem = require('../models/CartItem');
 const Customer = require('../models/Customer');
 const BookPublisher = require('../models/BookPublisher');
+const countriesList = require('countries-list').countries;
 
 class CheckoutController {
     static calculateSubtotalAndTotal(cartItems) {
@@ -77,8 +77,6 @@ class CheckoutController {
             const allCountries = Object.values(countriesList);
             const countryOptions = allCountries
                 .map((country) => country.name)
-
-            console.log(countryOptions)
 
             res.render('checkout', {
                 cartItems: cartItems,

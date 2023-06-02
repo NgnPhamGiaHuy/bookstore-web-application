@@ -53,7 +53,21 @@
             <ul class="header__nav-user-list">
                 <li class="header__nav-user-list-item">
                     <a href="" class="header__nav-user-link">
-                        <i class="fa-regular fa-user"></i>
+                        <div>
+                            <button type="button" class="header__nav-user-button">
+                                <span class="sr-only">Open main menu</span>
+                                <img src="<%= customerData.customer_avatar %>" alt="" loading="lazy"
+                                     class="header__nav-user-avatar">
+                                <span class="header__nav-user-name">
+                                    <%= customerData.customer_lname %>
+                                </span>
+                                <% if (customerData.customer_role === "admin" || customerData.customer_role === "supplier") { %>
+                                    <span class="header__nav-user-role">
+                                        <%= customerData.customer_role %>
+                                    </span>
+                                <% } %>
+                            </button>
+                        </div>
                     </a>
                 </li>
                 <li class="header__nav-user-list-item">
@@ -116,26 +130,14 @@
             <div class="header__search-bar">
                 <form action="/story-sells/search" method="post" class="header__search-bar-form">
                     <div class="header__search-find">
-                        <input type="text" class="header__search-find-input" name="searchTerm" placeholder="Search products..."
+                        <input type="text" class="header__search-find-input" name="searchTerm"
+                               placeholder="Search products..."
                                onfocus="changeInputBorderStyle(true)" onblur="changeInputBorderStyle(false)">
                         <button type="submit" class="header__search-find-button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
                 </form>
-<!--                <ul class="header__search-result-list">-->
-<!--                    <% for (const result of searchResultList) { %>-->
-<!--                        <li class="header__search-result-list-item">-->
-<!--                            <div class="header__search-result-image">-->
-<!--                                <img src="<%= result.cover_image %>" alt="">-->
-<!--                            </div>-->
-<!--                            <div class="header__search-result-info">-->
-<!--                                <h3 class="header__search-result-title"><%= result.book_title %></h3>-->
-<!--                                <p class="header__search-result-author"><%= result.author %></p>-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                    <% } %>-->
-<!--                </ul>-->
             </div>
             <div class="header__search-location">
                 <a href="#" class="header__search-location-link">

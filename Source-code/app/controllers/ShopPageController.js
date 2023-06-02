@@ -6,6 +6,7 @@ const Review = require("../models/Review");
 const Author = require("../models/Author");
 const BookGenre = require("../models/BookGenre");
 const BookAuthor = require("../models/BookAuthor");
+const Customer = require("../models/Customer");
 
 class ShopPageController {
     static async calculateTotalQuantity(cartItems) {
@@ -77,6 +78,7 @@ class ShopPageController {
     async index(req, res, next) {
         try {
             const customerId = req.session.customer;
+            const customerData = await Customer.findById(customerId).populate('customer_lname').populate('customer_avatar');
 
             const booksPerPage = 12;
             const page = parseInt(req.query.page) || 1;
@@ -198,6 +200,7 @@ class ShopPageController {
                 authorData,
                 randomBooks,
                 totalGenres,
+                customerData,
                 totalQuantity,
                 currentPage: page,
             });

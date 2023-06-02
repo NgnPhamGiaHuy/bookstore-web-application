@@ -4,6 +4,7 @@ const Author = require("../models/Author");
 const Review = require("../models/Review");
 const Cart = require("../models/Cart");
 const CartItem = require("../models/CartItem");
+const Customer = require("../models/Customer");
 
 
 class SearchPageController {
@@ -106,6 +107,11 @@ class SearchPageController {
                         .lean()
                         .exec();
 
+                    const ratingSum = reviews.reduce((sum, review) => sum + review.rating, 0);
+                    const averageRating = ratingSum / reviews.length;
+                    const rating = parseFloat(averageRating.toFixed(2));
+                    const ratingWidth = rating * 20;
+
                     return {
                         _id: book._id,
                         cover_image: book.cover_image,
@@ -118,6 +124,8 @@ class SearchPageController {
                         sale_count: book.sale_count,
                         authors: bookAuthorsData,
                         reviews,
+                        rating,
+                        ratingWidth,
                     };
                 })
             );
@@ -142,12 +150,15 @@ class SearchPageController {
                 }
             }
 
+            const customerData = await Customer.findById(customerId)
+
             return res.render('search', {
                 orderBy,
                 searchTerm,
                 searchResults,
                 authors,
                 totalPages,
+                customerData,
                 totalQuantity,
                 currentPage: page,
             });

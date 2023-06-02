@@ -1,4 +1,5 @@
 const Cart = require('../models/Cart');
+const Customer = require("../models/Customer");
 const CartItem = require('../models/CartItem');
 const BookAuthor = require('../models/BookAuthor');
 
@@ -116,10 +117,11 @@ class CartPageController {
     async index(req, res, next) {
         try {
             const customerId = req.session.customerId;
+            const customerData = await Customer.findById(customerId);
             const cart = await Cart.findOne({customer: customerId}).populate('customer');
 
             if (!cart) {
-                return res.render('cart', {cartItems: [], subtotal: 0, total: 0, totalQuantity: 0, cart: null});
+                return res.render('cart', {customerData: customerData, cartItems: [], subtotal: 0, total: 0, totalQuantity: 0, cart: null});
             }
 
             const cartItems = await CartItem.find({cart: cart._id}).populate('book');
@@ -151,8 +153,14 @@ class CartPageController {
             const totalQuantity = CartPageController.calculateTotalQuantity(cartItems);
             const {subtotal, total} = CartPageController.calculateSubtotalAndTotal(cartItems);
 
-
-            res.render('cart', {cartItems, subtotal, total, totalQuantity, cart});
+            res.render('cart', {
+                cart,
+                total,
+                subtotal,
+                cartItems,
+                customerData,
+                totalQuantity,
+            });
         } catch (error) {
             next(error);
         }
