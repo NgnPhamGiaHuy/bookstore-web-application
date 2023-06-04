@@ -22,12 +22,18 @@ class UserPageController {
             const customerId = req.session.customerId;
             const customerData = await Customer.findById(customerId);
             const cart = await Cart.findOne({ customer: customerId }).populate('customer');
-            const cartItems = await CartItem.find({ cart: cart._id }).populate('book');
-            const totalQuantity = UserPageController.calculateTotalQuantity(cartItems);
+
             const allCountries = Object.values(countriesList);
             const countryOptions = allCountries.map((country) => country.name);
 
             const updateSuccess = req.query.updateSuccess === 'true';
+
+            let cartItems = [];
+            let totalQuantity = 0;
+            if (cart) {
+                cartItems = await CartItem.find({cart: cart._id}).populate('book');
+                totalQuantity = UserPageController.calculateTotalQuantity(cartItems);
+            }
 
             res.render('user', {
                 customerData,
@@ -57,7 +63,8 @@ class UserPageController {
 
             if (req.files && req.files.avatar) {
                 const file = req.files.avatar;
-                const avatarDirectory = path.join(__dirname, '..', 'public', 'img', 'User');
+
+                const avatarDirectory = path.join(__dirname, '..', '..', 'public', 'img', 'User');
                 const avatarFileName = `Avatar_${customerId}${path.extname(file.name)}`;
                 const avatarPath = path.join(avatarDirectory, avatarFileName);
 

@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
     <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 </head>
 
 <body>
@@ -56,12 +57,17 @@
                                 <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-region">
                                     <span class="main__checkout-content-form-detail-label">
                                         Country / Region
-                                        <abbr class="required" title="required" style="color: var(--color-primary)">*</abbr>
+                                        <abbr class="required" title="required"
+                                              style="color: var(--color-primary)">*</abbr>
                                     </span>
-                                    <select class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-region" name="region" id="region-select" autocomplete="region" aria-hidden="true" required>
+                                    <select class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-region"
+                                            name="region" id="region-select" autocomplete="region" aria-hidden="true"
+                                            required>
+                                        <option value="default" selected>Please select your nationality</option>
                                         <% for (let i = 0; i < countryOptions.length; i++) { %>
-                                            <% if (countryOptions[i] === "Vietnam") { %>
-                                                <option value="<%= countryOptions[i] %>" selected><%= countryOptions[i] %></option>
+                                            <% if (countryOptions[i] === customerData.customer_nationality) { %>
+                                                <option value="<%= countryOptions[i] %>"
+                                                        selected><%= countryOptions[i] %></option>
                                             <% } else { %>
                                                 <option value="<%= countryOptions[i] %>"><%= countryOptions[i] %></option>
                                             <% } %>
@@ -76,7 +82,7 @@
                                     </span>
                                     <input type="text"
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-house"
-                                           placeholder="House number and street name" required>
+                                           placeholder="House number and street name" value="<%= customerData.customer_address %>" required>
                                     <input type="text"
                                            class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-apartment"
                                            placeholder="Apartment, suite, unit, etc. (optional)">

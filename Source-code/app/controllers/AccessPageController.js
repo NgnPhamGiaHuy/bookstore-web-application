@@ -1,6 +1,6 @@
 const Customer = require('../models/Customer');
+
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
 
 class AccessPageController {
     async login(req, res, next) {
@@ -44,7 +44,6 @@ class AccessPageController {
             let firstName = '';
             let lastName = '';
 
-            // Split the name into first name and last name
             const nameParts = name.split(' ');
             if (nameParts.length > 1) {
                 firstName = nameParts.slice(0, -1).join(' ');
@@ -53,25 +52,18 @@ class AccessPageController {
                 lastName = name;
             }
 
-            // Check if the email already exists
             const existingCustomer = await Customer.findOne({ customer_email: email }).exec();
             if (existingCustomer) {
                 return res.send(`<script>alert("The email '${email}' is already registered. Please use a different email."); window.location.href = "/user/register";</script>`);
             }
 
-            // Generate a unique confirmation token
-            const confirmationToken = generateToken();
-
-            // Create a new customer with confirmation token
             const customer = new Customer({
                 customer_username: email,
-                customer_password: password,
+                customer_password: '',
                 customer_fname: firstName,
                 customer_lname: lastName,
                 customer_email: email,
-                customer_role: role,
-                confirmation_token: confirmationToken,
-                confirmation_token_expires: Date.now() + 180000, // Token expires in 3 minutes (180,000 milliseconds)
+                customer_role: role
             });
 
             const saltRounds = 10;

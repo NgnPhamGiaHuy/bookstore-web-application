@@ -3225,7 +3225,9 @@ button {
 .aside__area-customer-avatar > img {
     width: 52px;
     height: 52px;
+    object-fit: cover;
     margin-right: 12px;
+    border-radius: 9999px;
 }
 
 .aside__area-customer-info {
@@ -3234,19 +3236,25 @@ button {
 
 .aside__area-options {
     display: flex;
-    margin-top: 24px;
-    align-items: center;
-    flex-direction: row;
+    margin-top: 12px;
+    align-items: start;
+    flex-direction: column;
+}
+
+.section__nav-title {
+    font-size: 16px;
+    margin-top: 16px;
+    color: var(--color-cyan-bluish-gray);
+    text-transform: uppercase;
 }
 
 .aside__area-options-list-item {
-    padding: 12px 34px;
-    border-radius: 4px;
-    margin-bottom: -4px;
+    font-size: 14px;
+    margin-bottom: 12px;
 }
 
 .aside__area-options-list-item-active, .aside__area-options-list-item:hover {
-    background-color: var(--color-border);
+    color: var(--color-primary-hover);
 }
 
 .aside__area-options-icon {
@@ -3432,6 +3440,18 @@ button {
 .main__shop-products-caption {
     position: relative;
     padding-top: 20px;
+}
+
+.section-title {
+    text-transform: uppercase;
+}
+
+.section-subtitle {
+    margin-bottom: 8px;
+}
+
+.customer__container {
+    padding: 24px;
 }
 
 .customer__information-content {
@@ -3634,7 +3654,7 @@ button {
     flex-direction: column;
 }
 
-.customer__information-content-contact-content-text-output{
+.customer__information-content-contact-content-text-output {
     width: 80%;
     overflow: hidden;
 }
@@ -3653,6 +3673,172 @@ button {
 .customer__information-content-update:hover {
     color: var(--color-white);
     background-color: var(--color-primary);
+}
+
+.book__upload-content-form {
+    display: flex;
+    padding: 24px;
+    min-width: 1290px;
+    border-radius: 4px;
+    flex-direction: row;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.upload-files-container {
+    width: 600px;
+    height: 960px;
+    border-radius: 8px;
+    padding: 30px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid var(--color-accent);
+}
+
+.drag-file-area {
+    width: 350px;
+    border-radius: 40px;
+    text-align: center;
+    padding: 30px 50px;
+    margin: 10px 0 15px;
+    border: 2px dashed var(--color-primary);
+}
+
+.drag-file-area .upload-icon {
+    font-size: 50px;
+}
+
+.drag-file-area h3 {
+    font-size: 26px;
+    margin: 15px 0;
+}
+
+.drag-file-area label {
+    font-size: 19px;
+}
+
+.drag-file-area label .browse-files-text {
+    cursor: pointer;
+    font-weight: bolder;
+    color: var(--color-primary);
+}
+
+.browse-files span {
+    position: relative;
+    top: -25px;
+}
+
+.default-file-input {
+    opacity: 0;
+}
+
+.cannot-upload-message {
+    background-color: #ffc6c4;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    padding: 5px 10px 5px 30px;
+    border-radius: 5px;
+    color: #BB0000;
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.cannot-upload-message span, .upload-button-icon {
+    padding-right: 10px;
+}
+
+.cannot-upload-message span:last-child {
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.file-block {
+    color: #f7fff7;
+    background-color: #7b2cbf;
+    transition: all 1s;
+    width: 390px;
+    position: relative;
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 15px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.file-icon {
+    margin-right: 10px;
+}
+
+.file-name, .file-size {
+    padding: 0 3px;
+}
+
+.remove-file-icon {
+    cursor: pointer;
+}
+
+.progress-bar {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 6%;
+    width: 50%;
+    height: 5px;
+    border-radius: 25px;
+    background-color: #4BB543;
+}
+
+.upload-button {
+    background-color: var(--color-primary);
+    color: #f7fff7;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 12px 50px;
+    cursor: pointer;
+}
+
+.book__upload-info {
+    width: 50%;
+    display: flex;
+    margin-top: -8px;
+    margin-left: 24px;
+    flex-direction: column;
+}
+
+.book__upload-info-block {
+    margin-bottom: 12px;
+}
+
+.book__upload-info-input {
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: 1px solid var(--color-accent);
 }
 
 
