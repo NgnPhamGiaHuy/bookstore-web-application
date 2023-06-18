@@ -3,9 +3,12 @@ const Schema = mongoose.Schema
 
 const CustomerSchema = new Schema(
     {
-        customer_username: {
+        customer_email: {
             type: String,
             required: true
+        },
+        customer_username: {
+            type: String,
         },
         customer_password: {
             type: String,
@@ -31,10 +34,6 @@ const CustomerSchema = new Schema(
         customer_avatar: {
             type: String,
             default: '/img/User/Avatar.png',
-        },
-        customer_email: {
-            type: String,
-            required: true
         },
         customer_address: {
             type: String

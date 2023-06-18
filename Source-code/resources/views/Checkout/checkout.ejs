@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StorySells: Where Imagination Comes to Life!</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/Icon/Ico.png">
+    <script src="https://kit.fontawesome.com/d8ded057c6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+</head>
+
+<body>
+<%- include('../partials/header-02.ejs', { text: 'Checkout', display: 'block', customerData: customerData, totalQuantity: 0 ? totalQuantity : totalQuantity }) -%>
+
+<div class="container">
+    <div class="container__full" style="display: block; max-width: 1320px">
+        <div id="primary" class="checkout__area">
+            <main id="main" class="main__checkout" role="main">
+                <article class="main__checkout-status">
+                    <div class="main__checkout-buymore">
+                        <span>Want to buy more?</span>
+                        <a href="/story-sells/shop">Click here to come back</a>
+                    </div>
+                    <div class="main__checkout-content">
+                        <form method="POST" class="main__checkout-content-form">
+                            <div class="main__checkout-content-form-detail">
+                                <h2 class="main__checkout-content-form-detail-title">Billing details</h2>
+                                <div class="main__checkout-content-form-detail-name">
+                                    <div class="main__checkout-content-form-detail-username">
+                                        <span class="main__checkout-content-form-detail-label">
+                                            First name
+                                        </span>
+                                        <input type="text"
+                                               class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-firstname"
+                                               value="<%= customerData.customer_fname %>" placeholder="">
+                                    </div>
+                                    <div class="main__checkout-content-form-detail-username">
+                                        <span class="main__checkout-content-form-detail-label">
+                                            Last name
+                                            <abbr class="required" title="required" style="color: var(--color-primary)">*</abbr>
+                                        </span>
+                                        <input type="text"
+                                               class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-lastname"
+                                               value="<%= customerData.customer_lname %>" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-company">
+                                    <span class="main__checkout-content-form-detail-label">Company name(optional)</span>
+                                    <input type="text"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-company"
+                                           placeholder="" required>
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-region">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        Country / Region
+                                        <abbr class="required" title="required"
+                                              style="color: var(--color-primary)">*</abbr>
+                                    </span>
+                                    <select class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-region"
+                                            name="region" id="region-select" autocomplete="region" aria-hidden="true"
+                                            required>
+                                        <option value="default" selected>Please select your nationality</option>
+                                        <% for (let i = 0; i < countryOptions.length; i++) { %>
+                                            <% if (countryOptions[i] === customerData.customer_nationality) { %>
+                                                <option value="<%= countryOptions[i] %>"
+                                                        selected><%= countryOptions[i] %></option>
+                                            <% } else { %>
+                                                <option value="<%= countryOptions[i] %>"><%= countryOptions[i] %></option>
+                                            <% } %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-street">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        Street address
+                                        <abbr class="required" title="required"
+                                              style="color: var(--color-primary)">*</abbr>
+                                    </span>
+                                    <input type="text"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-house"
+                                           placeholder="House number and street name" value="<%= customerData.customer_address %>" required>
+                                    <input type="text"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-apartment"
+                                           placeholder="Apartment, suite, unit, etc. (optional)">
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-city">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        Town / City
+                                        <abbr class="required" title="required"
+                                              style="color: var(--color-primary)">*</abbr>
+                                    </span>
+                                    <input type="text"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-city"
+                                           placeholder="" required>
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-state">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        State
+                                        <abbr class="required" title="required"
+                                              style="color: var(--color-primary)">*</abbr>
+                                    </span>
+                                    <select class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-state"
+                                            name="state" id="state-select" autocomplete="state" aria-hidden="true"
+                                            required>
+                                        <option value="Vietnam" selected>Vietnam</option>
+                                        <option value="Africa">Africa</option>
+                                    </select>
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-zipcode">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        ZIP code
+                                    </span>
+                                    <input type="text"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-zipcode"
+                                           placeholder="">
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-phone">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        Phone
+                                        <abbr class="required" title="required"
+                                              style="color: var(--color-primary)">*</abbr>
+                                    </span>
+                                    <input type="tel"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-phone"
+                                           value="<%= customerData.customer_phoneNo %>" placeholder="" required>
+                                </div>
+                                <div class="main__checkout-content-form-detail-full main__checkout-content-form-detail-email">
+                                    <span class="main__checkout-content-form-detail-label">
+                                        Email address
+                                    </span>
+                                    <input type="email"
+                                           class="main__checkout-content-form-detail-input main__checkout-content-form-detail-input-email"
+                                           value="<%= customerData.customer_email %>" placeholder="">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="main__checkout-content-collaterals">
+                            <div class="main__checkout-content-order">
+                                <h2 class="main__checkout-content-order-title">Your order</h2>
+                                <div class="main__checkout-content-order-info">
+                                    <div class="main__checkout-content-order-info-label">
+                                        <span>Product</span>
+                                        <span>Subtotal</span>
+                                    </div>
+                                    <div class="main__checkout-content-order-info-books">
+                                        <ul class="main__checkout-content-order-info-list">
+                                            <% cartItems.forEach((cartItem)=> { %>
+                                                <li class="main__checkout-content-order-info-list-item">
+                                                    <div class="main__checkout-content-order-info-books-text">
+                                                        <div class="main__checkout-content-order-info-books-title">
+                                                            <a href="/story-sells/book/<%= cartItem.book._id %>" st>
+                                                                <%= cartItem.book.book_title %>
+                                                            </a>
+                                                            <span class="main__checkout-content-order-info-books-amount">
+                                                                x<%= cartItem.quantity %>
+                                                            </span>
+                                                        </div>
+                                                        <div class="main__checkout-content-order-info-books-vendor">
+                                                            <strong>Vendor: </strong>
+                                                            <% for (let i = 0; i < cartItem.book.publishers.length
+                                                            && i < 3; i++) { %>
+                                                                <a href="/story-sells/publisher/<%= cartItem.book.publishers[i]._id %>">
+                                                                    <%= cartItem.book.publishers[i].publisher_name %>
+                                                                </a>
+                                                                <% if (i < cartItem.book.publishers.length - 1) { %>
+                                                                    <span>,</span>
+                                                                <% } %>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+                                                    <% if (cartItem.book.sale_price > 0) { %>
+                                                        <div class="main__checkout-content-order-info-books-price">
+                                                            <span>$</span>
+                                                            <%= cartItem.book.sale_price * cartItem.quantity %>
+                                                        </div>
+                                                    <% } else { %>
+                                                        <div class="main__checkout-content-order-info-books-price">
+                                                            <span>$</span>
+                                                            <%= cartItem.book.price * cartItem.quantity %>
+                                                        </div>
+                                                    <% } %>
+                                                </li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                    <div class="main__checkout-content-order-info-subtotal">
+                                        <h3 style="margin: 0; font-weight: normal">Subtotal</h3>
+                                        <span>
+                                            $ <%= subtotal %>
+                                        </span>
+                                    </div>
+                                    <div class="main__checkout-content-order-info-total">
+                                        <h3>Total</h3>
+                                        <span>
+                                            $ <%= total %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <p class="main__checkout-content-order-info-privacy">
+                                    Your personal data will be used to process your order, support your
+                                    experience
+                                    throughout this website, and for other purposes described in our
+                                    <a href="" style="color: var(--color-black)">
+                                        privacy policy.
+                                    </a>
+                                </p>
+                                <div class="main__checkout-content-checkout">
+                                    <button type="submit" class="main__checkout-content-checkout-button">Place
+                                        order
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') -%>
+</body>
+
+</html>
