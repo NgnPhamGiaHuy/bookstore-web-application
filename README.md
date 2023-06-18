@@ -34,11 +34,11 @@ Having outlined the core use cases, we shall now delve into the Database design 
 
 ## **Database Schema**
 The database schema for the Online Bookstore project has been meticulously crafted to proficiently handle book-related data and user information. MongoDB, a widely favored NoSQL database, is employed in conjunction with the Mongoose library to facilitate seamless interaction with the database.
- 
+
 The schema encompasses various collections, namely "Book," "Author," "Genre," "Publisher," "Book Author," "Book Genre," "Book Publisher," "Cart," "Cart Item," "Customer," and "Review." Each collection represents a distinct entity within the system and incorporates associated fields to store relevant data. Relationships between collections are established using primary and foreign keys, ensuring the integrity of the data.
- 
+
 For instance, the "Books" collection houses comprehensive information about each book, encompassing its title, description, price, availability, as well as references to corresponding authors, genres, and publishers. The "Author," "Genre," and "Publisher" collections contain intricate details concerning the respective entities, such as their names and biographies. The "Book Author," "Book Genre," and "Book Publisher" collections facilitate the mapping between books and their associated authors, genres, and publishers.
- 
+
 To optimize performance, meticulous indexing has been implemented on frequently accessed columns. Indexing greatly enhances query performance by enabling the database to swiftly locate the desired data. Additionally, stringent security measures, such as hashing and generation of user passwords, have been employed to safeguard the sensitive user information stored in the "Customer" collection.
  
 <img width="998" alt="O B-ERD" src="https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/1594d786-d43d-4f99-b43e-eef09f3c5241">
@@ -46,9 +46,9 @@ To optimize performance, meticulous indexing has been implemented on frequently 
 
 ## **User Interface Design**
 The UI design of the Online Bookstore strives to present an immaculate and aesthetically pleasing arrangement, enriching the overall user experience. The design team focused on crafting a responsive interface that seamlessly adapts to various devices and screen sizes. Key design elements, such as a prominent search bar, lucid navigation menus, and streamlined book catalogs, have been integrated to facilitate effortless book discovery and browsing.
- 
+
 The HomePage serves as a central hub, offering users a comprehensive display of featured books, suggested titles, and personalized recommendations based on their browsing history. The design underscores the importance of prominently showcasing book covers, titles, authors, and ratings. Users can effortlessly navigate to different sections of the website, including the ShopPage, CartPage, LoginPage, RegisterPage, CheckOutPage, and BookPage, by utilizing well-designed navigation menus.
- 
+
 To enhance the purchasing experience, a user-friendly shopping cart has been implemented. Users have the ability to add books to their cart, update quantities, and seamlessly proceed to checkout. The checkout process is streamlined, enabling users to provide shipping information, select a payment method, and review their order before finalizing their purchase. Clear and concise error messages are displayed whenever necessary, guiding the user through the process.
 
 ### Login & Register Interface Design:
