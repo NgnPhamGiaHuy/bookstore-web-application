@@ -1,6 +1,6 @@
 <h1 align="center">Online-Bookstore-Project</h1>
 
-The design and implementation phase of the Online Bookstore project focuses on creating an intuitive user interface, developing a scalable database schema, and establishing a modular system architecture. These decisions are necessary to ensure a smooth user experience, efficient data management, and flexible system maintenance. This section will provide detailed insights into each aspect of the design and implementation process.
+The design and implementation phase of the Online Bookstore project is dedicated to crafting an intuitive user interface, formulating a scalable database schema, and establishing a modular system architecture. These deliberations are indispensable in guaranteeing a seamless user experience, efficient management of data, and flexible system maintenance. This section shall furnish comprehensive elucidations on each facet of the design and implementation journey.
 
 ## **Use Case:**
 
@@ -10,56 +10,46 @@ Before diving into the details of user interface design, it is essential to unde
 <p align="center">Figure 1 - Use Case Diagram</p>
 
 ### User registration and login:
-+ Users can create new accounts by providing their personal information and creating a username and password.
-+ Existing users can sign in with their credentials to access features and personalized account information.
+To gain access to the full array of features and personalized account information, users are empowered to create new accounts by providing their personal particulars and generating a unique username and password. For those already registered, existing users can effortlessly sign in using their credentials to access their accounts.
 
 ### Search and browse books:
-+ Users can search for books based on various criteria such as book title, author, genre or publication date.
-+ Users can browse book categories and genres to discover new titles that interest them.
+In order to facilitate an effortless voyage of book discovery, users are bestowed with the ability to conduct searches based on diverse criteria such as book title, author, genre, or publication date. Furthermore, users can indulge in the delight of perusing through book categories and genres, thus immersing themselves in the realm of captivating titles that allure their interests.
 
 ### Book details and reviews:
-+ Users can view detailed information about specific books, including book cover, title, author, genre, description, and customer reviews.
-+ Users can read and contribute comments to share their opinions and experiences with the community.
+Users are invited to embark on an immersive exploration of comprehensive book details, which encompass vital elements including the book cover, title, author, genre, description, and customer reviews. This empowers users with a profound understanding of the book, facilitating an informed decision-making process. Additionally, users are encouraged to contribute their own comments, thereby sharing their insights, opinions, and experiences with the vibrant community.
 
 ### Cart management:
-+ Users can add books to their cart, update quantities, and remove items as needed.
-+ Users can view the contents of their cart, including the total price, and proceed to checkout.
+To facilitate a seamless shopping experience, users can effortlessly manage their shopping cart. They have the freedom to add books to their cart, update quantities as needed, and remove items that are no longer of interest. The cart display showcases the contents, including the total price, empowering users with a clear overview. Subsequently, users can proceed to the checkout process.
 
 ### Check and pay:
-+ Users can proceed to the checkout process, where they provide shipping information and choose a payment method.
-+ Integration with secure payment gateway allows users to complete transactions securely.
+The checkout process encompasses a series of steps where users provide shipping information and select a preferred payment method. Through integration with a secure payment gateway, users can confidently finalize their transactions with utmost security and peace of mind.
 
 ### Order history and tracking:
-+ Users can track the status of their orders, including shipment details and estimated delivery dates.
-+ Users can view their order history and access receipts for previous purchases.
+In order to stay informed about the progress of their orders, users can conveniently track the status, accessing vital information such as shipment details and estimated delivery dates. Additionally, users have the ability to view their complete order history and conveniently access receipts for previous purchases.
 
 ### Manage user accounts:
-+ Users can manage their account information, including updating personal information, changing passwords, and managing email preferences.
-+ Users can view and edit billing and shipping addresses for faster payments in the future.
-
-Now that we've outlined the main use cases, let's dive into the Database design and UI design of the Online Bookstore project.
-
+To offer users greater control and flexibility, they have the autonomy to manage their account details. This includes the ability to update personal information, modify passwords, and manage email preferences. Furthermore, users can effortlessly view and edit billing and shipping addresses, streamlining future payments.
+ 
+Having outlined the core use cases, we shall now delve into the Database design and UI design aspects of the Online Bookstore project.
 
 ## **Database Schema**
-The database schema for the Online Bookstore project is carefully designed to efficiently manage book-related data and user information. MongoDB, a popular NoSQL database, is used in conjunction with the Mongoose library to facilitate interaction with the database.
-
-The schema includes several collections like "Book", "Author", "Genre", "Publisher", "Book Author", "Book Genre", "Book Publisher", "Cart", "Cart Item", "Customer" and "Review." Each collection represents a distinct entity in the system and contains related fields to store related data. Relationships between collections are established using primary and foreign keys, ensuring data integrity.
-
-For example, the "Books" collection stores information about each book, including title, description, price, availability, and references to respective authors, genres, and publishers. The "Author", "Genre", and "Publisher" collections contain details about the respective entities, such as names and biographies. The "Book Author", "Book Genre", and "Book Publisher" collections facilitate mapping between books and related authors, genres, and publishers.
-
-To optimize performance, proper indexing has been implemented on frequently accessed columns. Indexing enhances query performance by allowing the database to quickly locate the desired data. In addition, security measures, such as hashing and generation of user passwords, have been used to protect sensitive user information stored in the "Customer" collection.
+The database schema for the Online Bookstore project has been meticulously crafted to proficiently handle book-related data and user information. MongoDB, a widely favored NoSQL database, is employed in conjunction with the Mongoose library to facilitate seamless interaction with the database.
+ 
+The schema encompasses various collections, namely "Book," "Author," "Genre," "Publisher," "Book Author," "Book Genre," "Book Publisher," "Cart," "Cart Item," "Customer," and "Review." Each collection represents a distinct entity within the system and incorporates associated fields to store relevant data. Relationships between collections are established using primary and foreign keys, ensuring the integrity of the data.
+ 
+For instance, the "Books" collection houses comprehensive information about each book, encompassing its title, description, price, availability, as well as references to corresponding authors, genres, and publishers. The "Author," "Genre," and "Publisher" collections contain intricate details concerning the respective entities, such as their names and biographies. The "Book Author," "Book Genre," and "Book Publisher" collections facilitate the mapping between books and their associated authors, genres, and publishers.
+ 
+To optimize performance, meticulous indexing has been implemented on frequently accessed columns. Indexing greatly enhances query performance by enabling the database to swiftly locate the desired data. Additionally, stringent security measures, such as hashing and generation of user passwords, have been employed to safeguard the sensitive user information stored in the "Customer" collection.
  
 <img width="998" alt="O B-ERD" src="https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/1594d786-d43d-4f99-b43e-eef09f3c5241">
 <p align="center">Figure 2 - ERD Diagram</p>
 
-
 ## **User Interface Design**
-The UI design of Online Bookstore aims to provide a clean and visually appealing layout to enhance the overall user experience. The design team focused on creating a responsive interface that can be accessed seamlessly from a variety of devices and screen sizes. Key design elements, such as a prominent search bar, clear navigation menus, and streamlined book catalogs, have been incorporated to facilitate easy book discovery and browsing.
-
-The HomePage serves as a central hub, providing users with an overview of featured books, suggested titles, and personalized recommendations based on their browsing history. The design emphasizes the importance of prominently displaying book covers, titles, authors and ratings. Users can easily navigate to different sections of the website, such as ShopPage, CartPage, LoginPage, RegisterPage, CheckOutPage and BookPage, using well-designed navigation menus.
-
-To simplify the buying experience, a user-friendly shopping cart has been implemented. Users can add books to their cart, update quantities, and proceed to checkout seamlessly. The checkout process is streamlined, allowing users to provide shipping information, choose a payment method, and review their order before completing a purchase. Clear and concise error messages are displayed whenever necessary to guide the user through the process.
-
+The UI design of the Online Bookstore strives to present an immaculate and aesthetically pleasing arrangement, enriching the overall user experience. The design team focused on crafting a responsive interface that seamlessly adapts to various devices and screen sizes. Key design elements, such as a prominent search bar, lucid navigation menus, and streamlined book catalogs, have been integrated to facilitate effortless book discovery and browsing.
+ 
+The HomePage serves as a central hub, offering users a comprehensive display of featured books, suggested titles, and personalized recommendations based on their browsing history. The design underscores the importance of prominently showcasing book covers, titles, authors, and ratings. Users can effortlessly navigate to different sections of the website, including the ShopPage, CartPage, LoginPage, RegisterPage, CheckOutPage, and BookPage, by utilizing well-designed navigation menus.
+ 
+To enhance the purchasing experience, a user-friendly shopping cart has been implemented. Users have the ability to add books to their cart, update quantities, and seamlessly proceed to checkout. The checkout process is streamlined, enabling users to provide shipping information, select a payment method, and review their order before finalizing their purchase. Clear and concise error messages are displayed whenever necessary, guiding the user through the process.
 
 ### Login & Register Interface Design:
 The login and register interface of the online bookstore web application provides users with a secure and convenient way to access the platform and enjoy its features:
@@ -67,13 +57,13 @@ The login and register interface of the online bookstore web application provide
 **Login Interface:**
 The login interface allows registered users to log into their accounts. It consists of two input fields: one for the user's email or username and another for their password. Upon entering the correct credentials, users can click the login button to access their personalized bookstore account.
 
-![LoginPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/fd1789c7-4c90-4cb4-9436-7e61a9557861)
+![LoginPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/68d2e8c1-a7eb-47ea-9efd-c013c62f266c)
 <p align="center">Figure 3 - Login Interface Design</p>
 
 **Register Interface:**
 The register interface enables new users to create an account on the online bookstore platform. It prompts users to provide their necessary information, including a valid email address, a unique username, and a secure password. Once users fill in the required fields, they can submit the registration form and create their account. The interface also include terms of service or privacy policy agreement checkboxes to ensure users are aware of and agree to the platform's policies.
 
-![RegisterPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/2ed83bef-3cb4-4bf4-8cd6-256f13c7059c)
+![RegisterPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/721b2ad6-164b-4e79-b89e-5976f0c49212)
 <p align="center">Figure 4 - Regiter Interface Desgin</p>
 
 
