@@ -1,13 +1,3 @@
-# ignore .DS_Store from all folders
-.DS_Store
-
-# ignore .idea from all folders
+.env
 .idea
-
-# ignore nodemon.json only in Online-Bookstore-Project/Source-code
-
-
-# ignore resources/html in Online-Bookstore-Project/Source-code
-Source-code/resources/html
-
-# ignore config/database in Online-Bookstore-Project/Source-code
+.DS_Store
