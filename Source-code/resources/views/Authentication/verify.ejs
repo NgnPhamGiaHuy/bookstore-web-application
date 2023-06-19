@@ -52,13 +52,14 @@
     </div>
     <div class="caption__container">
         <div class="caption__container-text" style="display:flex ;align-items: center; flex-direction: column">
-            <h1 class="caption__container-title" style="font-size: 32px; letter-spacing: 2px; padding-bottom: 46px; border-bottom: 1px solid var(--color-lighter)">
+            <h1 class="caption__container-title"
+                style="font-size: 32px; letter-spacing: 2px; padding-bottom: 46px; border-bottom: 1px solid var(--color-lighter)">
                 Verify your email address
             </h1>
-            <span class="caption__container-subtitle" style="font-size: 20px">
+            <span class="caption__container-subtitle" style="font-size: 20px; text-align: center">
                 We will send a verification code to
                 <br>
-                <%=   %>
+                "<%= email %>"
             </span>
             <p class="caption__container-paragraph">
                 Please check your inbox and enter the verification code below to verify your email address. The code
@@ -67,35 +68,35 @@
             </p>
         </div>
         <div class="import__container">
-            <form id="login-form" action="/user/register" method="POST" class="import__container-form">
+            <form id="login-form" action="/user/verify/<%= customerId %>" method="POST" class="import__container-form">
                 <div class="import__container-form-input">
                     <label for="name" class="import__container-form-input-title">
                         Code:
                     </label>
                     <ul class="import__container-form-input-list">
                         <li class="container-form-input-item">
-                            <input id="code1" name="code1" type="text" class="import__container-form-input-data"
-                                   required maxlength="1" autofocus>
+                            <input id="code1" name="verificationCode" type="number"
+                                   class="import__container-form-input-data" required autofocus>
                         </li>
                         <li class="container-form-input-item">
-                            <input id="code2" name="code2" type="text" class="import__container-form-input-data"
-                                   required maxlength="1">
+                            <input id="code2" name="verificationCode" type="number"
+                                   class="import__container-form-input-data" required>
                         </li>
                         <li class="container-form-input-item">
-                            <input id="code3" name="code3" type="text" class="import__container-form-input-data"
-                                   required maxlength="1">
+                            <input id="code3" name="verificationCode" type="number"
+                                   class="import__container-form-input-data" required>
                         </li>
                         <li class="container-form-input-item">
-                            <input id="code4" name="code4" type="text" class="import__container-form-input-data"
-                                   required maxlength="1">
+                            <input id="code4" name="verificationCode" type="number"
+                                   class="import__container-form-input-data" required>
                         </li>
                         <li class="container-form-input-item">
-                            <input id="code5" name="code5" type="text" class="import__container-form-input-data"
-                                   required maxlength="1">
+                            <input id="code5" name="verificationCode" type="number"
+                                   class="import__container-form-input-data" required>
                         </li>
                         <li class="container-form-input-item">
-                            <input id="code6" name="code6" type="text" class="import__container-form-input-data"
-                                   required maxlength="1">
+                            <input id="code6" name="verificationCode" type="number"
+                                   class="import__container-form-input-data" required>
                         </li>
                     </ul>
                 </div>
@@ -125,13 +126,40 @@
 <script>
     const codeInputs = document.querySelectorAll('.import__container-form-input-list input');
 
-    for (let i = 0; i < codeInputs.length - 1; i++) {
+    for (let i = 0; i < codeInputs.length; i++) {
         codeInputs[i].addEventListener('input', function () {
             if (codeInputs[i].value.length === 1) {
-                codeInputs[i + 1].focus();
+                if (i < codeInputs.length - 1) {
+                    codeInputs[i + 1].focus();
+                } else {
+                    codeInputs[i].blur();
+                }
             }
         });
     }
+
+    const pasteCode = (code) => {
+        for (let i = 0; i < codeInputs.length; i++) {
+            if (i < code.length) {
+                codeInputs[i].value = code[i];
+            } else {
+                codeInputs[i].value = '';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const codeInputsContainer = document.querySelector('.import__container-form-input-list');
+        codeInputsContainer.addEventListener('paste', function (e) {
+            e.preventDefault();
+            const clipboardData = e.clipboardData || window.clipboardData;
+            const pastedData = clipboardData.getData('text/plain');
+            const formattedCode = pastedData.replace(/\D/g, '');
+            if (formattedCode.length === 6) {
+                pasteCode(formattedCode);
+            }
+        });
+    });
 </script>
 
 <script>

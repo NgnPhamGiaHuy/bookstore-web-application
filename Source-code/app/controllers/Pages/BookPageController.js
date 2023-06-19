@@ -7,15 +7,9 @@ const BookGenre = require('../../models/BookGenre');
 const BookAuthor = require('../../models/BookAuthor');
 const BookPublisher = require('../../models/BookPublisher');
 
-class BookPageController {
-    static calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-        return totalQuantity;
-    }
+const calculateTotal = require('../../utils/calculateTotal');
 
+class BookPageController {
     async index(req, res, next) {
         try {
             const bookId = req.params.slug;
@@ -34,7 +28,7 @@ class BookPageController {
 
             if (cart) {
                 cartItems = await CartItem.find({cart: cart._id}).populate('book');
-                totalQuantity = BookPageController.calculateTotalQuantity(cartItems);
+                totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
             }
 
             const [bookGenres, bookAuthors, bookPublishers, bookRatings, bookReviews,] = await Promise.all([BookGenre.find({book: book._id}).populate('genre'), BookAuthor.find({book: book._id}).populate('author'), BookPublisher.find({book: book._id}).populate('publisher'), Review.aggregate([{$match: {book: book._id}}, {

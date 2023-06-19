@@ -4,39 +4,10 @@ const Customer = require('../../models/Customer');
 const BookPublisher = require('../../models/BookPublisher');
 const countriesList = require('countries-list').countries;
 
+const calculateTotal = require('../../utils/calculateTotal');
+
+
 class CheckoutController {
-    static calculateSubtotalAndTotal(cartItems) {
-        let subtotal = 0;
-        let total = 0;
-
-        for (const cartItem of cartItems) {
-            if (cartItem.book.sale_price > 0) {
-                cartItem.subtotal = cartItem.book.sale_price * cartItem.quantity;
-                subtotal += cartItem.subtotal;
-                total += cartItem.subtotal;
-            } else {
-                cartItem.subtotal = cartItem.book.price * cartItem.quantity;
-                subtotal += cartItem.subtotal;
-                total += cartItem.subtotal;
-            }
-        }
-
-        return {
-            subtotal: subtotal.toFixed(2),
-            total: total.toFixed(2),
-        };
-    }
-
-    static calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-
-        return totalQuantity;
-    }
-
     async index(req, res, next) {
         try {
             const customerId = req.session.customerId;
@@ -71,8 +42,8 @@ class CheckoutController {
                 cartItem.book.publishers = publishers;
             }
 
-            const {subtotal, total} = CheckoutController.calculateSubtotalAndTotal(cartItems);
-            const totalQuantity = CheckoutController.calculateTotalQuantity(cartItems);
+            const {subtotal, total} = await calculateTotal.calculateSubtotalAndTotal(cartItems);
+            const totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
 
             const allCountries = Object.values(countriesList);
             const countryOptions = allCountries

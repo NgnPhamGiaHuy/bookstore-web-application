@@ -46,6 +46,10 @@ const CustomerSchema = new Schema(
             enum: ['admin', 'user', 'guest', 'supplier'],
             default: 'user'
         },
+        customer_verified: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true,

@@ -3,38 +3,9 @@ const Customer = require("../../models/Customer");
 const CartItem = require('../../models/CartItem');
 const BookAuthor = require('../../models/BookAuthor');
 
+const calculateTotal = require('../../utils/calculateTotal');
+
 class CartPageController {
-    static calculateSubtotalAndTotal(cartItems) {
-        let subtotal = 0;
-        let total = 0;
-
-        for (const cartItem of cartItems) {
-            if (cartItem.book.sale_price > 0) {
-                cartItem.subtotal = cartItem.book.sale_price * cartItem.quantity;
-                subtotal += cartItem.subtotal;
-                total += cartItem.subtotal;
-            } else {
-                cartItem.subtotal = cartItem.book.price * cartItem.quantity;
-                subtotal += cartItem.subtotal;
-                total += cartItem.subtotal;
-            }
-        }
-
-        return {
-            subtotal: subtotal.toFixed(2), total: total.toFixed(2),
-        };
-    }
-
-    static calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-
-        return totalQuantity;
-    }
-
     async removeCartItem(req, res, next) {
         try {
             const cartItemId = req.params.cartItemId;
@@ -63,7 +34,7 @@ class CartPageController {
             cartItem.quantity = quantity;
             await cartItem.save();
 
-            const {subtotal, total} = CartPageController.calculateSubtotalAndTotal([cartItem]);
+            const {subtotal, total} = await calculateTotal.calculateSubtotalAndTotal([cartItem]);
 
             res.json({success: true, subtotal, total});
         } catch (error) {
@@ -150,8 +121,8 @@ class CartPageController {
                 cartItem.book.authors = authors;
             }
 
-            const totalQuantity = CartPageController.calculateTotalQuantity(cartItems);
-            const {subtotal, total} = CartPageController.calculateSubtotalAndTotal(cartItems);
+            const totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
+            const {subtotal, total} = await calculateTotal.calculateSubtotalAndTotal(cartItems);
 
             res.render('Cart/cart', {
                 cart,

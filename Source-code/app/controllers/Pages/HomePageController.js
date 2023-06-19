@@ -7,7 +7,10 @@ const Review = require("../../models/Review");
 const CartItem = require("../../models/CartItem");
 const BookGenre = require("../../models/BookGenre");
 const BookAuthor = require("../../models/BookAuthor");
+
 const generateDummyData = require("../../../config/database/dataGenerator");
+const calculateTotal = require('../../utils/calculateTotal');
+
 
 class HomePageController {
     static getCityAndZipCode(req) {
@@ -25,16 +28,6 @@ class HomePageController {
         }
 
         return {city, zipCode};
-    }
-
-    static async calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-
-        return totalQuantity;
     }
 
     async updateHome(req, res, next) {
@@ -201,7 +194,7 @@ class HomePageController {
                         .populate("book")
                         .lean()
                         .exec();
-                    totalQuantity = await HomePageController.calculateTotalQuantity(cartItems);
+                    totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
                 }
             }
 

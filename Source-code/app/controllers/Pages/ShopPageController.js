@@ -1,24 +1,16 @@
 const Book = require("../../models/Book");
-const Cart = require("../../models/Cart")
-const CartItem = require("../../models/CartItem");
+const Cart = require("../../models/Cart");
 const Genre = require("../../models/Genre");
 const Review = require("../../models/Review");
 const Author = require("../../models/Author");
+const Customer = require("../../models/Customer");
+const CartItem = require("../../models/CartItem");
 const BookGenre = require("../../models/BookGenre");
 const BookAuthor = require("../../models/BookAuthor");
-const Customer = require("../../models/Customer");
+
+const calculateTotal = require('../../utils/calculateTotal');
 
 class ShopPageController {
-    static async calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-
-        return totalQuantity;
-    }
-
     async updateShop(req, res, next) {
         try {
             res.redirect("/story-sells/shop");
@@ -188,7 +180,7 @@ class ShopPageController {
                         .populate("book")
                         .lean()
                         .exec();
-                    totalQuantity = await ShopPageController.calculateTotalQuantity(cartItems);
+                    totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
                 }
             }
 

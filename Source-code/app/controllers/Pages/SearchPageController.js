@@ -6,6 +6,7 @@ const Cart = require("../../models/Cart");
 const CartItem = require("../../models/CartItem");
 const Customer = require("../../models/Customer");
 
+const calculateTotal = require('../../utils/calculateTotal');
 
 class SearchPageController {
     async search(req, res) {
@@ -15,18 +16,8 @@ class SearchPageController {
             return res.redirect(`/story-sells/search?searchTerm=${encodedSearchTerm}`);
         } catch (error) {
             console.error('Error searching for books:', error);
-            return res.status(500).json({ error: 'Internal server error' });
+            return res.status(500).json({error: 'Internal server error'});
         }
-    }
-
-    static async calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-
-        return totalQuantity;
     }
 
     async index(req, res) {
@@ -66,13 +57,13 @@ class SearchPageController {
             }
 
             const [books, totalBooks] = await Promise.all([
-                Book.find({ book_title: { $regex: searchTerm, $options: 'i' } })
+                Book.find({book_title: {$regex: searchTerm, $options: 'i'}})
                     .sort(sort)
                     .skip(skip)
                     .limit(booksPerPage) // Limit the number of books per page
                     .lean()
                     .exec(),
-                Book.countDocuments({ book_title: { $regex: searchTerm, $options: 'i' } }) // Get the total count of books
+                Book.countDocuments({book_title: {$regex: searchTerm, $options: 'i'}}) // Get the total count of books
             ]);
 
             const bookIds = books.map((book) => book._id);
@@ -103,7 +94,7 @@ class SearchPageController {
                             })
                     );
 
-                    const reviews = await Review.find({ book: book._id })
+                    const reviews = await Review.find({book: book._id})
                         .lean()
                         .exec();
 
@@ -146,7 +137,7 @@ class SearchPageController {
                         .populate("book")
                         .lean()
                         .exec();
-                    totalQuantity = await SearchPageController.calculateTotalQuantity(cartItems);
+                    totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
                 }
             }
 

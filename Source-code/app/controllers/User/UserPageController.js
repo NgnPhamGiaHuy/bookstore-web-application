@@ -6,17 +6,10 @@ const fs = require('fs');
 const path = require('path');
 const countriesList = require('countries-list').countries;
 
+const calculateTotal = require('../../utils/calculateTotal');
+
+
 class UserPageController {
-    static calculateTotalQuantity(cartItems) {
-        let totalQuantity = 0;
-
-        for (const cartItem of cartItems) {
-            totalQuantity += cartItem.quantity;
-        }
-
-        return totalQuantity;
-    }
-
     async index(req, res, next) {
         try {
             const customerId = req.session.customerId;
@@ -32,7 +25,7 @@ class UserPageController {
             let totalQuantity = 0;
             if (cart) {
                 cartItems = await CartItem.find({cart: cart._id}).populate('book');
-                totalQuantity = UserPageController.calculateTotalQuantity(cartItems);
+                totalQuantity = await calculateTotal.calculateTotalQuantity(cartItems);
             }
 
             res.render('User/user', {

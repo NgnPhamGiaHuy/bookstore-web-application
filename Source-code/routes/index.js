@@ -1,12 +1,12 @@
-const homePageRouter = require('./homepage');
-const shopPageRouter = require('./shoppage');
-const cartPageRouter = require('./cartpage');
-const wishPageRouter = require('./wishpage');
-const bookPageRouter = require('./bookpage');
-const userPageRouter = require('./customer');
-const accessPageRouter = require('./accesspage');
-const searchPageRouter = require('./searchpage');
-const checkoutPageRouter = require('./checkoutpage');
+const homePageRouter = require('./Home/homepage');
+const shopPageRouter = require('./Shop/shoppage');
+const cartPageRouter = require('./Cart/cartpage');
+const userPageRouter = require('./User/userpage');
+const bookPageRouter = require('./Books/bookpage');
+const searchPageRouter = require('./Search/searchpage');
+const wishPageRouter = require('./Wishlist/wishlistpage');
+const checkoutPageRouter = require('./Checkout/checkoutpage');
+const accessPageRouter = require('./Authentication/accesspage');
 
 function requireLogin(req, res, next) {
     if (req.session.isLoggedIn || (req.cookies && req.cookies.customerId)) {
