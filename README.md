@@ -66,6 +66,21 @@ The register interface enables new users to create an account on the online book
 ![RegisterPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/721b2ad6-164b-4e79-b89e-5976f0c49212)
 <p align="center">Figure 4 - Regiter Interface Desgin</p>
 
+**Verify Interface:**
+The verification interface holds significant importance within the online bookstore web application as it ensures the genuineness and security of user accounts. Upon completion of the registration form, users will receive an authentication email containing a unique verification code.
+
+The verification interface prompts users to access their email inbox and input the provided verification code. This step is crucial in confirming the ownership of the provided contact information and preventing unauthorized access to the platform.
+
+Once users correctly enter the verification code, the verification interface validates their account, granting them access to the online bookstore platform. This process serves to maintain the platform's integrity and ensures that only authorized users can utilize its features.
+
+The verification interface plays a vital role in enhancing security measures and establishing trust among users by verifying their identity through the unique verification code sent to their registered email address.
+
+![VerifyPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/55515c32-cfe3-44b9-b1f4-c507fef33ea1)
+<p align="center">Figure 5.1 - Verify Interface Desgin</p>
+
+<img width="1466" alt="Email-Confirm" src="https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/649fcf0c-55fe-4008-9213-ca6f787f1af7">
+<p align="center">Figure 5.2 - Email Confirm</p>
+
 
 ### Home Page Interface Design
 The home page of an online bookstore web application serves as the primary gateway for users to explore and discover a wide range of books and related content:
@@ -80,7 +95,7 @@ The home page of an online bookstore web application serves as the primary gatew
  
 ![HomePage-Above](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/c06a47aa-c5a0-4024-9bc2-100cdb06e5cd)
 ![HomePage-Below](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/87820b85-b7b3-4ba1-8484-e9f96ffdc414)
-<p align="center">Figure 5 - Home Page Interface Design</p>
+<p align="center">Figure 6 - Home Page Interface Design</p>
 
 
 ### Shop Page Interface Desgin
@@ -98,7 +113,7 @@ The shop page of an online bookstore web application is a crucial section where 
 
 ![ShopPage-Above](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/2f0f2781-66b5-417f-ab49-9bbbf777cc28)
 ![ShopPage-Below](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/174a4027-13e7-4601-9cb2-0c65f11a9bac)
-<p align="center">Figure 6 - Shop Page Interface Desgin</p>
+<p align="center">Figure 7 - Shop Page Interface Desgin</p>
 
 
 ### Book Page Interface Design
@@ -113,7 +128,7 @@ The book page on an online bookstore web application is a dedicated space where 
 **Customer Reviews and Ratings:** To assist users in making informed decisions, the book page may display customer reviews and ratings. These reviews are accompanied by a star rating that represents the average score given by readers who have already experienced the book. Users can read through the reviews to gain insights and opinions from other readers.
  
 ![BookPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/ddc45192-5a79-4e62-ae60-f663831ee18c)
-<p align="center">Figure 7 - Book Page Interface Design</p>
+<p align="center">Figure 8 - Book Page Interface Design</p>
 
 
 ### Search Page Interface Design
@@ -128,7 +143,7 @@ The search page of an online bookstore web application provides users with a pow
 **Pagination:** If the search results are extensive, the search page implement pagination to ensure a smooth browsing experience.
 
 ![SearchPage](https://github.com/HinhNhuLaHuy/Online-Bookstore-Project/assets/84061230/deb472fa-9b99-46fa-8cbe-b814ac2b2401)
-<p align="center">Figure 8 - Seacrh Page Interface Design with “Harry” keyword</p>
+<p align="center">Figure 9 - Seacrh Page Interface Design with “Harry” keyword</p>
 
 ### Cart Page Interface Design
 The cart page of an online bookstore web application is a crucial stage in the purchasing process, where users can review and manage the items, they have added to their shopping cart before proceeding to checkout:
