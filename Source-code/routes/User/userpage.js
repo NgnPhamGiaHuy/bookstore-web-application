@@ -8,5 +8,10 @@ router.use(fileUpload({}));
 
 router.get('/', userPageController.index);
 router.post('/', userPageController.update);
+router.post('/logout', (req, res) => {
+    req.session.destroy();
+
+    res.redirect('/story-sells/login');
+});
 
 module.exports = router;

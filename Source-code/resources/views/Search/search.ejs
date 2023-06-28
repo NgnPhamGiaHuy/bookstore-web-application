@@ -24,13 +24,16 @@
         <div class="header__search-bar">
             <form action="/story-sells/search" class="header__search-bar-form" method="get">
                 <div class="header__search-find">
-                    <input type="text" class="header__search-find-input" name="searchTerm" placeholder="Search products..." value="<%= searchTerm %>">
+                    <input type="text" class="header__search-find-input" name="searchTerm"
+                           placeholder="Search products..." value="<%= searchTerm %>">
                     <button type="submit" class="header__search-find-button">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
                 <input type="hidden" name="page" value="1">
-                <input type="hidden" name="orderby" value="<%= orderBy %>">
+                <% if (orderBy) { %>
+                    <input type="hidden" name="orderby" value="<%= orderBy %>">
+                <% } %>
             </form>
         </div>
         <div class="header__nav-user">
@@ -159,13 +162,32 @@
                             </a>
                         </div>
                         <form action="/story-sells/search" method="get" class="main__shop-sorting-form">
-                            <select name="orderby" id="orderby" class="main__shop-sorting-form-orderby" aria-label="Shop order" onchange="this.form.submit()">
-                                <option value="" <% if (orderBy === '') { %>selected <% } %>>Default sorting</option>
-                                <option value="popularity" <% if (orderBy === 'popularity') { %>selected <% } %>>Sort by popularity</option>
-                                <option value="rating" <% if (orderBy === 'rating') { %>selected <% } %>>Sort by average rating</option>
-                                <option value="date" <% if (orderBy === 'date') { %>selected <% } %>>Sort by latest</option>
-                                <option value="price" <% if (orderBy === 'price') { %>selected <% } %>>Sort by price: low to high</option>
-                                <option value="price-desc" <% if (orderBy === 'price-desc') { %>selected <% } %>>Sort by price: high to low</option>
+                            <select name="orderby" id="orderby" class="main__shop-sorting-form-orderby"
+                                    aria-label="Shop order" onchange="this.form.submit()">
+                                <option value="" <% if (orderBy === '') { %>selected
+                                        <% } %>
+                                >Default sorting
+                                </option>
+                                <option value="popularity" <% if (orderBy === 'popularity') { %>selected
+                                        <% } %>
+                                >Sort by popularity
+                                </option>
+                                <option value="rating" <% if (orderBy === 'rating') { %>selected
+                                        <% } %>
+                                >Sort by average rating
+                                </option>
+                                <option value="date" <% if (orderBy === 'date') { %>selected
+                                        <% } %>
+                                >Sort by latest
+                                </option>
+                                <option value="price" <% if (orderBy === 'price') { %>selected
+                                        <% } %>
+                                >Sort by price: low to high
+                                </option>
+                                <option value="price-desc" <% if (orderBy === 'price-desc') { %>selected
+                                        <% } %>
+                                >Sort by price: high to low
+                                </option>
                             </select>
                             <input type="hidden" name="searchTerm" value="<%= searchTerm %>">
                         </form>
@@ -281,24 +303,24 @@
                         <% } %>
 
                         <% if (startPage > 1) { %>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/search?searchTerm=<%= searchTerm %>&page=1&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers">1</a>
+                        </li>
+                        <% if (startPage > 2) { %>
                             <li class="pagination__area-list-item">
-                                <a href="/story-sells/search?searchTerm=<%=searchTerm%>&page=1&orderby=<%= orderBy %>"
-                                   class="pagination__area-numbers">1</a>
+                                <span class="pagination__area-ellipsis">...</span>
                             </li>
-                            <% if (startPage > 2) { %>
-                                <li class="pagination__area-list-item">
-                                    <span class="pagination__area-ellipsis">...</span>
-                                </li>
-                            <% } %>
+                        <% } %>
                         <% } %>
 
                         <% for (let i = startPage; i <= endPage; i++) { %>
-                            <li class="pagination__area-list-item">
-                                <a href="/story-sells/search?searchTerm=<%=searchTerm%>&page=<%= i %>&orderby=<%= orderBy %>"
-                                   class="pagination__area-numbers <%= i === currentPage ? 'pagination__area-numbers-current' : '' %>">
-                                    <%= i %>
-                                </a>
-                            </li>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/search?searchTerm=<%= searchTerm %>&page=<%= i %>&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers <%= i === currentPage ? 'pagination__area-numbers-current' : '' %>">
+                                <%= i %>
+                            </a>
+                        </li>
                         <% } %>
 
                         <% if (endPage < totalPages) { %>
@@ -308,7 +330,7 @@
                                 </li>
                             <% } %>
                             <li class="pagination__area-list-item">
-                                <a href="/story-sells/search?searchTerm=<%=searchTerm%>&page=<%= totalPages %>&orderby=<%= orderBy %>"
+                                <a href="/story-sells/search?searchTerm=<%= searchTerm %>&page=<%= totalPages %>&orderby=<%= orderBy %>"
                                    class="pagination__area-numbers">
                                     <%= totalPages %>
                                 </a>
@@ -316,12 +338,12 @@
                         <% } %>
 
                         <% if (currentPage < totalPages) { %>
-                            <li class="pagination__area-list-item">
-                                <a href="/story-sells/search?searchTerm=<%=searchTerm%>&page=<%= currentPage + 1 %>&orderby=<%= orderBy %>"
-                                   class="pagination__area-numbers-next">
-                                    <span><i class="fa-solid fa-chevron-right"></i></span>
-                                </a>
-                            </li>
+                        <li class="pagination__area-list-item">
+                            <a href="/story-sells/search?searchTerm=<%= searchTerm %>&page=<%= currentPage + 1 %>&orderby=<%= orderBy %>"
+                               class="pagination__area-numbers-next">
+                                <span><i class="fa-solid fa-chevron-right"></i></span>
+                            </a>
+                        </li>
                         <% } %>
                     </ul>
                 </nav>
@@ -339,7 +361,7 @@
     </div>
 </div>
 
-<%- include('../partials/footer.ejs') -%>
+<%- include('../Footer/footer.ejs') -%>
 </body>
 
 </html>

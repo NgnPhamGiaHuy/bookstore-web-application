@@ -35,6 +35,10 @@ const CustomerSchema = new Schema(
             type: String,
             default: '/img/User/Avatar.png',
         },
+        customer_background: {
+            type: String,
+            default: '/img/Background-Img/User-Background.jpg',
+        },
         customer_address: {
             type: String
         },

@@ -1,10 +1,10 @@
+const Cart = require("../../models/Cart");
 const Book = require("../../models/Book");
-const BookAuthor = require("../../models/BookAuthor");
 const Author = require("../../models/Author");
 const Review = require("../../models/Review");
-const Cart = require("../../models/Cart");
 const CartItem = require("../../models/CartItem");
 const Customer = require("../../models/Customer");
+const BookAuthor = require("../../models/BookAuthor");
 
 const calculateTotal = require('../../utils/calculateTotal');
 
@@ -56,14 +56,12 @@ class SearchPageController {
                     break;
             }
 
-            const [books, totalBooks] = await Promise.all([
-                Book.find({book_title: {$regex: searchTerm, $options: 'i'}})
-                    .sort(sort)
-                    .skip(skip)
-                    .limit(booksPerPage) // Limit the number of books per page
-                    .lean()
-                    .exec(),
-                Book.countDocuments({book_title: {$regex: searchTerm, $options: 'i'}}) // Get the total count of books
+            const [books, totalBooks] = await Promise.all([Book.find({book_title: {$regex: searchTerm, $options: 'i'}})
+                .sort(sort)
+                .skip(skip)
+                .limit(booksPerPage) // Limit the number of books per page
+                .lean()
+                .exec(), Book.countDocuments({book_title: {$regex: searchTerm, $options: 'i'}}) // Get the total count of books
             ]);
 
             const bookIds = books.map((book) => book._id);
@@ -83,43 +81,39 @@ class SearchPageController {
                 .lean()
                 .exec();
 
-            const searchResults = await Promise.all(
-                books.map(async (book) => {
-                    const bookAuthorsData = await Promise.all(
-                        bookAuthors
-                            .filter((ba) => ba.book.equals(book._id))
-                            .map(async (ba) => {
-                                const author = await Author.findById(ba.author);
-                                return author.author_name;
-                            })
-                    );
+            const searchResults = await Promise.all(books.map(async (book) => {
+                const bookAuthorsData = await Promise.all(bookAuthors
+                    .filter((ba) => ba.book.equals(book._id))
+                    .map(async (ba) => {
+                        const author = await Author.findById(ba.author);
+                        return author.author_name;
+                    }));
 
-                    const reviews = await Review.find({book: book._id})
-                        .lean()
-                        .exec();
+                const reviews = await Review.find({book: book._id})
+                    .lean()
+                    .exec();
 
-                    const ratingSum = reviews.reduce((sum, review) => sum + review.rating, 0);
-                    const averageRating = ratingSum / reviews.length;
-                    const rating = parseFloat(averageRating.toFixed(2));
-                    const ratingWidth = rating * 20;
+                const ratingSum = reviews.reduce((sum, review) => sum + review.rating, 0);
+                const averageRating = ratingSum / reviews.length;
+                const rating = parseFloat(averageRating.toFixed(2));
+                const ratingWidth = rating * 20;
 
-                    return {
-                        _id: book._id,
-                        cover_image: book.cover_image,
-                        book_title: book.book_title,
-                        description: book.description,
-                        publication_date: book.publication_date,
-                        price: book.price,
-                        sale_price: book.sale_price,
-                        inventory_count: book.inventory_count,
-                        sale_count: book.sale_count,
-                        authors: bookAuthorsData,
-                        reviews,
-                        rating,
-                        ratingWidth,
-                    };
-                })
-            );
+                return {
+                    _id: book._id,
+                    cover_image: book.cover_image,
+                    book_title: book.book_title,
+                    description: book.description,
+                    publication_date: book.publication_date,
+                    price: book.price,
+                    sale_price: book.sale_price,
+                    inventory_count: book.inventory_count,
+                    sale_count: book.sale_count,
+                    authors: bookAuthorsData,
+                    reviews,
+                    rating,
+                    ratingWidth,
+                };
+            }));
 
             let cart = null;
             let cartItems = [];
@@ -144,14 +138,7 @@ class SearchPageController {
             const customerData = await Customer.findById(customerId)
 
             return res.render('Search/search', {
-                orderBy,
-                searchTerm,
-                searchResults,
-                authors,
-                totalPages,
-                customerData,
-                totalQuantity,
-                currentPage: page,
+                orderBy, searchTerm, searchResults, authors, totalPages, customerData, totalQuantity, currentPage: page,
             });
         } catch (error) {
             console.error('Error searching for books:', error);

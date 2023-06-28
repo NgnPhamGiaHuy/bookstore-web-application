@@ -15,6 +15,7 @@ const BookSchema = new Schema(
         cover_image: {
             type: String,
             required: true,
+            default: '/img/Book-Cover/Default.png',
         },
         price: {
             type: Number,

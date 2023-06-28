@@ -7,6 +7,10 @@ const AuthorSchema = new Schema(
             type: String,
             required: true,
         },
+        author_avatar: {
+            type: String,
+            default: '/img/Author/Author.png',
+        },
         biography: {
             type: String,
         },

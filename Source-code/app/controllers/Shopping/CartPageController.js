@@ -92,7 +92,7 @@ class CartPageController {
             const cart = await Cart.findOne({customer: customerId}).populate('customer');
 
             if (!cart) {
-                return res.render('cart', {customerData: customerData, cartItems: [], subtotal: 0, total: 0, totalQuantity: 0, cart: null});
+                return res.render('Cart/cart', {customerData: customerData, cartItems: [], subtotal: 0, total: 0, totalQuantity: 0, cart: null});
             }
 
             const cartItems = await CartItem.find({cart: cart._id}).populate('book');

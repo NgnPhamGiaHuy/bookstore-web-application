@@ -1,0 +1,169 @@
+<header>
+    <nav class="header__nav">
+        <div class="header__nav-logo">
+            <a href="/story-sells" class="header__nav-logo-link">
+                <img src="/img/Icon/Website-logo.svg" alt="" class="header__nav-logo-img">
+            </a>
+        </div>
+        <div class="header__nav-menu" style="max-height: 100px;">
+            <ul class="header__nav-menu-list">
+                <li class="header__nav-menu-list-item">
+                    <a href="/story-sells" id="home" class="header__nav-menu-link header__nav-menu-link-active">
+                        <span class="header__nav-menu-link-text">
+                            Home
+                        </span>
+                        <span class="header__nav-menu-link-dot"></span>
+                    </a>
+                </li>
+                <li class="header__nav-menu-list-item">
+                    <a href="/story-sells/shop" id="shop" class="header__nav-menu-link">
+                        <span class="header__nav-menu-link-text">
+                            Shop
+                        </span>
+                        <span class="header__nav-menu-link-dot"></span>
+                    </a>
+                </li>
+                <li class="header__nav-menu-list-item">
+                    <a href="/story-sells/publisher" class="header__nav-menu-link">
+                        <span class="header__nav-menu-link-text">
+                            Publisher
+                        </span>
+                        <span class="header__nav-menu-link-dot"></span>
+                    </a>
+                </li>
+                <li class="header__nav-menu-list-item">
+                    <a href="/story-sells/author" class="header__nav-menu-link">
+                        <span class="header__nav-menu-link-text">
+                            Author
+                        </span>
+                        <span class="header__nav-menu-link-dot"></span>
+                    </a>
+                </li>
+                <li class="header__nav-menu-list-item">
+                    <a href="/story-sells/contact" class="header__nav-menu-link">
+                        <span class="header__nav-menu-link-text">
+                            Contact
+                        </span>
+                        <span class="header__nav-menu-link-dot"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="header__nav-user">
+            <ul class="header__nav-user-list">
+                <li class="header__nav-user-list-item">
+                    <a href="/story-sells/user" class="header__nav-user-link">
+                        <div>
+                            <button type="button" class="header__nav-user-button">
+                                <span class="sr-only">Open main menu</span>
+                                <img src="<%= customerData.customer_avatar %>" alt="" loading="lazy"
+                                     class="header__nav-user-avatar">
+                                <span class="header__nav-user-name">
+                                    <%= customerData.customer_lname %>
+                                </span>
+                                <% if (customerData.customer_role === "admin" || customerData.customer_role === "supplier") { %>
+                                    <span class="header__nav-user-role">
+                                        <%= customerData.customer_role %>
+                                    </span>
+                                <% } %>
+                            </button>
+                        </div>
+                    </a>
+                </li>
+                <li class="header__nav-user-list-item">
+                    <a href="/wishlist" class="header__nav-user-link">
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                </li>
+                <li class="header__nav-user-list-item">
+                    <a href="/story-sells/cart" class="header__nav-user-link">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <% if (totalQuantity > 99) { %>
+                            <span class="header__nav-user-list-cart-total header__nav-user-list-cart-total--exceeded">99+</span>
+                        <% } else { %>
+                            <span class="header__nav-user-list-cart-total"><%= totalQuantity %></span>
+                        <% } %>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <div class="header__search">
+        <div class="header__search-content">
+            <nav class="header__search-subnav">
+                <div class="header__search-subnav-categories">
+                    <span class="header__search-categories-text">
+                        <i class="fa-solid fa-list"></i>
+                        Categories
+                    </span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="header__search-subnav-menu">
+                    <ul class="header__search-subnav-menu-list">
+                        <% const genreIcons = {
+                            'Genre 1': 'fa-solid fa-palette',
+                            'Genre 2': 'fa-solid fa-dna',
+                            'Genre 3': 'fa-solid fa-pen-nib',
+                            'Genre 4': 'fa-solid fa-pen-nib',
+                            'Genre 5': 'fa-regular fa-flag',
+                            'Genre 6': 'fa-solid fa-masks-theater',
+                            'Genre 7': 'fa-solid fa-book-bookmark',
+                            'Genre 8': 'fa-regular fa-circle-user',
+                            'Genre 9': 'fa-solid fa-hourglass-start',
+                            'Genre 10': 'fa-solid fa-flask',
+                        }; %>
+
+                        <% for(let i = 0; i < totalGenres.length && i < 10; i++) {
+                            const iconClass = genreIcons[`Genre ${i + 1}`] || 'fa-solid fa-mountain-sun';
+                        %>
+                        <li class="header__search-subnav-menu-list-item">
+                            <a href="/story-sells/genre/<%= totalGenres[i] %>" class="header__search-subnav-menu-link">
+                                <i class="<%= iconClass %>"></i>
+                                <span class="header__search-subnav-menu-link-text"><%= totalGenres[i] %></span>
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </nav>
+            <div class="header__search-bar">
+                <form action="/story-sells/search" method="post" class="header__search-bar-form">
+                    <div class="header__search-find">
+                        <input type="text" class="header__search-find-input" name="searchTerm"
+                               placeholder="Search products..."
+                               onfocus="changeInputBorderStyle(true)" onblur="changeInputBorderStyle(false)">
+                        <button type="submit" class="header__search-find-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="header__search-location">
+                <a href="#" class="header__search-location-link">
+                    <span class="material-symbols-outlined">
+                        location_on
+                    </span>
+                    <div class="header__search-location-text">
+                        <p class="header__search-location-text-title">
+                            Deliver to <%= customerData.customer_lname %>
+                        </p>
+                        <h3 href="" class="header__search-location-text-place" rel="noopener noreferrer">
+                            <%= city + " " + zipCode %>
+                        </h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function changeInputBorderStyle(focus) {
+            const input = document.querySelector('.header__search-find-input');
+            if (focus) {
+                input.classList.add('focus');
+            } else {
+                input.classList.remove('focus');
+            }
+        }
+    </script>
+</header>

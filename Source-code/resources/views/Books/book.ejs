@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<%- include('../partials/header-02.ejs', { text: 'Book', display: 'none', customerData: customerData, totalQuantity: 0 ? totalQuantity : totalQuantity }) -%>
+<%- include('../Header/header-02.ejs', { text: 'Book', display: 'none', customerData: customerData, totalQuantity: 0 ? totalQuantity : totalQuantity }) -%>
 
 <div class="book__subnav">
     <section class="book__subnav-content">
@@ -330,7 +330,7 @@
     </div>
 </div>
 
-<%- include('../partials/footer.ejs') -%>
+<%- include('../Footer/footer.ejs') -%>
 </body>
 
 </html>

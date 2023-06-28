@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<%- include('../partials/header-01.ejs', {genres: totalGenres, totalQuantity: totalQuantity}) -%>
+<%- include('../Header/header-01.ejs', {genres: totalGenres, totalQuantity: totalQuantity}) -%>
 
 <div class="content">
     <main id="content__main">
@@ -174,7 +174,9 @@
                             <div class="books__sale-widget">
                                 <span class="books__sale-widget-link">
                                     <div class="books__sale-widget-wrapper">
-                                        <div class="books__sale-widget-wrapper-img"></div>
+                                        <div class="books__sale-widget-wrapper-img">
+                                            <img src="/img/Banner/Book-Banner.jpg" alt="">
+                                        </div>
                                         <div class="books__sale-widget-wrapper-overlay"></div>
                                     </div>
                                     <div class="books__sale-widget-content">
@@ -255,7 +257,7 @@
                                         <div class="books__banner-content-progress"></div>
                                         <div class="books__banner-content-slides">
                                             <div class="books__banner-content-slides-bg">
-                                                <img src="/img/Revslider-Shape.png" alt=""
+                                                <img src="/img/Banner/Revslider-Shape.png" alt=""
                                                      class="books__banner-content-slides-subbg">
                                             </div>
                                             <div class="books__banner-content-slides-content">
@@ -289,13 +291,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="books__banner-content-slides-content-book">
-                                                        <img src="/img/Book-Cover/Book-Cover.png" alt=""
+                                                        <img src="/img/Banner/Book-Cover.png" alt=""
                                                              class="books__banner-content-slides-content-book-img">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="books__banner-content-slides-dash">
-                                                <img src="/img/Revslider_Vector.png" alt=""
+                                                <img src="/img/Banner/Revslider_Vector.png" alt=""
                                                      class="books__banner-content-slides-dash-img">
                                             </div>
                                         </div>
@@ -1070,7 +1072,7 @@
     }
 </script>
 
-<%- include('../partials/footer.ejs') -%>
+<%- include('../Footer/footer.ejs') -%>
 </body>
 
 </html>
