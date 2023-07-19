@@ -1,0 +1,100 @@
+<section class="manage__users">
+    <div class="manage__users-container">
+        <div class="manage__users-header">
+            <ul class="manage__users-header-list">
+                <li class="manage__users-header-list-item manage__users-header-list-item-active">
+                    <button type="button" class="manage__users-header-button">
+                        <span class="manage__users-header-button-text">
+                            Author
+                        </span>
+                        <span class="manage__users-header-button-quantity">
+                            200
+                        </span>
+                    </button>
+                </li>
+                <li class="manage__users-header-list-item">
+                    <button type="button" class="manage__users-header-button">
+                        <span class="manage__users-header-button-text">
+                            Admin
+                        </span>
+                        <span class="manage__users-header-button-quantity">
+                            200
+                        </span>
+                    </button>
+                </li>
+                <li class="manage__users-header-list-item">
+                    <button type="button" class="manage__users-header-button">
+                        <span class="manage__users-header-button-text">
+                            Shopper
+                        </span>
+                        <span class="manage__users-header-button-quantity">
+                            200
+                        </span>
+                    </button>
+                </li>
+                <li class="manage__users-header-list-item">
+                    <button type="button" class="manage__users-header-button">
+                        <span class="manage__users-header-button-text">
+                            Vendor
+                        </span>
+                        <span class="manage__users-header-button-quantity">
+                            200
+                        </span>
+                    </button>
+                </li>
+            </ul>
+            <div class="manage__users-header-quantity-result">
+                <span>Showing</span>
+                <span>1 - 9</span>
+                <span>of</span>
+                <span>1500</span>
+                <span>result</span>
+            </div>
+        </div>
+        <div class="manager__user-underline"></div>
+        <div class="manage__users-search-field">
+            <form action="" class="manage__users-search-form">
+                <label>
+                    <input type="text" class="manage__users-search-form-input">
+                </label>
+                <button type="submit" class="manage__users-search-form-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+            <div class="manage__users-search-filter">
+                <div class="manage__users-search-filter-display">
+                    <div class="manage__users-search-filter-display-list">
+
+                    </div>
+                    <div class="manage__users-search-filter-display-grid">
+
+                    </div>
+                </div>
+                <div class="manage__users-search-filter-submit">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="manage__users-navigation">
+        <ul class="manage__users-navigation-list">
+            <li class="manage__users-navigation-list-item">
+
+            </li>
+        </ul>
+    </div>
+</section>
+
+<script>
+    const manageUsers = document.querySelectorAll('.manage__users-header-list-item');
+
+    manageUsers.forEach(item => {
+        item.addEventListener('click', () => {
+            manageUsers.forEach(item => {
+                item.classList.remove('manage__users-header-list-item-active');
+            });
+
+            item.classList.add('manage__users-header-list-item-active');
+        });
+    });
+</script>
