@@ -70,7 +70,7 @@ class ShopPageController {
     async index(req, res, next) {
         try {
             const customerId = req.session.customer;
-            const customerData = await Customer.findById(customerId).populate('customer_lastName').populate('customer_avatar');
+            const customerData = await Customer.findById(customerId);
 
             const booksPerPage = 12;
             const page = parseInt(req.query.page) || 1;
@@ -165,7 +165,7 @@ class ShopPageController {
                 },
             },]);
 
-            let cart = null;
+            let cart;
             let cartItems = [];
             let totalQuantity = 0;
 
@@ -185,7 +185,6 @@ class ShopPageController {
             }
 
             res.render("pages/shop", {
-                title: "Shop",
                 orderBy,
                 bookData,
                 totalPages,

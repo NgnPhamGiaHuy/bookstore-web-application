@@ -19,11 +19,17 @@ class LoginPageController {
                 return res.send('<script>alert("Invalid password."); window.location.href = "/user/login";</script>');
             }
 
+            if (customer.customer_role === "admin") {
+                req.session.isAdmin = true;
+            } else {
+                req.session.isAdmin = false;
+            }
+
             req.session.isLoggedIn = true;
             req.session.customer = customer;
             req.session.customerId = customer._id;
 
-            if (rememberMe){
+            if (rememberMe) {
                 res.cookie('customerId', customer._id, {maxAge: 30 * 24 * 60 * 60 * 1000}); // Cookie expires in 30 days
             }
 

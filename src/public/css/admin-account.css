@@ -135,7 +135,7 @@ button {
     background-color: var(--color-border);
 }
 
-.manager__user-underline {
+.manage__users-underline {
     width: 100%;
     height: 4px;
     margin-top: 20px;
@@ -171,19 +171,163 @@ button {
 }
 
 .manage__users-search-form-input {
-    display: flex;
-    width: 346px;
-    padding: 12px 12px 12px 40px;
-    align-items: center;
     gap: 10px;
+    outline: 0;
+    width: 346px;
+    display: flex;
     flex-shrink: 0;
+    align-items: center;
     border-radius: 100px;
-    background: #FFF;
-    box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.09);
+    padding: 12px 12px 12px 40px;
+    background: var(--color-white);
+    box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.09);
 }
 
 .manage__users-search-form-icon {
     left: 10px;
     font-size: 16px;
     position: absolute;
+}
+
+.manage__users-search-filter {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.manage__users-search-filter-display-list {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.manage__users-search-filter-display-list-item {
+    padding: 7px;
+    display: flex;
+    cursor: pointer;
+    transition: all .7s;
+    align-items: center;
+}
+
+.manage__users-search-filter-display-list-item:first-child {
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-block-start: 1px solid var(--color-lighter);
+    border-block-end: 1px solid var(--color-lighter);
+    border-inline-start: 1px solid var(--color-lighter);
+}
+
+.manage__users-search-filter-display-list-item:last-child {
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border-block-start: 1px solid var(--color-lighter);
+    border-block-end: 1px solid var(--color-lighter);
+    border-inline-end: 1px solid var(--color-lighter);
+}
+
+.manage__users-search-filter-display-figure {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.manage__users-search-filter-display-icon {
+    display: flex;
+    align-items: center;
+    color: var(--color-text);
+}
+
+.manage__users-search-filter-display-icon > i {
+    margin: 0;
+    font-size: 14px;
+}
+
+.manage__users-search-filter-display-list-item-active {
+    background-color: var(--color-primary-opacity);
+    border: 1px solid var(--color-primary-hover) !important;
+}
+
+.manage__users-search-filter-display-list-item-active .manage__users-search-filter-display-icon {
+    color: var(--color-primary) !important;
+}
+
+.manage__users-search-filter-submit {
+    margin-left: 16px;
+}
+
+.manage__users-search-filter-submit-button {
+    display: flex;
+    padding: 6px 10px;
+    align-items: center;
+    flex-direction: row;
+    transition: all .4s;
+    border-radius: 24px;
+    border: 1px solid var(--color-lighter);
+}
+
+.manage__users-search-filter-submit-button:hover {
+    color: var(--color-primary-hover);
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary-opacity);
+}
+
+.manage__users-search-filter-submit-icon > i {
+    margin-left: 0;
+    margin-right: 6px;
+}
+
+.manage__users-list {
+    display: flex;
+    margin-top: 16px;
+    flex-direction: column;
+}
+
+.manage__users-list-table {
+    overflow: hidden;
+    border-radius: 1em;
+    border-collapse: collapse;
+}
+
+.manage__users-list-table-header-row {
+    background-color: var(--color-primary-opacity);
+}
+
+.manage__users-list-table-header-cell {
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    color: var(--color-accent);
+    border-bottom: 2px solid white;
+
+}
+
+.manage__users-list-table-body-cell {
+    padding: 16px;
+    font-size: 14px;
+    background-color: #F5F5F5;
+    color: var(--color-accent);
+    border-bottom: 2px solid white;
+
+}
+
+.manage__users-list-table-body-cell-content {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.manage__users-list-table-body-cell-content-figure{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.manage__users-list-table-body-cell-content-figure-avatar {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 12px;
 }
