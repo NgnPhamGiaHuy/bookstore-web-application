@@ -118,7 +118,7 @@ Contributions are welcome! Follow these steps to contribute:
 ```bash
 # Fork the repository
 # Clone your fork
-git clone https://github.com/your-username/bookstore-web-application.git
+git clone https://github.com/ngnphamgiahuy/bookstore-web-application.git
 
 # Create a feature branch
 git checkout -b feature/amazing-feature
